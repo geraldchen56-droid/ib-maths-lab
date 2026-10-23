@@ -2,7 +2,7 @@
 
 Interactive study site for IB Mathematics: Analysis & Approaches HL. Live at **https://ib-aahl-probability-lab.vercel.app**.
 
-The first unit is **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14). Every topic page follows the same pattern, so new units can be added in the same style.
+The home page is a **course hub**. Units so far: **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14) and **Vectors** (AHL 3.12–3.16, with rotatable 3D models). Every topic page follows the same pattern, so new units can be added in the same style.
 
 ---
 
@@ -29,17 +29,27 @@ Then open http://localhost:8000. Refresh after each edit; no restart is needed.
 
 ## 3. What each file does
 
-| File | What lives there |
-|---|---|
-| `index.html` | All page content: the header, topic menu, and one `<section class="sec" id="s-TOPIC">` per topic, containing The idea, Formulas, Live model, and the Casio and TI calculator panels. Also has the Calculator cheat sheet. |
-| `app.js` | Behaviour: the calculator switch, navigation, every live model (Venn, tree, Bayes, counting, discrete, binomial, normal, continuous), the **practice question generators** (`GEN`), scoring, and redraws. |
-| `learn.js` | The **How to answer** guides and **Worked examples** for each topic (the object `L`), plus the right-hand **Formulas drawer** and the left-hand **Topics drawer**. |
-| `styles.css` | All styling. Colours are defined once as variables at the top (`--accent`, `--paper`, …), with a dark-mode set below them. |
+```
+index.html            the course hub (links to each unit; old /#topic links redirect to probability/)
+shared/               code every unit uses
+  core.js             helpers, the calculator switch (C, G, K, M, cv), the window.LAB namespace, the UNITS list
+  boot.js             navigation, scoring, the practice engine
+  learn-render.js     renders How to answer and Worked examples; builds the Formulas and Topics drawers
+  styles.css          all styling, with variables and a dark mode at the top
+probability/          one folder per unit
+  index.html          page content: header, topic menu, one <section class="sec" id="s-TOPIC"> per topic
+  app.js              the live models and the practice generators (GEN)
+  learn.js            How to answer guides and Worked examples (the object L)
+vectors/              same three files as probability/ (app.js also has the 3D engine)
+tools/check-marks.js  checks every unit's worked examples add up
+```
+
+Scores are kept in the browser. Probability uses `ibprob-score` (its original key, so old scores survive); other units are stored in the same object under keys like `vectors.vec`. The calculator choice is `ibprob-calc` for all units.
 
 ### Anatomy of one topic page (in order)
 
-1. **Header**: syllabus reference, title, one-line lede (`index.html`)
-2. **The idea**: the reasoning, written in plain prose (`index.html`, `.theory > .prose`)
+1. **Header**: syllabus reference, title, one-line lede (`<unit>/index.html`)
+2. **The idea**: the reasoning, written in plain prose (`<unit>/index.html`, `.theory > .prose`)
 3. **Formulas**: formulas, Traps and Shorthand. They are written in `index.html` as the second panel in `.theory`, and `learn.js` moves them into the right-hand drawer automatically.
 4. **Live model**: sliders and a canvas (markup in `index.html`, drawing code in `app.js`)
 5. **How to answer**: 5-step method, question-type table, and where the marks are (`learn.js` → `L.topic.method/types/marks`)
@@ -68,7 +78,7 @@ Only the version matching the reader's choice is shown. In JavaScript, use the h
 ```
 `m` is the marks for the part. The `M('M1')`, `M('A1')`, `M('R1')` badges inside its steps must add up to `m`. Run `node tools/check-marks.js` to confirm.
 
-**Add a practice question type.** In `app.js`, add a function to the topic's `GEN` array. It must return:
+**Add a practice question type.** In the unit's `app.js`, add a function to the topic's `GEN` array. It must return:
 ```js
 { q: 'Question text (HTML allowed)', ans: 0.164, exact: false,
   work: ['step 1', 'step 2', C('casio line', 'TI line'), '= <b>answer</b>'],
@@ -76,7 +86,7 @@ Only the version matching the reader's choice is shown. In JavaScript, use the h
 ```
 Use `exact: true` for whole-number answers (counting). Otherwise answers within 0.6% are marked correct.
 
-**Add a formula, trap or shorthand.** Edit the second `.panel` inside that topic's `.theory` in `index.html`. It shows up in the Formulas drawer automatically.
+**Add a formula, trap or shorthand.** Edit the second `.panel` inside that topic's `.theory` in the unit's `index.html`. It shows up in the Formulas drawer automatically.
 
 ## 5. Adding a new unit (the rest of the course)
 
@@ -88,19 +98,19 @@ The AA HL syllabus, for planning:
 |---|---|
 | 1. Number & algebra | Sequences and series, exponents and logs, binomial theorem, counting*, proof, complex numbers, systems of equations |
 | 2. Functions | Graphs, composites and inverses, transformations, quadratics, rational functions, polynomials, inequalities, modulus |
-| 3. Geometry & trigonometry | 3D shapes, trig ratios and identities, radians, unit circle, trig equations and graphs, vectors, lines and planes |
+| 3. Geometry & trigonometry | 3D shapes, trig ratios and identities, radians, unit circle, trig equations and graphs, **vectors, lines and planes (done)** |
 | 4. Statistics & probability | Sampling, statistical measures, regression, **probability (done)** |
 | 5. Calculus | Limits, differentiation, integration, kinematics, related rates, differential equations, Maclaurin series |
 
 \*Counting is already on the Probability page.
 
-When a second unit is added, the plan is to make the home page a **course hub** linking to each unit, with each unit in its own folder (for example `/calculus/`). The skill describes this.
+To add a unit: create a folder (for example `calculus/`) with `index.html`, `app.js` and `learn.js` modelled on `vectors/`, add it to the `UNITS` list in `shared/core.js` and a card in the root `index.html`. The unit page's `<body>` needs `data-unit="calculus"`, and its scripts load in this order: `../shared/core.js`, `learn.js`, `app.js`, `../shared/learn-render.js`, `../shared/boot.js`. `tools/check-marks.js` finds any folder that has a `learn.js`.
 
 ## 6. Checks before every push
 
 1. **Numbers**: every number in a new example or explanation is computed by a script, not by hand.
 2. **Marks**: `node tools/check-marks.js` confirms every worked-example part awards exactly its stated marks.
-3. **Syntax**: `node --check app.js && node --check learn.js`.
+3. **Syntax**: `node --check` on each unit's `app.js` and `learn.js`, e.g. `node --check vectors/app.js && node --check vectors/learn.js`.
 4. **In the browser**: open the topic, then:
    - switch Casio ↔ TI and check both versions of every calculator line;
    - open the Formulas drawer with **F** and the Topics drawer by hovering at the left edge (or pressing **T**);

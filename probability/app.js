@@ -1,53 +1,8 @@
 (function(){
 "use strict";
-const $=s=>document.querySelector(s);
-const $$=s=>Array.from(document.querySelectorAll(s));
-const tok=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
-function hexRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return [(n>>16)&255,(n>>8)&255,n&255];}
-function rgba(name,a){const [r,g,b]=hexRgb(tok(name));return `rgba(${r},${g},${b},${a})`;}
-function prep(cv,h){const w=cv.clientWidth||300;const d=window.devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.setTransform(d,0,0,d,0,0);return {ctx,w,h};}
-const MONO='"IBM Plex Mono", ui-monospace, monospace';
-/* ---------- maths ---------- */
-function fact(n){let r=1;for(let i=2;i<=n;i++)r*=i;return r;}
-function nCr(n,r){if(r<0||r>n)return 0;r=Math.min(r,n-r);let x=1;for(let i=1;i<=r;i++)x=x*(n-r+i)/i;return Math.round(x);}
-function nPr(n,r){if(r<0||r>n)return 0;let x=1;for(let i=0;i<r;i++)x*=n-i;return x;}
-function bpdf(n,p,k){if(k<0||k>n)return 0;if(p===0)return k===0?1:0;if(p===1)return k===n?1:0;return nCr(n,k)*Math.pow(p,k)*Math.pow(1-p,n-k);}
-function bcdf(n,p,k){if(k<0)return 0;let s=0;for(let i=0;i<=Math.min(k,n);i++)s+=bpdf(n,p,i);return Math.min(1,s);}
-function erf(x){const s=x<0?-1:1;x=Math.abs(x);const t=1/(1+0.3275911*x);const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y;}
-function Phi(z){return 0.5*(1+erf(z/Math.SQRT2));}
-function invPhi(p){let lo=-12,hi=12;for(let i=0;i<90;i++){const m=(lo+hi)/2;if(Phi(m)<p)lo=m;else hi=m;}return (lo+hi)/2;}
-function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a;}
-function frac(n,d){const g=gcd(n,d)||1;n/=g;d/=g;return d===1?String(n):`${n}/${d}`;}
-const sf=(x,s=3)=>{if(!isFinite(x))return '–';if(Number.isInteger(x)&&Math.abs(x)<1e15)return String(x);return String(Number(x.toPrecision(s)));};
-const p4=x=>isFinite(x)?x.toFixed(4):'–';
-const r2=x=>Math.round(x*100)/100;
-const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
-const pick=a=>a[Math.floor(Math.random()*a.length)];
-const C=(c,t)=>`<span data-calc="casio">${c}</span><span data-calc="ti84">${t}</span>`;
-const lbl3=x=>+(+x).toFixed(4);
-const big=x=>x>=1e6?x.toExponential(4).replace('e+',' × 10^'):x.toLocaleString('en-US');
-/* ---------- calculator choice ---------- */
-function setCalc(c){c=c==='ti84'?'ti84':'casio';document.documentElement.dataset.calc=c;try{localStorage.setItem('ibprob-calc',c);}catch(e){}
-$$('[data-pick]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.pick===c?'true':'false'));}
-$$('[data-pick]').forEach(b=>b.addEventListener('click',()=>setCalc(b.dataset.pick)));
-setCalc(document.documentElement.dataset.calc);
-/* ---------- navigation ---------- */
-const SECS=['overview','basics','conditional','bayes','counting','discrete','binomial','normal','continuous','drill','casio'];
-const DRAW={};
-let current='overview';
-function show(id){
-if(!SECS.includes(id))id='overview';
-current=id;
-SECS.forEach(s=>{const el=document.getElementById('s-'+s);el.hidden=s!==id;});
-$$('.navb').forEach(b=>b.setAttribute('aria-current',b.dataset.go===id?'true':'false'));
-const nb=document.querySelector(`.navb[data-go="${id}"]`);
-if(nb&&nb.scrollIntoView&&window.innerWidth<=900)nb.scrollIntoView({block:'nearest',inline:'center'});
-try{history.replaceState(null,'','#'+id);}catch(e){}
-try{localStorage.setItem('ibprob-last',id);}catch(e){}
-requestAnimationFrame(()=>{DRAW[id]&&DRAW[id]();});
-}
-$$('.navb').forEach(b=>b.addEventListener('click',()=>{show(b.dataset.go);window.scrollTo({top:0});}));
-const CARDS=[
+const {$,$$,tok,hexRgb,rgba,prep,MONO,fact,nCr,nPr,bpdf,bcdf,erf,Phi,invPhi,gcd,frac,sf,p4,r2,ri,pick,C,lbl3,big,tableHTML,DRAW}=window.LAB;
+window.LAB.SECS.push(...['overview','basics','conditional','bayes','counting','discrete','binomial','normal','continuous','drill','casio']);
+window.LAB.CARDS.push(...[
 ['basics','SL 4.5','Events & Venns','Addition rule, independence, mutually exclusive'],
 ['conditional','SL 4.6','Conditional & trees','"Given that", two-way tables, replacement'],
 ['bayes','HL 4.13','Bayes\' theorem','Reversing a conditional; base rates'],
@@ -57,9 +12,7 @@ const CARDS=[
 ['normal','SL 4.9','Normal','Areas, InvN, unknown μ and σ'],
 ['continuous','HL 4.14','Continuous RVs','pdf, mean, median, mode, variance'],
 ['casio',C('fx-CG50 AU','TI-84 Plus CE'),'Calculator sheet','Every menu path and keystroke on one page'],
-];
-$('#cards').innerHTML=CARDS.map(c=>`<button class="card" data-go="${c[0]}"><span class="r">${c[1]}</span><span class="n">${c[2]}</span><span class="d">${c[3]}</span></button>`).join('');
-$$('.card').forEach(b=>b.addEventListener('click',()=>{show(b.dataset.go);window.scrollTo({top:0});}));
+]);
 /* ---------- Venn ---------- */
 (function(){
 const A=$('#vA'),B=$('#vB'),I=$('#vI'),cv=$('#vennCv');let region='AB';
@@ -316,9 +269,7 @@ if(!(fam==='pow'&&n===0)){vline(fam==='pow'?a-0.01*a:a/2,tok('muted'),[1,4]);}
 }
 DRAW.continuous=draw;
 })();
-/* ---------- Question generators ---------- */
-const tableHTML=(head,rows)=>`<div class="tablewrap"><table class="mini">${rows.map(r=>`<tr>${r.map((c,i)=>i===0||head?`<th>${c}</th>`:`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
-const GEN={
+Object.assign(window.LAB.GEN,{
 basics:[
 ()=>{const a=ri(30,70)/100,b=ri(20,60)/100;const lo=Math.max(0.05,a+b-1),hi=Math.min(a,b)-0.02;const i=r2(lo+(hi-lo)*Math.random());const u=r2(a+b-i);
 return {q:`Events A and B satisfy P(A) = ${a}, P(B) = ${b} and P(A ∪ B) = ${u}. Find P(A ∩ B).`,ans:i,
@@ -488,60 +439,6 @@ if(kind==='k')w[0]=w[0].replace(/k = ([0-9/]+)\.$/,'k = <b>$1</b>.');
 return {q:`X has pdf f(x) = kx(${a} − x) for 0 ≤ x ≤ ${a}, and 0 otherwise. Find ${kind==='k'?'k':kind==='P'?`P(X < ${sf(cc)})`:'Var(X)'}.`,ans,work:w,
 tip:`Symmetric pdf → mean = median = mode = the centre. Saves an integral.`};},
 ],
-};
-const SECNAME={basics:'Events & Venns',conditional:'Conditional & trees',bayes:"Bayes' theorem",counting:'Counting',discrete:'Discrete RVs',binomial:'Binomial',normal:'Normal',continuous:'Continuous RVs'};
-/* ---------- score store ---------- */
-let SCORE={};try{SCORE=JSON.parse(localStorage.getItem('ibprob-score')||'{}')||{};}catch(e){SCORE={};}
-function saveScore(){try{localStorage.setItem('ibprob-score',JSON.stringify(SCORE));}catch(e){}renderScore();}
-function renderScore(){
-let c=0,a=0;Object.values(SCORE).forEach(s=>{c+=s.c||0;a+=s.a||0;});
-$('#tCorrect').textContent=c;$('#tAttempt').textContent=a;$('#tRate').textContent=a?Math.round(100*c/a)+'%':'–';
-$$('.navb .s[data-s]').forEach(el=>{const s=SCORE[el.dataset.s];el.textContent=s&&s.a?`${s.c}/${s.a}`:'';});
-$$('.p-score').forEach(el=>{const s=SCORE[el.dataset.sec];el.textContent=s&&s.a?`${s.c} correct of ${s.a} this browser`:'Answers to 3 s.f. Fractions like 3/8 are fine.';});
-}
-function parseAns(t){t=String(t).trim().replace(/,/g,'').replace(/−/g,'-');if(!t)return NaN;const m=t.match(/^(-?\d*\.?\d+)\s*\/\s*(-?\d*\.?\d+)$/);if(m)return parseFloat(m[1])/parseFloat(m[2]);if(/%$/.test(t))return parseFloat(t)/100;return Number(t);}
-function mountPractice(el){
-const sec=el.dataset.sec;
-el.innerHTML=`<div class="p-head"><h3>Practice</h3><span class="p-score" data-sec="${sec}"></span></div>
-<div class="p-q"></div>
-<div class="p-row"><label class="sr" for="in-${sec}" style="position:absolute;left:-9999px">Your answer</label>
-<input type="text" id="in-${sec}" inputmode="decimal" autocomplete="off" placeholder="Your answer">
-<button class="btn primary" data-act="check">Check</button>
-<button class="btn" data-act="show">Show working</button>
-<button class="btn" data-act="next">New question</button></div>
-<div class="p-fb" aria-live="polite"></div>
-<div class="p-work" hidden></div>`;
-const qEl=el.querySelector('.p-q'),inp=el.querySelector('input'),fb=el.querySelector('.p-fb'),wk=el.querySelector('.p-work');
-let cur=null,scored=false,from='';
-function next(){
-let gens;if(sec==='drill'){from=pick(Object.keys(GEN));gens=GEN[from];}else gens=GEN[sec];
-cur=pick(gens)();scored=false;
-qEl.innerHTML=(sec==='drill'?`<span class="from">${SECNAME[from]}</span><br>`:'')+cur.q;
-inp.value='';fb.textContent='';fb.className='p-fb';wk.hidden=true;
-wk.innerHTML=`<span class="label">Working</span><ol>${cur.work.map(s=>`<li>${s}</li>`).join('')}</ol><div class="tipline"><b>Shorthand</b>${cur.tip}</div>`;
-}
-function check(){
-const x=parseAns(inp.value);if(!isFinite(x)){fb.textContent='Enter a number, e.g. 0.237 or 3/8.';fb.className='p-fb no';return;}
-const a=cur.ans;const ok=cur.exact?Math.abs(x-a)<1e-9*Math.max(1,Math.abs(a)):Math.abs(x-a)<=Math.max(Math.abs(a)*0.006,1e-6);
-if(!scored){scored=true;SCORE[sec]=SCORE[sec]||{c:0,a:0};SCORE[sec].a++;if(ok)SCORE[sec].c++;saveScore();}
-if(ok){fb.textContent=`Correct. Answer: ${sf(a)}.`;fb.className='p-fb ok';}
-else{fb.textContent='Not quite. Try again, or open the working.';fb.className='p-fb no';}
-}
-el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const act=b.dataset.act;
-if(act==='check')check();if(act==='next')next();
-if(act==='show'){wk.hidden=!wk.hidden;if(!scored){scored=true;SCORE[sec]=SCORE[sec]||{c:0,a:0};SCORE[sec].a++;saveScore();}fb.textContent=`Answer: ${sf(cur.ans)}`;fb.className='p-fb';}});
-inp.addEventListener('keydown',e=>{if(e.key==='Enter')check();});
-next();
-}
-$$('.practice').forEach(mountPractice);
-renderScore();
-/* ---------- redraw on resize / theme ---------- */
-let rt;const redraw=()=>{clearTimeout(rt);rt=setTimeout(()=>{DRAW[current]&&DRAW[current]();},80);};
-window.addEventListener('resize',redraw);
-try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',redraw);}catch(e){}
-new MutationObserver(redraw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redraw);
-let start=(location.hash||'').slice(1);if(!SECS.includes(start)){try{start=localStorage.getItem('ibprob-last')||'overview';}catch(e){start='overview';}}
-show(start);
-window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(h!==current&&SECS.includes(h))show(h);});
+});
+Object.assign(window.LAB.SECNAME,{basics:'Events & Venns',conditional:'Conditional & trees',bayes:"Bayes' theorem",counting:'Counting',discrete:'Discrete RVs',binomial:'Binomial',normal:'Normal',continuous:'Continuous RVs'});
 })();

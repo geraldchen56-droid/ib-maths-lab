@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Interactive guide to every IB Maths AA HL vectors topic: lines and planes in 3D with rotatable live models, worked exam questions, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>IB Vectors Lab</title>
+<script>try{document.documentElement.dataset.calc=localStorage.getItem('ibprob-calc')==='ti84'?'ti84':'casio';}catch(e){document.documentElement.dataset.calc='casio';}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body data-unit="vectors">
+<div class="wrap">
+<header class="top">
+<div>
+<div class="eyebrow"><a class="crumb" href="../">IB Maths Lab</a> · Topic 3 · Vectors (AHL)</div>
+<h1>Vectors <em>Lab</em></h1>
+<p class="sub">Every AHL vector topic: vectors and products, then lines and planes in 3D. Each one has the core reasoning, the formulas you need, a live model you can rotate, worked exam questions, and unlimited practice questions with full working.</p>
+</div>
+<div class="top-side">
+<div class="calcpick" role="group" aria-label="Calculator for keystroke instructions">
+<span class="lbl">Calculator</span>
+<div class="seg">
+<button type="button" data-pick="casio" aria-pressed="true">Casio fx-CG50</button>
+<button type="button" data-pick="ti84" aria-pressed="false">TI-84 Plus CE</button>
+</div>
+</div>
+<div class="tally" aria-live="polite">
+<div><b id="tCorrect">0</b>correct</div>
+<div><b id="tAttempt">0</b>attempted</div>
+<div><b id="tRate">–</b>accuracy</div>
+</div>
+</div>
+</header>
+<div class="shell">
+<nav class="rail" id="rail" aria-label="Topics">
+<div class="grp">Start</div>
+<button class="navb" data-go="overview"><span class="r">map</span><span class="n">Overview</span><span class="s"></span></button>
+<div class="grp">Vectors &amp; products</div>
+<button class="navb" data-go="vec"><span class="r">HL 3.12</span><span class="n">Vector basics</span><span class="s" data-s="vec"></span></button>
+<button class="navb" data-go="dot"><span class="r">HL 3.13</span><span class="n">Scalar product</span><span class="s" data-s="dot"></span></button>
+<button class="navb" data-go="cross"><span class="r">HL 3.15</span><span class="n">Vector product</span><span class="s" data-s="cross"></span></button>
+<div class="grp">Lines</div>
+<button class="navb" data-go="line"><span class="r">HL 3.14</span><span class="n">Lines</span><span class="s" data-s="line"></span></button>
+<button class="navb" data-go="lines2"><span class="r">HL 3.14</span><span class="n">Two lines</span><span class="s" data-s="lines2"></span></button>
+<div class="grp">Planes</div>
+<button class="navb" data-go="plane"><span class="r">HL 3.16</span><span class="n">Planes</span><span class="s" data-s="plane"></span></button>
+<button class="navb" data-go="lp"><span class="r">HL 3.16</span><span class="n">Line and plane</span><span class="s" data-s="lp"></span></button>
+<button class="navb" data-go="pp"><span class="r">HL 3.16</span><span class="n">Planes meeting</span><span class="s" data-s="pp"></span></button>
+<div class="grp">Test yourself</div>
+<button class="navb" data-go="drill"><span class="r">mix</span><span class="n">Mixed drill</span><span class="s" data-s="drill"></span></button>
+<button class="navb" data-go="casio"><span class="r"><span data-calc="casio">CG50</span><span data-calc="ti84">TI-84</span></span><span class="n">Calculator sheet</span><span class="s"></span></button>
+</nav>
+<main id="main">
+<section class="sec" id="s-overview" data-sec="overview">
+<header class="sec-head">
+<span class="ref">Map</span>
+<h2>How the topic fits together</h2>
+<p class="lede">Vectors in IB are one idea used three ways. A vector is a <em>movement</em>, so you can add, scale and measure it. The two products give you <em>angles</em> (dot) and <em>areas and normals</em> (cross). Then lines and planes are built from points and directions. Work through in order, or jump to a weak spot.</p>
+</header>
+<div class="cards" id="cards"></div>
+<div class="theory">
+<div class="panel">
+<h3>Which tool does the question want?</h3>
+<p class="small" style="margin-bottom:12px">Read the stem and match the first line that fits.</p>
+<div class="decide">
+<div><span>Positions, AB, length, midpoint, "divides in the ratio"</span><b>Vector basics → 3.12</b></div>
+<div><span>Angle between vectors, "perpendicular", projection</span><b>Scalar product → 3.13</b></div>
+<div><span>Normal vector, area of a triangle or parallelogram</span><b>Vector product → 3.15</b></div>
+<div><span>Equation of a line, point on a line, distance from a point</span><b>Lines → 3.14</b></div>
+<div><span>Do two lines meet? Angle between lines. Skew.</span><b>Two lines → 3.14</b></div>
+<div><span>Equation of a plane, distance to a plane</span><b>Planes → 3.16</b></div>
+<div><span>Where a line hits a plane, or the angle between them</span><b>Line and plane → 3.16</b></div>
+<div><span>Two or three planes, "solve the system"</span><b>Planes meeting → 3.16</b></div>
+</div>
+</div>
+<div class="panel prose">
+<h3>How to use each topic page</h3>
+<ol>
+<li><b>Read the idea first.</b> Each page starts with why the method works.</li>
+<li><b>Rotate the model.</b> Drag the picture to turn it, or use the View sliders. The view is shared across the 3D models. Double-click to reset.</li>
+<li><b>Do five practice questions.</b> They are randomised. Answer to 3 significant figures; fractions like 4/3 are accepted.</li>
+<li><b>Read the working even when you're right.</b> The shorthand line at the bottom is the part to memorise.</li>
+</ol>
+<p class="small">Formulas marked <span class="bk">booklet</span> are in the IB formula booklet. You still need to know when to use them.</p>
+</div>
+</div>
+</section>
+<section class="sec" id="s-vec" data-sec="vec" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.12</span>
+<h2>Vector basics</h2>
+<p class="lede">Vectors describe movement from one place to another. This page covers position vectors, displacement, length, unit vectors, and dividing a line in a ratio.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>A position vector <b>a</b> = OA is the journey from the origin to A. The journey from A to B is AB = <b>b</b> − <b>a</b>: <b>end minus start</b>. Every other result in this unit is built on that one rule.</p>
+<p>|<b>v</b>| is Pythagoras in 3D, applied twice. A unit vector has the same direction but length 1, so divide by the length.</p>
+<p>To find P on AB with AP : PB = m : n, walk m/(m + n) of the way from A to B. The midpoint is the case m = n. Three points are collinear when AB is a scalar multiple of AC.</p>
+<p class="small">The live model is drawn in 2D so you can see everything at once. The algebra for three components is identical, with one more term.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">|<b>v</b>| = √(v₁² + v₂² + v₃²)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">AB = <b>b</b> − <b>a</b></span></div>
+<div class="fx"><span class="f">unit vector = <b>v</b> ÷ |<b>v</b>|</span></div>
+<div class="fx"><span class="f">midpoint = ½(<b>a</b> + <b>b</b>)</span></div>
+<div class="fx"><span class="f"><b>p</b> = <b>a</b> + (m ÷ (m + n)) AB, for AP : PB = m : n</span></div>
+<div class="fx"><span class="f">collinear: AB = λ AC</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>AB and BA are opposites: AB = −BA.</li>
+<li>"AP : PB = 1 : 2" means one third of the way, not a half.</li>
+<li>Squaring first: |k<b>v</b>| = |k||<b>v</b>|, so a negative k does not give a negative length.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>End minus start.</b> Always AB = b − a.</li>
+<li><b>Ratio m : n → fraction m/(m + n).</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: vectors on a grid</h3>
+<div class="lab-grid">
+<div class="lcol"><div class="ctrls" id="vec-ctrls"></div></div>
+<div>
+<canvas id="vec-cv" aria-label="vectors on a grid"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>u = OA</span><span><i style="background:var(--amber)"></i>v = OB</span><span><i style="background:var(--good)"></i>AB = v − u</span><span><i style="background:var(--muted)"></i>k u (dashed)</span></div>
+<div id="vec-ro"></div>
+<div class="gdc" id="vec-gdc"></div>
+
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="vec"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Vectors · MAT/VCT</small></h3>
+<h4>Length and unit vector</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b>. Press <kbd>OPTN</kbd> → <kbd>F2</kbd> MAT/VCT. Define each vector as a vector (Vct A, Vct B…) in the editor.</li>
+<li>Press <kbd>F6</kbd> ▷ until the vector commands appear: <b>Norm(</b> for length, <b>UnitV(</b> for the unit vector.</li>
+<li>Type <span class="mono">Norm(Vct A)</span> and <kbd>EXE</kbd>.</li>
+</ol>
+<h4>Displacement and midpoint</h4>
+<ol>
+<li>Calculate directly with the vector names: <span class="mono">Vct B − Vct A</span>, <span class="mono">(Vct A + Vct B) ÷ 2</span>.</li>
+</ol>
+<p class="small">Menu labels shift a little between OS versions. If you cannot find Norm( on your calculator, press <kbd>F6</kbd> ▷ to page through the MAT/VCT menu.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Lists</small></h3>
+<h4>Store a vector</h4>
+<ol>
+<li>Type <span class="mono">{3,−6,6}</span> using <kbd>2nd</kbd> <kbd>(</kbd> and <kbd>2nd</kbd> <kbd>)</kbd> for the braces.</li>
+<li>Press <kbd>STO→</kbd> then <kbd>2nd</kbd> <kbd>1</kbd> (L₁) and <kbd>ENTER</kbd>.</li>
+</ol>
+<h4>Length</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>x²</kbd> (√ ), then <kbd>2nd</kbd> <kbd>STAT</kbd> (LIST) → MATH → 5:sum(, then <span class="mono">L₁²</span>.</li>
+<li>Gives <span class="mono">√(sum(L₁²))</span>.</li>
+</ol>
+<p class="small">The TI-84 Plus CE has no built-in vector commands. Lists add, subtract and scale element by element, which is exactly what vectors do, so L₂ − L₁ is AB.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-dot" data-sec="dot" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.13</span>
+<h2>Scalar product</h2>
+<p class="lede">The scalar product turns two vectors into one number that tells you how much they point the same way.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Two formulas for the same number: <b>a</b>·<b>b</b> = a₁b₁ + a₂b₂ + a₃b₃ and <b>a</b>·<b>b</b> = |<b>a</b>||<b>b</b>| cos θ. The first one is how you calculate. The second one is why it measures angle. Set them equal and you get the angle formula.</p>
+<p>Because cos is positive for acute angles, zero at 90° and negative for obtuse ones, the sign of the dot product tells you the shape of the angle straight away. <b>Zero means perpendicular.</b></p>
+<p>The scalar projection <b>a</b>·<b>b</b> ÷ |<b>b</b>| is the length of the shadow of <b>a</b> along <b>b</b>. It is positive if the arrows lean the same way and negative if they lean opposite.</p>
+<p>For an angle in a triangle, both vectors must start at the vertex: the angle at B uses BA and BC.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f"><b>a</b>·<b>b</b> = a₁b₁ + a₂b₂ + a₃b₃</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f"><b>a</b>·<b>b</b> = |<b>a</b>||<b>b</b>| cos θ</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">cos θ = <b>a</b>·<b>b</b> ÷ (|<b>a</b>||<b>b</b>|)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f"><b>a</b>·<b>a</b> = |<b>a</b>|²</span></div>
+<div class="fx"><span class="f">perpendicular ⇔ <b>a</b>·<b>b</b> = 0</span></div>
+<div class="fx"><span class="f">scalar projection of <b>a</b> on <b>b</b> = <b>a</b>·<b>b</b> ÷ |<b>b</b>|</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>The dot product is a number. A vector answer loses the mark.</li>
+<li>The angle at B uses BA·BC, not AB·BC. AB points the wrong way.</li>
+<li>(<b>a</b> + <b>b</b>)·(<b>a</b> + <b>b</b>) = |<b>a</b>|² + 2<b>a</b>·<b>b</b> + |<b>b</b>|², not |<b>a</b>|² + |<b>b</b>|².</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Perpendicular? Dot = 0.</b></li>
+<li><b>Angle at a vertex: both arrows start there.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: scalar product</h3>
+<div class="lab-grid">
+<div class="lcol"><div class="ctrls" id="dot-ctrls"></div></div>
+<div>
+<canvas id="dot-cv" aria-label="scalar product"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>u</span><span><i style="background:var(--amber)"></i>v</span><span><i style="background:var(--good)"></i>projection of v on u</span></div>
+<div id="dot-ro"></div>
+<div class="gdc" id="dot-gdc"></div>
+
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="dot"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Vectors · MAT/VCT</small></h3>
+<h4>Dot product and angle</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP): Angle = <b>Degree</b>.</li>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b>, then <kbd>OPTN</kbd> → <kbd>F2</kbd> MAT/VCT. Press <kbd>F6</kbd> ▷ to reach <b>DotP(</b> and <b>Angle(</b>.</li>
+<li><span class="mono">DotP(Vct A,Vct B)</span> gives a·b. <span class="mono">Angle(Vct A,Vct B)</span> gives θ.</li>
+</ol>
+<h4>Without those commands</h4>
+<ol>
+<li>Older OS: store vectors in List 1 and List 2, then <span class="mono">Sum(List 1×List 2)</span>.</li>
+<li>Angle: <span class="mono">cos⁻¹(a·b ÷ (Norm a × Norm b))</span>.</li>
+</ol>
+<p class="small">The commands need OS 3.x. If DotP( is missing, use the list method.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Lists</small></h3>
+<h4>Dot product</h4>
+<ol>
+<li>Store the vectors in L₁ and L₂ (<kbd>STO→</kbd> <kbd>2nd</kbd> <kbd>1</kbd>).</li>
+<li><kbd>2nd</kbd> <kbd>STAT</kbd> (LIST) → MATH → 5:sum(, then <span class="mono">sum(L₁*L₂)</span>.</li>
+</ol>
+<h4>Angle</h4>
+<ol>
+<li>Set <kbd>MODE</kbd> to <b>DEGREE</b>.</li>
+<li><span class="mono">cos⁻¹(sum(L₁*L₂)/(√(sum(L₁²))√(sum(L₂²))))</span>. <kbd>2nd</kbd> <kbd>cos</kbd> gives cos⁻¹.</li>
+</ol>
+<p class="small">Store the dot product in A and the two lengths in B and C (<kbd>STO→</kbd> <kbd>ALPHA</kbd>) so the angle line is short and you can see each part.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-cross" data-sec="cross" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.15</span>
+<h2>Vector product</h2>
+<p class="lede">The vector product takes two vectors and produces a third, perpendicular to both. Its size is an area.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p><b>a</b> × <b>b</b> is a vector that is perpendicular to both <b>a</b> and <b>b</b>, pointing the way a right-handed screw would move turning from <b>a</b> to <b>b</b>. Its length is the area of the parallelogram the two vectors span: |<b>a</b>||<b>b</b>| sin θ.</p>
+<p>The dot product has cos, the cross product has sin. When the vectors are parallel, sin θ = 0, so the cross product is zero. That is the test for parallel.</p>
+<p>Two jobs come up constantly. The cross product of two directions in a plane gives the <b>normal</b> to the plane. Half its magnitude gives the <b>area of a triangle</b>.</p>
+<p>Rotate the model, then drag v to be parallel to u and watch the parallelogram collapse and u × v shrink to zero.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f"><b>a</b> × <b>b</b> = (a₂b₃ − a₃b₂, a₃b₁ − a₁b₃, a₁b₂ − a₂b₁)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">|<b>a</b> × <b>b</b>| = |<b>a</b>||<b>b</b>| sin θ</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">parallelogram area = |<b>a</b> × <b>b</b>|</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">triangle ABC area = ½|AB × AC|</span></div>
+<div class="fx"><span class="f"><b>b</b> × <b>a</b> = −(<b>a</b> × <b>b</b>)</span></div>
+<div class="fx"><span class="f"><b>a</b> × <b>b</b> = <b>0</b> ⇔ <b>a</b> ∥ <b>b</b></span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Order matters: b × a points the opposite way.</li>
+<li>Triangle area needs the ½: the cross product gives the parallelogram.</li>
+<li>Do not mix up: dot product uses cos, cross product uses sin.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Dot uses cos, cross uses sin.</b></li>
+<li><b>Check: dot the result with each input. Both must be 0.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: vector product</h3>
+<div class="lab-grid">
+<div class="lcol"><div class="ctrls" id="cross-ctrls"></div></div>
+<div>
+<canvas id="cross-cv" aria-label="vector product"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>u</span><span><i style="background:var(--amber)"></i>v</span><span><i style="background:var(--good)"></i>u × v (scaled for display)</span></div>
+<div id="cross-ro"></div>
+<div class="gdc" id="cross-gdc"></div>
+
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="cross"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Vectors · MAT/VCT</small></h3>
+<h4>Cross product and area</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F2</kbd> MAT/VCT, then <kbd>F6</kbd> ▷ to find <b>CrossP(</b>.</li>
+<li><span class="mono">CrossP(Vct A,Vct B)</span> gives the vector.</li>
+<li>Area: <span class="mono">Norm(CrossP(Vct A,Vct B))</span>, then halve it for a triangle.</li>
+</ol>
+<p class="small">CrossP( needs OS 3.x. On older OS, use the component formula.</p>
+<h4>Check by hand</h4>
+<ol>
+<li>Dot the result with each input vector. Both must give 0.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Components</small></h3>
+<h4>No cross-product key</h4>
+<ol>
+<li>Store a in L₁ and b in L₂. Use the components: <span class="mono">L₁(2)*L₂(3)−L₁(3)*L₂(2)</span> for the first component.</li>
+<li><kbd>2nd</kbd> <kbd>STAT</kbd> (LIST) → OPS gives the list tools. Pick the element with L₁(2), typed with <kbd>2nd</kbd> <kbd>1</kbd> then <kbd>(</kbd> 2 <kbd>)</kbd>.</li>
+</ol>
+<h4>Length</h4>
+<ol>
+<li>Store the answer in L₃ and use <span class="mono">√(sum(L₃²))</span>.</li>
+</ol>
+<p class="small">Dot the result with a and b to check it. Both should be 0.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-line" data-sec="line" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.14</span>
+<h2>Lines</h2>
+<p class="lede">A line in 3D needs a point and a direction. There is no y = mx + c, because a line in space has no single gradient.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p><b>r</b> = <b>a</b> + λ<b>b</b>: start at the point A, then move any multiple λ of the direction <b>b</b>. Different λ give different points on the same line. The direction is usually the vector AB between two known points, and any multiple of it describes the same line.</p>
+<p>To check that a point is on the line, find λ from one component, then confirm the other two. To get the Cartesian form, make λ the subject of each component and set them equal.</p>
+<p>The angle between two lines is the angle between their directions (taken acute). The shortest distance from a point P to the line is the length of the perpendicular PF, equal to |AP × <b>b</b>| ÷ |<b>b</b>|: the parallelogram area divided by its base.</p>
+<p>For a moving particle, <b>b</b> is the velocity, |<b>b</b>| is the speed, and the position at time t is <b>a</b> + t<b>b</b>.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f"><b>r</b> = <b>a</b> + λ<b>b</b></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">(x − x₀) ÷ l = (y − y₀) ÷ m = (z − z₀) ÷ n</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">cos θ = |<b>b</b>₁·<b>b</b>₂| ÷ (|<b>b</b>₁||<b>b</b>₂|)</span></div>
+<div class="fx"><span class="f">distance from P to line = |AP × <b>b</b>| ÷ |<b>b</b>|</span></div>
+<div class="fx"><span class="f">closest approach: AP·<b>b</b> = λ|<b>b</b>|²</span></div>
+<div class="fx"><span class="f">speed = |<b>b</b>|</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>To show a point is on the line, check all three components.</li>
+<li>A zero in the direction vector: write y = constant instead of dividing by 0.</li>
+<li>The angle between lines uses only directions. The points are decoys.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Point + direction.</b></li>
+<li><b>On the line? One λ for all three components.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a line, a point and the shortest distance</h3>
+<div class="lab-grid">
+<div class="lcol"><div class="ctrls" id="line-ctrls"></div></div>
+<div>
+<canvas id="line-cv" aria-label="a line, a point and the shortest distance"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>line</span><span><i style="background:var(--amber)"></i>direction b</span><span><i style="background:var(--bad)"></i>perpendicular PF</span></div>
+<div id="line-ro"></div>
+<div class="gdc" id="line-gdc"></div>
+
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="line"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Vectors · MAT/VCT</small></h3>
+<h4>Distance from a point to a line</h4>
+<ol>
+<li>Define AP = P − A and b as vectors.</li>
+<li><span class="mono">Norm(CrossP(Vct AP,Vct B)) ÷ Norm(Vct B)</span>.</li>
+</ol>
+<h4>Angle between two lines</h4>
+<ol>
+<li><span class="mono">Angle(Vct B1,Vct B2)</span>. If it gives an obtuse angle, subtract it from 180° for the acute angle between the lines.</li>
+</ol>
+<p class="small">The Angle( command exists only on OS 3.x. Otherwise use cos⁻¹ with DotP/Sum.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Lists</small></h3>
+<h4>Distance from a point to a line</h4>
+<ol>
+<li>Compute AP × b by components in L₃.</li>
+<li><span class="mono">√(sum(L₃²))/√(sum(L₂²))</span> with b in L₂.</li>
+</ol>
+<h4>Angle between two lines</h4>
+<ol>
+<li><span class="mono">cos⁻¹(abs(sum(L₁*L₂))/(√(sum(L₁²))√(sum(L₂²))))</span>. <kbd>MATH</kbd> → NUM → 1:abs(.</li>
+</ol>
+<p class="small">The abs( makes the angle acute, which is what "the angle between two lines" means.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-lines2" data-sec="lines2" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.14</span>
+<h2>Two lines</h2>
+<p class="lede">In 2D, lines that are not parallel always meet. In 3D they can pass without touching: parallel, intersecting, coincident or skew.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Start with the directions. If one is a multiple of the other, the lines are <b>parallel</b> or the <b>same line</b>: put the point A₂ into line 1 to tell which.</p>
+<p>If the directions are not parallel, equate the lines. This gives three equations in two unknowns λ and μ. Solve any two, then <b>test the third</b>. If it holds, the lines intersect there. If it fails, there is no solution and the lines are <b>skew</b>.</p>
+<p>Skew lines have a shortest distance, along the direction perpendicular to both: n = <b>b</b>₁ × <b>b</b>₂. Project the connecting vector a₂ − a₁ onto n.</p>
+<p>In the model, line 1 is fixed. Press a preset, then move line 2 and watch the verdict change. Rotate to see why skew lines look like they cross from some angles.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f"><b>a</b>₁ + λ<b>b</b>₁ = <b>a</b>₂ + μ<b>b</b>₂</span></div>
+<div class="fx"><span class="f">parallel: <b>b</b>₂ = k<b>b</b>₁</span></div>
+<div class="fx"><span class="f">skew gap = |(<b>a</b>₂ − <b>a</b>₁)·(<b>b</b>₁ × <b>b</b>₂)| ÷ |<b>b</b>₁ × <b>b</b>₂|</span></div>
+<div class="fx"><span class="f">cos θ = |<b>b</b>₁·<b>b</b>₂| ÷ (|<b>b</b>₁||<b>b</b>₂|)</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Use different letters, λ and μ, for the two lines.</li>
+<li>Skew needs both facts: not parallel, and no intersection.</li>
+<li>Matching the third equation is part of the proof, not a bonus.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Parallel? Same line? Else solve two, test the third.</b></li>
+<li><b>Third fails → skew.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: two lines</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="lines2-pre"></div><div class="ctrls" id="lines2-ctrls"></div></div>
+<div>
+<canvas id="lines2-cv" aria-label="two lines"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>L₁ (fixed)</span><span><i style="background:var(--amber)"></i>L₂</span><span><i style="background:var(--bad)"></i>intersection or shortest gap</span></div>
+<div id="lines2-ro"></div>
+<div class="gdc" id="lines2-gdc"></div>
+<div id="lines2-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="lines2"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Equation · SIMUL</small></h3>
+<h4>Solve two equations for λ and μ</h4>
+<ol>
+<li>Rearrange x and y equations into the form λ − μ = number.</li>
+<li><kbd>MENU</kbd> → <b>Equation</b> → <kbd>F1</kbd> SIMUL → 2 unknowns. Enter coefficients and constants. <kbd>EXE</kbd> after each, then <kbd>F1</kbd> SOLVE.</li>
+<li>Substitute λ, μ into the z equation by hand. Both sides equal: intersect. Not equal: skew.</li>
+</ol>
+<h4>Skew distance</h4>
+<ol>
+<li>n = <span class="mono">CrossP(Vct B1,Vct B2)</span>, then <span class="mono">Abs(DotP(Vct A2−Vct A1,n)) ÷ Norm(n)</span>.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Simultaneous</small></h3>
+<h4>Solve two equations for λ and μ</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>x⁻¹</kbd> (MATRIX) → EDIT, make a 2×3 matrix of the x and y equations.</li>
+<li><kbd>2nd</kbd> <kbd>x⁻¹</kbd> → MATH → B:rref(, then the matrix name. The last column holds λ and μ.</li>
+<li>Substitute into the z equation by hand.</li>
+</ol>
+<p class="small">Or use <kbd>APPS</kbd> → PlySmlt2 → Simultaneous equation solver, if the app is installed on your calculator.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-plane" data-sec="plane" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.16</span>
+<h2>Planes</h2>
+<p class="lede">A plane is pinned down by a point and a normal, a vector sticking out at right angles.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Every vector lying in the plane is perpendicular to the normal <b>n</b>. So for a point <b>r</b> on the plane through A, (<b>r</b> − <b>a</b>)·<b>n</b> = 0, which rearranges to <b>r</b>·<b>n</b> = <b>a</b>·<b>n</b>. That constant is d. This is the whole idea.</p>
+<p>A plane has three descriptions. <b>Vector form</b> <b>r</b> = <b>a</b> + λ<b>b</b> + μ<b>c</b> gives a point and two directions. <b>Normal form</b> <b>r</b>·<b>n</b> = d. <b>Cartesian form</b> ax + by + cz = d, where (a, b, c) is the normal. To convert, cross the two directions for n, then dot with the point for d.</p>
+<p>The distance from P to the plane is the shadow of AP along n: |n·p − d| ÷ |n|.</p>
+<p>Drag d and the normal in the model. The green arrow is always at right angles to the plane.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f"><b>r</b> = <b>a</b> + λ<b>b</b> + μ<b>c</b></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f"><b>r</b>·<b>n</b> = <b>a</b>·<b>n</b></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">ax + by + cz = d</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f"><b>n</b> = <b>b</b> × <b>c</b>, or AB × AC for three points</span></div>
+<div class="fx"><span class="f">distance from P to plane = |<b>n</b>·<b>p</b> − d| ÷ |<b>n</b>|</span></div>
+<div class="fx"><span class="f">distance from the origin = |d| ÷ |<b>n</b>|</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>n = b × c uses the two directions, never the point.</li>
+<li>Check your plane with the other points on it.</li>
+<li>Scaling n changes d too: 2x + 2y + 2z = 6 is the same plane as x + y + z = 3.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Normal first (cross), then d (dot).</b></li>
+<li><b>Distance: plug in, subtract d, divide by |n|.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a plane, its normal and a point</h3>
+<div class="lab-grid">
+<div class="lcol"><div class="ctrls" id="plane-ctrls"></div></div>
+<div>
+<canvas id="plane-cv" aria-label="a plane, its normal and a point"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>plane</span><span><i style="background:var(--good)"></i>normal n</span><span><i style="background:var(--amber)"></i>point P</span><span><i style="background:var(--bad)"></i>perpendicular PF</span></div>
+<div id="plane-ro"></div>
+<div class="gdc" id="plane-gdc"></div>
+
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="plane"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Vectors · MAT/VCT</small></h3>
+<h4>Plane through three points</h4>
+<ol>
+<li>Vectors AB and AC. <span class="mono">CrossP(Vct AB,Vct AC)</span> is a normal.</li>
+<li>d = <span class="mono">DotP(n,Vct A)</span>.</li>
+</ol>
+<h4>Distance from a point</h4>
+<ol>
+<li><span class="mono">Abs(DotP(n,Vct P) − d) ÷ Norm(n)</span>.</li>
+</ol>
+<p class="small">Check each of the three points in the final equation.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Lists</small></h3>
+<h4>Plane through three points</h4>
+<ol>
+<li>Get n by components from AB and AC and store it in L₃.</li>
+<li>d = <span class="mono">sum(L₃*L₁)</span> with A in L₁.</li>
+</ol>
+<h4>Distance from a point</h4>
+<ol>
+<li><span class="mono">abs(sum(L₃*L₂)−d)/√(sum(L₃²))</span> with P in L₂.</li>
+</ol>
+<p class="small">Check each of the three points in the final equation.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-lp" data-sec="lp" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.16</span>
+<h2>Line and plane</h2>
+<p class="lede">A line and a plane can meet at one point, never meet, or the line can lie inside the plane.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Write the line as x = a₁ + λb₁, y = a₂ + λb₂, z = a₃ + λb₃ and substitute into the plane equation. Everything collapses to <b>one linear equation in λ</b>: n·a + λ(n·b) = d.</p>
+<p>Three outcomes. If n·b ≠ 0 you get one value of λ, hence one point. If n·b = 0 the line is parallel to the plane: either a·n ≠ d (never meets) or a·n = d (the line lies in the plane).</p>
+<p>The angle between a line and a plane is measured against the plane, not the normal. Since the normal is at 90° to the plane, the angle with the plane satisfies <b>sin θ = |b·n| ÷ (|b||n|)</b>.</p>
+<p>To reflect P in a plane, find the foot of the perpendicular F by sending a line along the normal, then go the same distance again: P′ = 2F − P.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">n·a + λ(n·b) = d</span></div>
+<div class="fx"><span class="f">parallel to the plane ⇔ <b>b</b>·<b>n</b> = 0</span></div>
+<div class="fx"><span class="f">sin θ = |<b>b</b>·<b>n</b>| ÷ (|<b>b</b>||<b>n</b>|)</span></div>
+<div class="fx"><span class="f">foot of the perpendicular: line through P along <b>n</b></span></div>
+<div class="fx"><span class="f">reflection P′ = 2F − P</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>The angle with the plane uses sin, not cos.</li>
+<li>b·n = 0 alone does not tell you the line misses the plane. Check a·n against d.</li>
+<li>Put λ back into the LINE, not the plane, to get the point.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Line into plane → one equation in λ.</b></li>
+<li><b>b·n = 0 → parallel. Then a·n vs d.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a line meeting a plane</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="lp-pre"></div><div class="ctrls" id="lp-ctrls"></div></div>
+<div>
+<canvas id="lp-cv" aria-label="a line meeting a plane"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>plane</span><span><i style="background:var(--amber)"></i>line</span><span><i style="background:var(--bad)"></i>intersection</span></div>
+<div id="lp-ro"></div>
+<div class="gdc" id="lp-gdc"></div>
+
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="lp"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Solve · Vectors</small></h3>
+<h4>Where does the line meet the plane?</h4>
+<ol>
+<li>Compute n·a with <span class="mono">DotP(n,Vct A)</span> and n·b with <span class="mono">DotP(n,Vct B)</span>.</li>
+<li>λ = (d − n·a) ÷ (n·b). Put λ into the line.</li>
+</ol>
+<h4>Angle between line and plane</h4>
+<ol>
+<li><span class="mono">sin⁻¹(Abs(DotP(Vct B,n)) ÷ (Norm(Vct B)×Norm(n)))</span>, in Degree mode.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Lists</small></h3>
+<h4>Where does the line meet the plane?</h4>
+<ol>
+<li>n·a is <span class="mono">sum(L₃*L₁)</span> and n·b is <span class="mono">sum(L₃*L₂)</span>.</li>
+<li>λ = (d − n·a) ÷ (n·b).</li>
+</ol>
+<h4>Angle between line and plane</h4>
+<ol>
+<li><span class="mono">sin⁻¹(abs(sum(L₂*L₃))/(√(sum(L₂²))√(sum(L₃²))))</span> with <kbd>MODE</kbd> in DEGREE. <kbd>2nd</kbd> <kbd>sin</kbd> gives sin⁻¹.</li>
+</ol>
+</aside></div>
+</section>
+<section class="sec" id="s-pp" data-sec="pp" hidden>
+<header class="sec-head">
+<span class="ref">AHL 3.16</span>
+<h2>Planes meeting</h2>
+<p class="lede">Two planes meet in a line. Three planes can meet at a point, along a line, or not at all.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Two planes are parallel exactly when their normals are. Otherwise they meet in a <b>line</b> whose direction is n₁ × n₂, perpendicular to both normals. The angle between the planes is the angle between the normals.</p>
+<p>For three planes, write the equations as a system of three equations in x, y, z. If the determinant of the coefficients is non-zero, there is exactly one solution and the planes meet at a point. If the determinant is zero, the planes either share a line or share nothing.</p>
+<p>When there is no solution, say which of two pictures it is: <b>a triangular prism</b> (every pair meets in a line, but the three lines are parallel and no point is common), or <b>two parallel planes</b> cut by a third. In the prism all three normals lie in a flat sheet, which is why the determinant is zero.</p>
+<table class="mini"><tr><th>Picture</th><th>Normals / determinant</th><th>Solutions</th></tr>
+<tr><td>Single point</td><td>det ≠ 0</td><td>exactly one</td></tr>
+<tr><td>Common line</td><td>det = 0, consistent</td><td>infinitely many</td></tr>
+<tr><td>Triangular prism</td><td>det = 0, no parallel pair</td><td>none</td></tr>
+<tr><td>Two parallel planes</td><td>det = 0, two normals parallel</td><td>none</td></tr>
+</table>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">direction of intersection = <b>n</b>₁ × <b>n</b>₂</span></div>
+<div class="fx"><span class="f">cos θ = |<b>n</b>₁·<b>n</b>₂| ÷ (|<b>n</b>₁||<b>n</b>₂|)</span></div>
+<div class="fx"><span class="f">det ≠ 0 ⇔ unique solution</span></div>
+<div class="fx"><span class="f">det = <b>n</b>₃·(<b>n</b>₁ × <b>n</b>₂)</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>The right-hand sides d never affect the angle or the direction.</li>
+<li>No solution does not mean parallel: a prism has no parallel planes.</li>
+<li>Always finish with a sentence naming the geometry.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>det ≠ 0: a point. det = 0: eliminate and look at the last line.</b></li>
+<li><b>0 = 0 → a line. 0 = 5 → no common point.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: three planes</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="pp-pre"></div><div class="vgrid" id="pp-grid"></div><div class="ctrls" id="pp-ctrls"></div></div>
+<div>
+<canvas id="pp-cv" aria-label="three planes"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>π₁</span><span><i style="background:var(--amber)"></i>π₂</span><span><i style="background:var(--good)"></i>π₃</span><span><i style="background:var(--bad)"></i>common point or line</span></div>
+<div id="pp-ro"></div>
+<div class="gdc" id="pp-gdc"></div>
+
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="pp"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Equation · SIMUL</small></h3>
+<h4>Solve three equations</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Equation</b> → <kbd>F1</kbd> SIMUL → <kbd>F2</kbd> (3 unknowns).</li>
+<li>Enter the nine coefficients and three constants, <kbd>EXE</kbd> after each. <kbd>F1</kbd> SOLVE.</li>
+<li>If the planes have no unique solution, it shows an error. That is your clue that the determinant is zero.</li>
+</ol>
+<h4>Determinant</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b>, <kbd>OPTN</kbd> → MAT/VCT → <b>Det</b>, then the 3×3 matrix.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>rref</small></h3>
+<h4>Solve three equations</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>x⁻¹</kbd> (MATRIX) → EDIT, a 3×4 matrix of coefficients and constants.</li>
+<li><kbd>2nd</kbd> <kbd>x⁻¹</kbd> → MATH → B:rref(, then the matrix. The last column is x, y, z when there is one solution.</li>
+</ol>
+<h4>Reading rref</h4>
+<ol>
+<li>A row [0 0 0 | 0]: a free variable, so a line of solutions.</li>
+<li>A row [0 0 0 | 1]: a contradiction, so no common point.</li>
+</ol>
+<p class="small">Also under <kbd>APPS</kbd> → PlySmlt2 → Simultaneous equation solver, if installed.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-drill" data-sec="drill" hidden>
+<header class="sec-head">
+<span class="ref">Mixed</span>
+<h2>Mixed drill</h2>
+<p class="lede">Questions from every vector topic in random order. Part of the skill is recognising which tool a question wants before you start.</p>
+</header>
+<div class="practice" data-sec="drill"></div>
+<div class="panel prose">
+<h3>Exam habits that save marks</h3>
+<ul>
+<li>Write vectors as columns with brackets and keep the letters: "AB = <b>b</b> − <b>a</b>".</li>
+<li>For "show that", write every step, including the check that the third equation holds.</li>
+<li>Set the calculator to degrees before any angle. Keep full precision until the last step.</li>
+<li>For a plane or line, check your final equation with a second known point.</li>
+<li>Name the geometry in words at the end: "the lines are skew", "the planes form a triangular prism".</li>
+</ul>
+</div>
+</section>
+<section class="sec" id="s-casio" data-sec="casio" hidden>
+<header class="sec-head">
+<span class="ref"><span data-calc="casio">fx-CG50 AU</span><span data-calc="ti84">TI-84 Plus CE</span></span>
+<h2>Calculator cheat sheet</h2>
+<p class="lede">Every vector keystroke in one place. Each topic page also has its own calculator panel next to the practice questions.</p>
+</header>
+<div class="panel" data-calc="casio">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP): Angle = <b>Degree</b>, Input/Output = <b>Math/Math</b>.</li>
+<li>The vector commands are in <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F2</kbd> MAT/VCT. Press <kbd>F6</kbd> ▷ to page through them.</li>
+<li>Define each vector as a vector in the editor before you use it: Vct A, Vct B…</li>
+</ul>
+<p class="small">DotP(, CrossP(, Angle(, UnitV( and Norm( need OS 3.x. If you are on an older OS, use the list-based fallbacks below.</p>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Dot product</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F2</kbd> MAT/VCT → <kbd>F6</kbd> ▷ → DotP(</td><td>Vct A, Vct B</td></tr>
+<tr><td>Cross product</td><td>same menu → CrossP(</td><td>Vct A, Vct B</td></tr>
+<tr><td>Angle between vectors</td><td>same menu → Angle(</td><td>Vct A, Vct B</td></tr>
+<tr><td>Length / unit vector</td><td>same menu → Norm( / UnitV(</td><td>Vct A</td></tr>
+<tr><td>Dot product (older OS)</td><td>Sum(List 1×List 2)</td><td>vectors in Lists 1 and 2</td></tr>
+<tr><td>Solve 2 or 3 equations</td><td><b>Equation</b> → <kbd>F1</kbd> SIMUL → <kbd>F1</kbd> (2) or <kbd>F2</kbd> (3 unknowns)</td><td>coefficients and constants</td></tr>
+<tr><td>Determinant</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → MAT/VCT → Det</td><td>3×3 matrix</td></tr>
+<tr><td>Inverse trig</td><td><kbd>SHIFT</kbd> <kbd>sin</kbd> / <kbd>cos</kbd> / <kbd>tan</kbd></td><td>Degree mode</td></tr>
+<tr><td>Fraction ↔ decimal</td><td><kbd>S⇔D</kbd></td><td>Run-Matrix output</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Which command for which question?</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>Angle between vectors or at a vertex</td><td>Angle( or cos⁻¹(DotP ÷ (Norm × Norm))</td></tr>
+<tr><td>Angle between two lines</td><td>Angle( on the directions; if obtuse, 180° minus it</td></tr>
+<tr><td>Angle between a line and a plane</td><td>sin⁻¹(Abs(DotP(b, n)) ÷ (Norm b × Norm n))</td></tr>
+<tr><td>Area of a triangle</td><td>Norm(CrossP(AB, AC)) ÷ 2</td></tr>
+<tr><td>Distance from a point to a plane</td><td>Abs(DotP(n, P) − d) ÷ Norm(n)</td></tr>
+<tr><td>Distance from a point to a line</td><td>Norm(CrossP(AP, b)) ÷ Norm(b)</td></tr>
+<tr><td>Shortest distance between skew lines</td><td>Abs(DotP(a₂ − a₁, n)) ÷ Norm(n), n = CrossP(b₁, b₂)</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>MODE</kbd>: <b>DEGREE</b>, <b>FLOAT</b>, <b>MATHPRINT</b>.</li>
+<li>Store a vector as a list: type the braces with <kbd>2nd</kbd> <kbd>(</kbd> and <kbd>2nd</kbd> <kbd>)</kbd>, then <kbd>STO→</kbd> <kbd>2nd</kbd> <kbd>1</kbd> (L₁). Use L₂, L₃ for others.</li>
+<li>Lists add, subtract and scale element by element, which is how vectors behave. <span class="mono">L₂−L₁</span> is AB.</li>
+</ul>
+<p class="small">The TI-84 Plus CE has no built-in dot, cross or angle command for vectors. Use the list formulas below.</p>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Dot product</td><td><kbd>2nd</kbd> <kbd>STAT</kbd> (LIST) → MATH → 5:sum(</td><td><span class="mono">sum(L₁*L₂)</span></td></tr>
+<tr><td>Length</td><td><kbd>2nd</kbd> <kbd>x²</kbd> (√ ) with sum(</td><td><span class="mono">√(sum(L₁²))</span></td></tr>
+<tr><td>Angle</td><td><kbd>2nd</kbd> <kbd>cos</kbd> (cos⁻¹)</td><td><span class="mono">cos⁻¹(sum(L₁*L₂)/(√(sum(L₁²))√(sum(L₂²))))</span></td></tr>
+<tr><td>Cross product</td><td>by components</td><td>(a₂b₃ − a₃b₂, a₃b₁ − a₁b₃, a₁b₂ − a₂b₁)</td></tr>
+<tr><td>Solve 2 or 3 equations</td><td><kbd>2nd</kbd> <kbd>x⁻¹</kbd> (MATRIX) → EDIT, then MATH → B:rref(</td><td>augmented matrix</td></tr>
+<tr><td>Same, with an app</td><td><kbd>APPS</kbd> → PlySmlt2 → Simultaneous</td><td>if installed</td></tr>
+<tr><td>Determinant</td><td><kbd>2nd</kbd> <kbd>x⁻¹</kbd> → MATH → 1:det(</td><td>3×3 matrix</td></tr>
+<tr><td>Absolute value</td><td><kbd>MATH</kbd> → NUM → 1:abs(</td><td>angle between lines</td></tr>
+<tr><td>Decimal → fraction</td><td><kbd>MATH</kbd> → 1:►Frac</td><td>Home screen answer</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Which formula for which question?</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>Angle between vectors or at a vertex</td><td>cos⁻¹(sum(L₁*L₂)/(√(sum(L₁²))√(sum(L₂²))))</td></tr>
+<tr><td>Angle between two lines</td><td>same, with abs( around the sum</td></tr>
+<tr><td>Angle between a line and a plane</td><td>sin⁻¹(abs(sum(b*n))/(√(sum(b²))√(sum(n²))))</td></tr>
+<tr><td>Area of a triangle</td><td>cross by components, then √(sum(L₃²))/2</td></tr>
+<tr><td>Distance from a point to a plane</td><td>abs(sum(n*p) − d)/√(sum(n²))</td></tr>
+<tr><td>Distance from a point to a line</td><td>cross by components of AP and b, then √(sum(L₃²))/√(sum(b²))</td></tr>
+<tr><td>Shortest distance between skew lines</td><td>abs(sum((a₂−a₁)*n))/√(sum(n²)), n = b₁ × b₂</td></tr>
+</table>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+<script src="../shared/core.js"></script>
+<script src="learn.js"></script>
+<script src="app.js"></script>
+<script src="../shared/learn-render.js"></script>
+<script src="../shared/boot.js"></script>
+</body>
+</html>
