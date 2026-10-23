@@ -1,0 +1,117 @@
+# IB Maths Lab
+
+Interactive study site for IB Mathematics: Analysis & Approaches HL. Live at **https://ib-aahl-probability-lab.vercel.app**.
+
+The first unit is **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14). Every topic page follows the same pattern, so new units can be added in the same style.
+
+---
+
+## 1. How publishing works
+
+The site is plain HTML, CSS and JavaScript. There is no build step and nothing to install.
+
+```
+edit files  →  git push to main  →  Vercel redeploys automatically (≈20 seconds)
+```
+
+- Every push to `main` goes live at the URL above.
+- Every push to any other branch gets its own preview URL (shown in the Vercel dashboard). Use a branch when you want to check something before it goes live.
+- To undo a bad deploy, open Vercel → project **ib-aahl-probability-lab** → Deployments, then use **Promote** or **Instant Rollback** on the last good one.
+
+## 2. Preview on your own computer
+
+```bash
+cd ib-maths-lab
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000. Refresh after each edit; no restart is needed.
+
+## 3. What each file does
+
+| File | What lives there |
+|---|---|
+| `index.html` | All page content: the header, topic menu, and one `<section class="sec" id="s-TOPIC">` per topic, containing The idea, Formulas, Live model, and the Casio and TI calculator panels. Also has the Calculator cheat sheet. |
+| `app.js` | Behaviour: the calculator switch, navigation, every live model (Venn, tree, Bayes, counting, discrete, binomial, normal, continuous), the **practice question generators** (`GEN`), scoring, and redraws. |
+| `learn.js` | The **How to answer** guides and **Worked examples** for each topic (the object `L`), plus the right-hand **Formulas drawer** and the left-hand **Topics drawer**. |
+| `styles.css` | All styling. Colours are defined once as variables at the top (`--accent`, `--paper`, …), with a dark-mode set below them. |
+
+### Anatomy of one topic page (in order)
+
+1. **Header**: syllabus reference, title, one-line lede (`index.html`)
+2. **The idea**: the reasoning, written in plain prose (`index.html`, `.theory > .prose`)
+3. **Formulas**: formulas, Traps and Shorthand. They are written in `index.html` as the second panel in `.theory`, and `learn.js` moves them into the right-hand drawer automatically.
+4. **Live model**: sliders and a canvas (markup in `index.html`, drawing code in `app.js`)
+5. **How to answer**: 5-step method, question-type table, and where the marks are (`learn.js` → `L.topic.method/types/marks`)
+6. **Worked examples**: 3 exam-style questions with marks and step-by-step reveal (`learn.js` → `L.topic.ex`)
+7. **Practice + calculator panel**: unlimited random questions (`app.js` → `GEN.topic`) beside the Casio and TI-84 panels (`index.html`, `<aside class="calc" data-calc="casio|ti84">`)
+
+## 4. Common edits
+
+**Fix a typo or change wording.** Find the text in `index.html` (or in `learn.js` for methods and examples) and edit it directly.
+
+**Calculator-specific text.** Anything that differs between calculators is written twice:
+```html
+<span data-calc="casio">Ncd(Lower, Upper, σ, μ)</span><span data-calc="ti84">normalcdf(lower, upper, μ, σ)</span>
+```
+Only the version matching the reader's choice is shown. In JavaScript, use the helper `C(casioText, tiText)` in `app.js`, or `G(casioText, tiText)` in `learn.js`.
+
+**Add a worked example.** In `learn.js`, add an object to that topic's `ex` array:
+```js
+{tag:'Paper 2 · calculator', title:'Short title', stem:'The question setup…', parts:[
+  {q:'Find P(X > 4).', m:2, s:[
+    'First step of reasoning.',
+    G(`Bcd: Lower 5, Upper 15 `+M('M1'), `1 − binomcdf(15, 0.2, 4) `+M('M1')),
+    '= <b>0.164</b> (3 s.f.) '+M('A1')
+  ]}
+], tip:'Examiner note: the one mistake this question is designed to catch.'}
+```
+`m` is the marks for the part. The `M('M1')`, `M('A1')`, `M('R1')` badges inside its steps must add up to `m`. Run `node tools/check-marks.js` to confirm.
+
+**Add a practice question type.** In `app.js`, add a function to the topic's `GEN` array. It must return:
+```js
+{ q: 'Question text (HTML allowed)', ans: 0.164, exact: false,
+  work: ['step 1', 'step 2', C('casio line', 'TI line'), '= <b>answer</b>'],
+  tip: 'Short, memorable shorthand for spotting and solving this question type.' }
+```
+Use `exact: true` for whole-number answers (counting). Otherwise answers within 0.6% are marked correct.
+
+**Add a formula, trap or shorthand.** Edit the second `.panel` inside that topic's `.theory` in `index.html`. It shows up in the Formulas drawer automatically.
+
+## 5. Adding a new unit (the rest of the course)
+
+Build each unit in a **fresh Claude chat** and ask it to use the **ib-maths-topic-lab** skill. A good first message: *"Use the ib-maths-topic-lab skill to add Calculus to my IB Maths Lab."* The skill has the full template, the checks, and the deploy steps, so every unit matches this one. One chat per unit keeps each conversation short, which makes your usage go much further.
+
+The AA HL syllabus, for planning:
+
+| Unit | Contents |
+|---|---|
+| 1. Number & algebra | Sequences and series, exponents and logs, binomial theorem, counting*, proof, complex numbers, systems of equations |
+| 2. Functions | Graphs, composites and inverses, transformations, quadratics, rational functions, polynomials, inequalities, modulus |
+| 3. Geometry & trigonometry | 3D shapes, trig ratios and identities, radians, unit circle, trig equations and graphs, vectors, lines and planes |
+| 4. Statistics & probability | Sampling, statistical measures, regression, **probability (done)** |
+| 5. Calculus | Limits, differentiation, integration, kinematics, related rates, differential equations, Maclaurin series |
+
+\*Counting is already on the Probability page.
+
+When a second unit is added, the plan is to make the home page a **course hub** linking to each unit, with each unit in its own folder (for example `/calculus/`). The skill describes this.
+
+## 6. Checks before every push
+
+1. **Numbers**: every number in a new example or explanation is computed by a script, not by hand.
+2. **Marks**: `node tools/check-marks.js` confirms every worked-example part awards exactly its stated marks.
+3. **Syntax**: `node --check app.js && node --check learn.js`.
+4. **In the browser**: open the topic, then:
+   - switch Casio ↔ TI and check both versions of every calculator line;
+   - open the Formulas drawer with **F** and the Topics drawer by hovering at the left edge (or pressing **T**);
+   - reveal each worked example step by step;
+   - check the browser console shows no errors;
+   - check the layout at phone width.
+
+## 7. Keyboard shortcuts on the site
+
+| Key | Action |
+|---|---|
+| **F** | Open or close the Formulas drawer (right) |
+| **T** | Open or close the Topics drawer (left); hovering at the left edge also opens it |
+| **Esc** | Close whichever drawer is open |

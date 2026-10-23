@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Interactive guide to every IB Maths AA SL and HL probability topic, with live models, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>IB Probability Lab</title>
+<script>try{document.documentElement.dataset.calc=localStorage.getItem('ibprob-calc')==='ti84'?'ti84':'casio';}catch(e){document.documentElement.dataset.calc='casio';}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<div>
+<div class="eyebrow">IB Maths AA HL · Topic 4 · Probability</div>
+<h1>Probability <em>Lab</em></h1>
+<p class="sub">Every probability topic in the SL and HL syllabus. Each one has the core reasoning, the formulas you need, a live model to experiment with, and unlimited practice questions with full working.</p>
+</div>
+<div class="top-side">
+<div class="calcpick" role="group" aria-label="Calculator for keystroke instructions">
+<span class="lbl">Calculator</span>
+<div class="seg">
+<button type="button" data-pick="casio" aria-pressed="true">Casio fx-CG50</button>
+<button type="button" data-pick="ti84" aria-pressed="false">TI-84 Plus CE</button>
+</div>
+</div>
+<div class="tally" aria-live="polite">
+<div><b id="tCorrect">0</b>correct</div>
+<div><b id="tAttempt">0</b>attempted</div>
+<div><b id="tRate">–</b>accuracy</div>
+</div>
+</div>
+</header>
+<div class="shell">
+<nav class="rail" id="rail" aria-label="Topics">
+<div class="grp">Start</div>
+<button class="navb" data-go="overview"><span class="r">map</span><span class="n">Overview</span><span class="s"></span></button>
+<div class="grp">Events</div>
+<button class="navb" data-go="basics"><span class="r">SL 4.5</span><span class="n">Events &amp; Venns</span><span class="s" data-s="basics"></span></button>
+<button class="navb" data-go="conditional"><span class="r">SL 4.6</span><span class="n">Conditional &amp; trees</span><span class="s" data-s="conditional"></span></button>
+<button class="navb" data-go="bayes"><span class="r">HL 4.13</span><span class="n">Bayes' theorem</span><span class="s" data-s="bayes"></span></button>
+<button class="navb" data-go="counting"><span class="r">HL 1.10</span><span class="n">Counting</span><span class="s" data-s="counting"></span></button>
+<div class="grp">Random variables</div>
+<button class="navb" data-go="discrete"><span class="r">SL 4.7</span><span class="n">Discrete RVs</span><span class="s" data-s="discrete"></span></button>
+<button class="navb" data-go="binomial"><span class="r">SL 4.8</span><span class="n">Binomial</span><span class="s" data-s="binomial"></span></button>
+<button class="navb" data-go="normal"><span class="r">SL 4.9</span><span class="n">Normal</span><span class="s" data-s="normal"></span></button>
+<button class="navb" data-go="continuous"><span class="r">HL 4.14</span><span class="n">Continuous RVs</span><span class="s" data-s="continuous"></span></button>
+<div class="grp">Test yourself</div>
+<button class="navb" data-go="drill"><span class="r">mix</span><span class="n">Mixed drill</span><span class="s" data-s="drill"></span></button>
+<button class="navb" data-go="casio"><span class="r"><span data-calc="casio">CG50</span><span data-calc="ti84">TI-84</span></span><span class="n">Calculator sheet</span><span class="s"></span></button>
+</nav>
+<main id="main">
+<section class="sec" id="s-overview" data-sec="overview">
+<header class="sec-head">
+<span class="ref">Map</span>
+<h2>How the topic fits together</h2>
+<p class="lede">Probability in IB splits into two halves. First you reason about <em>events</em> (did it happen or not). Then you model a <em>number</em> that comes out of a random process with a random variable. Work through in order, or jump to a weak spot.</p>
+</header>
+<div class="cards" id="cards"></div>
+<div class="theory">
+<div class="panel">
+<h3>Which model does the question want?</h3>
+<p class="small" style="margin-bottom:12px">Read the stem and match the first line that fits.</p>
+<div class="decide">
+<div><span>Two events, overlaps, "or", "and", "neither"</span><b>Venn → 4.5</b></div>
+<div><span>"Given that…", stages, with or without replacement</span><b>Tree → 4.6</b></div>
+<div><span>You know P(B | A) but are asked for P(A | B)</span><b>Bayes → HL 4.13</b></div>
+<div><span>Selecting or arranging, equally likely outcomes</span><b>nCr / nPr → HL 1.10</b></div>
+<div><span>A table of values with probabilities, or "expected gain"</span><b>Discrete RV → 4.7</b></div>
+<div><span>Fixed n trials, success or failure, constant p</span><b>Binomial → 4.8</b></div>
+<div><span>A continuous measurement given as mean and SD</span><b>Normal → 4.9</b></div>
+<div><span>A probability density function f(x) is given</span><b>Continuous RV → HL 4.14</b></div>
+</div>
+</div>
+<div class="panel prose">
+<h3>How to use each topic page</h3>
+<ol>
+<li><b>Read the idea first.</b> Each page starts with why the method works, so you can rebuild a formula if you forget it.</li>
+<li><b>Break the model.</b> Drag sliders to extreme values. Watch what happens when p = 0, when σ gets huge, when events become independent.</li>
+<li><b>Do five practice questions.</b> Questions are randomised every time. Answer to 3 significant figures, the IB default. Fractions like 3/8 are accepted.</li>
+<li><b>Read the working even when you're right.</b> The shorthand line at the bottom is the part to memorise.</li>
+</ol>
+<p class="small">Formulas marked <span class="bk">booklet</span> appear in the IB formula booklet. You still need to know when to use them.</p>
+</div>
+</div>
+</section>
+<section class="sec" id="s-basics" data-sec="basics" hidden>
+<header class="sec-head">
+<span class="ref">SL 4.5 – 4.6</span>
+<h2>Events, Venn diagrams and the addition rule</h2>
+<p class="lede">An event is a set of outcomes. Most questions about two events come down to the four regions of a Venn diagram. Once you know all four, you can answer anything.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>For equally likely outcomes, P(A) = n(A) ÷ n(U): favourable outcomes over all outcomes. Every probability sits between 0 and 1, and the probabilities of all outcomes add to 1. That is why P(A′) = 1 − P(A).</p>
+<p>If you add P(A) and P(B), the overlap A ∩ B gets counted twice. Subtract it once and you get the addition rule.</p>
+<p><b>Mutually exclusive</b> events cannot happen together, so the overlap is empty: P(A ∩ B) = 0.</p>
+<p><b>Independent</b> events don't affect each other. Knowing A happened leaves the chance of B unchanged, which gives P(A ∩ B) = P(A) × P(B).</p>
+<p><b>Expected number</b> of times A occurs in n trials is n × P(A). It is a long-run average, so it can be a decimal.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">P(A′) = 1 − P(A)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Mutually exclusive: P(A ∪ B) = P(A) + P(B)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Independent: P(A ∩ B) = P(A)P(B)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Expected occurrences = n·P(A)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">P(A only) = P(A) − P(A ∩ B)</span><span class="t">from the Venn</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Mutually exclusive is <b>not</b> independent. If A and B can't both happen, knowing A happened tells you B didn't. That is dependence.</li>
+<li>"A or B" in IB means inclusive: A, B, or both.</li>
+<li>"Exactly one of A, B" is A ∪ B minus A ∩ B.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>ME</b> = "can't both". <b>IND</b> = "doesn't care".</li>
+<li>Fill Venns from the <b>middle out</b>: overlap first, then the "only" regions, then outside.</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: two events</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<div class="ctrl"><label for="vA">P(A)</label><output id="vAo"></output><input type="range" id="vA" min="0" max="1" step="0.01" value="0.5"></div>
+<div class="ctrl"><label for="vB">P(B)</label><output id="vBo"></output><input type="range" id="vB" min="0" max="1" step="0.01" value="0.4"></div>
+<div class="ctrl"><label for="vI">P(A ∩ B)</label><output id="vIo"></output><input type="range" id="vI" min="0" max="1" step="0.01" value="0.2"></div>
+<div class="msg" id="vMsg"></div>
+<div class="field"><span class="label">Shade a region</span>
+<div class="seg" id="vennRegions">
+<button data-r="AB" aria-pressed="true">A ∩ B</button>
+<button data-r="AuB">A ∪ B</button>
+<button data-r="Ao">A ∩ B′</button>
+<button data-r="Bo">A′ ∩ B</button>
+<button data-r="N">A′ ∩ B′</button>
+<button data-r="Ac">A′</button>
+</div>
+</div>
+<p class="small">Try setting P(A ∩ B) to exactly P(A) × P(B), or to 0. Watch the status tiles change.</p>
+</div>
+<div>
+<canvas id="vennCv" aria-label="Venn diagram"></canvas>
+<div class="readout">
+<div class="hi"><span id="vRegName">Shaded region</span><b id="vReg"></b></div>
+<div><span>P(A ∪ B)</span><b id="vU"></b></div>
+<div><span>P(A | B)</span><b id="vAgB"></b></div>
+<div><span>P(A)·P(B)</span><b id="vProd"></b></div>
+<div><span>Independent?</span><b id="vInd"></b></div>
+<div><span>Mutually exclusive?</span><b id="vME"></b></div>
+</div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="basics"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix</small></h3>
+<p>No special menu here. The skill is storing values so you don't retype decimals.</p>
+<h4>Store, then combine</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> (icon 1).</li>
+<li>Type P(A), press <kbd>→</kbd> <kbd>ALPHA</kbd> <kbd>A</kbd> <kbd>EXE</kbd>. Repeat for P(B) → B and P(A ∩ B) → C.</li>
+<li>Union: <kbd>A</kbd> <kbd>+</kbd> <kbd>B</kbd> <kbd>−</kbd> <kbd>C</kbd> <kbd>EXE</kbd>.</li>
+<li>Independence check: <kbd>A</kbd> <kbd>×</kbd> <kbd>B</kbd> <kbd>EXE</kbd> and compare with C.</li>
+</ol>
+<div class="eg">0.45→A   0.3→B   0.12→C<br>A+B−C       = 0.63<br>A×B         = 0.135  (≠ C, not independent)</div>
+<h4>Exact answers</h4>
+<p>Press <kbd>S⇔D</kbd> to flip between a decimal and a fraction. Useful when the question says "give an exact answer".</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Home screen</small></h3>
+<p>No special menu here. The skill is storing values so you don't retype decimals. Letters are the green labels above the keys, reached with <kbd>ALPHA</kbd>.</p>
+<h4>Store, then combine</h4>
+<ol>
+<li>Work on the home screen. <kbd>2nd</kbd> <kbd>MODE</kbd> (QUIT) always gets you back.</li>
+<li>Type P(A), press <kbd>STO→</kbd> <kbd>ALPHA</kbd> <kbd>MATH</kbd> (A) <kbd>ENTER</kbd>. Repeat for P(B) → B (<kbd>ALPHA</kbd> <kbd>APPS</kbd>) and P(A ∩ B) → C (<kbd>ALPHA</kbd> <kbd>PRGM</kbd>).</li>
+<li>Union: A <kbd>+</kbd> B <kbd>−</kbd> C <kbd>ENTER</kbd>.</li>
+<li>Independence check: A <kbd>×</kbd> B <kbd>ENTER</kbd> and compare with C.</li>
+</ol>
+<div class="eg">.45→A   .3→B   .12→C<br>A+B−C       .63<br>A*B         .135  (≠ C, not independent)</div>
+<h4>Exact answers</h4>
+<p>Straight after an answer, press <kbd>MATH</kbd> <kbd>1</kbd> (►Frac) <kbd>ENTER</kbd> to turn the decimal into a fraction.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-conditional" data-sec="conditional" hidden>
+<header class="sec-head">
+<span class="ref">SL 4.6, 4.11</span>
+<h2>Conditional probability and tree diagrams</h2>
+<p class="lede">"Given that B happened" means you throw away every outcome outside B. B becomes your new sample space, so P(B) becomes the denominator.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>P(A | B) asks: of the times B happens, what fraction also have A? That is the overlap divided by B. In a two-way table, the condition tells you which row or column total to divide by.</p>
+<p><b>Trees</b> handle events in stages. Each branch carries a conditional probability, because the second stage is drawn knowing how the first went.</p>
+<ul>
+<li><b>Multiply along</b> a path. You need this <em>and</em> then that.</li>
+<li><b>Add across</b> paths. Any of these routes will do.</li>
+</ul>
+<p><b>Without replacement</b>, the second-stage numbers change: one fewer item in the bag, and one fewer of whatever was taken.</p>
+<p>A neat check for <b>independence</b>: A and B are independent exactly when P(A | B) = P(A). The condition makes no difference.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">P(A | B) = <span class="fr"><span>P(A ∩ B)</span><span>P(B)</span></span></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">P(A ∩ B) = P(A)·P(B | A)</span><span class="t">multiply along</span></div>
+<div class="fx"><span class="f">P(B) = P(A)P(B|A) + P(A′)P(B|A′)</span><span class="t">add across</span></div>
+<div class="fx"><span class="f">Independent ⇔ P(A | B) = P(A)</span><span class="t">test</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>P(A | B) ≠ P(B | A). P(rain | clouds) is not P(clouds | rain).</li>
+<li>Without replacement, P(2nd is red) is still r/n. Symmetry: any single draw is equally likely to be any item.</li>
+<li>Don't divide by the grand total when the question says "given".</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>"Given" = new denominator.</b></li>
+<li><b>Along ×, across +.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: two-stage tree</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<div class="ctrl"><label for="tA">P(A)</label><output id="tAo"></output><input type="range" id="tA" min="0" max="1" step="0.01" value="0.3"></div>
+<div class="ctrl"><label for="tBA">P(B | A)</label><output id="tBAo"></output><input type="range" id="tBA" min="0" max="1" step="0.01" value="0.8"></div>
+<div class="ctrl"><label for="tBnA">P(B | A′)</label><output id="tBnAo"></output><input type="range" id="tBnA" min="0" max="1" step="0.01" value="0.25"></div>
+<p class="small">Highlighted paths end in B. Their sum is P(B). Set P(B | A) equal to P(B | A′) and see what happens to P(A | B).</p>
+</div>
+<div>
+<canvas id="treeCv" aria-label="Tree diagram"></canvas>
+<div class="readout">
+<div><span>P(A ∩ B)</span><b id="tAB"></b></div>
+<div><span>P(B) = sum of paths</span><b id="tB"></b></div>
+<div class="hi"><span>P(A | B)</span><b id="tAgB"></b></div>
+<div><span>Independent?</span><b id="tInd"></b></div>
+</div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="conditional"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix</small></h3>
+<h4>Tree diagrams: one path per line</h4>
+<ol>
+<li>Multiply along each path and store it: <kbd>0.3</kbd> <kbd>×</kbd> <kbd>0.8</kbd> <kbd>→</kbd> <kbd>ALPHA</kbd> <kbd>X</kbd> <kbd>EXE</kbd>.</li>
+<li>Next path into Y: <kbd>0.7</kbd> <kbd>×</kbd> <kbd>0.25</kbd> <kbd>→</kbd> <kbd>ALPHA</kbd> <kbd>Y</kbd> <kbd>EXE</kbd>.</li>
+<li>P(B) = <kbd>X</kbd> <kbd>+</kbd> <kbd>Y</kbd>. P(A | B) = <kbd>X</kbd> <kbd>÷</kbd> <kbd>(</kbd> <kbd>X</kbd> <kbd>+</kbd> <kbd>Y</kbd> <kbd>)</kbd>.</li>
+</ol>
+<div class="eg">0.3×0.8→X     0.24<br>0.7×0.25→Y    0.175<br>X÷(X+Y)       0.5783…</div>
+<h4>Without replacement</h4>
+<p>Type each path as one fraction product, e.g. <span class="mono">5÷9×4÷8</span>, then <kbd>S⇔D</kbd> to get the exact fraction.</p>
+<p class="warn">Always put brackets around the denominator. <span class="mono">X÷X+Y</span> computes (X÷X)+Y.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Home screen</small></h3>
+<h4>Tree diagrams: one path per line</h4>
+<ol>
+<li>Multiply along each path and store it: <kbd>0.3</kbd> <kbd>×</kbd> <kbd>0.8</kbd> <kbd>STO→</kbd> <kbd>X,T,θ,n</kbd> <kbd>ENTER</kbd>.</li>
+<li>Next path into Y: <kbd>0.7</kbd> <kbd>×</kbd> <kbd>0.25</kbd> <kbd>STO→</kbd> <kbd>ALPHA</kbd> <kbd>1</kbd> (Y) <kbd>ENTER</kbd>.</li>
+<li>P(B) = X <kbd>+</kbd> Y. P(A | B) = X <kbd>÷</kbd> <kbd>(</kbd> X <kbd>+</kbd> Y <kbd>)</kbd>.</li>
+</ol>
+<div class="eg">.3*.8→X       .24<br>.7*.25→Y      .175<br>X/(X+Y)       .5783…</div>
+<h4>Without replacement</h4>
+<p>Type each path as one product, e.g. <span class="mono">5/9*4/8</span>, then <kbd>MATH</kbd> <kbd>1</kbd> (►Frac) for the exact fraction. <kbd>ALPHA</kbd> <kbd>Y=</kbd> opens the n/d fraction template if you prefer stacked fractions.</p>
+<p class="warn">Always put brackets around the denominator. <span class="mono">X/X+Y</span> computes (X/X)+Y.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-bayes" data-sec="bayes" hidden>
+<header class="sec-head">
+<span class="ref">AHL 4.13</span>
+<h2>Bayes' theorem</h2>
+<p class="lede">Bayes reverses a conditional. The tree gives you P(evidence | cause). The question wants P(cause | evidence).</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Draw the tree with the <em>cause</em> first (disease or not, machine A or B) and the <em>evidence</em> second (test positive, item defective). Then apply the conditional probability definition:</p>
+<p>P(A | B) = P(A ∩ B) ÷ P(B).</p>
+<ul>
+<li>The <b>numerator</b> is one path: the cause you care about, followed by the evidence.</li>
+<li>The <b>denominator</b> is every path that ends in the evidence. You get it by total probability.</li>
+</ul>
+<p>That is all Bayes' theorem is. The booklet version just writes the denominator out in full.</p>
+<p>The surprising part is <b>base rates</b>. For a rare condition, even an accurate test produces more false positives than true positives, simply because there are so many healthy people. Push the prevalence slider down in the model to see this.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">P(A | B) = <span class="fr"><span>P(A)P(B | A)</span><span>P(A)P(B | A) + P(A′)P(B | A′)</span></span></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">P(A<sub>i</sub> | B) = <span class="fr"><span>P(A<sub>i</sub>)P(B | A<sub>i</sub>)</span><span>Σ P(A<sub>j</sub>)P(B | A<sub>j</sub>)</span></span></span><span class="bk">booklet</span></div>
+</div>
+<p class="small" style="margin-top:10px">The second form handles three or more causes (three machines, three suppliers). Same logic: one path over all paths.</p>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Sensitivity = P(+ | ill). Specificity = P(− | healthy). The false positive rate is 1 − specificity.</li>
+<li>Ignoring the prior: P(ill | +) is <b>not</b> the test accuracy.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Bayes = one path ÷ all paths to the evidence.</b></li>
+<li>Stuck? <b>Imagine 1000 people</b> and count.</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a screening test on 1000 people</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<div class="ctrl"><label for="bP">Prevalence P(ill)</label><output id="bPo"></output><input type="range" id="bP" min="0.002" max="0.5" step="0.002" value="0.02"></div>
+<div class="ctrl"><label for="bS">Sensitivity P(+ | ill)</label><output id="bSo"></output><input type="range" id="bS" min="0.5" max="1" step="0.01" value="0.95"></div>
+<div class="ctrl"><label for="bSp">Specificity P(− | healthy)</label><output id="bSpo"></output><input type="range" id="bSp" min="0.5" max="1" step="0.01" value="0.9"></div>
+<p class="small">Each dot is one person. Of everyone who tests positive (filled dots), what fraction is actually ill?</p>
+</div>
+<div>
+<canvas id="bayesCv" aria-label="Population of 1000 people"></canvas>
+<div class="legend">
+<span><i style="background:var(--accent)"></i>ill, tests + (true positive)</span>
+<span><i style="background:var(--amber)"></i>healthy, tests + (false positive)</span>
+<span><i style="border:1.5px solid var(--accent)"></i>ill, tests − (missed)</span>
+<span><i style="background:var(--line)"></i>healthy, tests −</span>
+</div>
+<div class="readout">
+<div><span>True positives</span><b id="bTP"></b></div>
+<div><span>False positives</span><b id="bFP"></b></div>
+<div class="hi"><span>P(ill | +)</span><b id="bPost"></b></div>
+<div><span>P(healthy | −)</span><b id="bNPV"></b></div>
+</div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="bayes"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · lists</small></h3>
+<h4>Two causes</h4>
+<ol>
+<li>Store the path you want: P(A) × P(B | A) <kbd>→</kbd> <kbd>ALPHA</kbd> <kbd>X</kbd>.</li>
+<li>Store the other path: P(A′) × P(B | A′) <kbd>→</kbd> <kbd>ALPHA</kbd> <kbd>Y</kbd>.</li>
+<li><kbd>X</kbd> <kbd>÷</kbd> <kbd>(</kbd> <kbd>X</kbd> <kbd>+</kbd> <kbd>Y</kbd> <kbd>)</kbd> <kbd>EXE</kbd>.</li>
+</ol>
+<div class="eg">0.02×0.95→X        0.019<br>0.98×0.1→Y         0.098<br>X÷(X+Y)            0.1623…</div>
+<h4>Three or more causes: use lists</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Statistics</b>. Priors in List 1, conditionals P(B | Aᵢ) in List 2.</li>
+<li>Move to the List 3 header and type <kbd>List</kbd> <kbd>1</kbd> <kbd>×</kbd> <kbd>List</kbd> <kbd>2</kbd> <kbd>EXE</kbd>. Each row is one path.</li>
+<li>In Run-Matrix: <kbd>OPTN</kbd> → <kbd>F1</kbd> LIST → <kbd>F6</kbd> (▷) → Sum, then type List 3. That is P(B). Divide the path you want by it.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Home screen · lists</small></h3>
+<h4>Two causes</h4>
+<ol>
+<li>Store the path you want: P(A) × P(B | A) <kbd>STO→</kbd> <kbd>X,T,θ,n</kbd>.</li>
+<li>Store the other path: P(A′) × P(B | A′) <kbd>STO→</kbd> <kbd>ALPHA</kbd> <kbd>1</kbd> (Y).</li>
+<li>X <kbd>÷</kbd> <kbd>(</kbd> X <kbd>+</kbd> Y <kbd>)</kbd> <kbd>ENTER</kbd>.</li>
+</ol>
+<div class="eg">.02*.95→X          .019<br>.98*.1→Y           .098<br>X/(X+Y)            .1623…</div>
+<h4>Three or more causes: use lists</h4>
+<ol>
+<li><kbd>STAT</kbd> → 1:Edit. Priors in L1, conditionals P(B | Aᵢ) in L2.</li>
+<li>Move the cursor onto the L3 heading and type <kbd>2nd</kbd> <kbd>1</kbd> (L1) <kbd>×</kbd> <kbd>2nd</kbd> <kbd>2</kbd> (L2) <kbd>ENTER</kbd>. Each row is one path.</li>
+<li>On the home screen: <kbd>2nd</kbd> <kbd>STAT</kbd> (LIST) → ► MATH → 5:sum(, then <kbd>2nd</kbd> <kbd>3</kbd> (L3) <kbd>)</kbd> <kbd>ENTER</kbd>. That is P(B). Divide the path you want by it, e.g. <span class="mono">L3(1)/sum(L3)</span>.</li>
+</ol>
+</aside></div>
+</section>
+<section class="sec" id="s-counting" data-sec="counting" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.10 · used in probability</span>
+<h2>Counting: permutations and combinations</h2>
+<p class="lede">When outcomes are equally likely, probability is a counting problem: favourable ÷ total. The only real question is whether order matters.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p><b>Arranging n different objects:</b> n choices for the first slot, n − 1 for the second, and so on. That is n!.</p>
+<p><b>Permutations</b> <sup>n</sup>P<sub>r</sub>: fill r ordered slots from n objects. Stop the factorial after r terms.</p>
+<p><b>Combinations</b> <sup>n</sup>C<sub>r</sub>: choose a group of r where order doesn't matter. Each group was counted r! times as a permutation (once per ordering), so divide by r!.</p>
+<p><b>Repeated letters:</b> swapping identical letters gives the same word, so divide by the factorial of each repeat count.</p>
+<p><b>Must be together:</b> glue them into one block, arrange the blocks, then multiply by the arrangements inside the block.</p>
+<p><b>At least one:</b> use the complement. Total minus "none".</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f"><sup>n</sup>P<sub>r</sub> = <span class="fr"><span>n!</span><span>(n − r)!</span></span></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f"><sup>n</sup>C<sub>r</sub> = <span class="fr"><span>n!</span><span>r!(n − r)!</span></span></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Repeats: <span class="fr"><span>n!</span><span>p! q! …</span></span></span><span class="t">identical items</span></div>
+<div class="fx"><span class="f">Together: (n − k + 1)! × k!</span><span class="t">k items glued</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Never count "at least one" as "pick one, then pick any". That double counts.</li>
+<li>"Exactly 2 women" means the rest must be men. Multiply both choices.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>P for Position</b> (order matters). <b>C for Choose</b> (it doesn't).</li>
+<li><b>nCr = nPr ÷ r!</b>. Remove the orderings.</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: why nCr = nPr ÷ r!</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<div class="ctrl"><label for="cN">n objects</label><output id="cNo"></output><input type="range" id="cN" min="1" max="12" step="1" value="5"></div>
+<div class="ctrl"><label for="cR">choose r</label><output id="cRo"></output><input type="range" id="cR" min="0" max="12" step="1" value="2"></div>
+<p class="small">For n ≤ 6 and r ≤ 3, every group is listed with its orderings. Each chip is one combination; the letters after the arrow are the permutations it stands for.</p>
+</div>
+<div>
+<div class="readout" style="margin-top:0">
+<div><span>n!</span><b id="cFact"></b></div>
+<div><span><sup>n</sup>P<sub>r</sub> (ordered)</span><b id="cP"></b></div>
+<div><span>r!</span><b id="cRf"></b></div>
+<div class="hi"><span><sup>n</sup>C<sub>r</sub> (groups)</span><b id="cC"></b></div>
+</div>
+<div class="combos" id="cList"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="counting"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · PROB</small></h3>
+<h4>Finding x!, nPr, nCr</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b>.</li>
+<li>Type n, then <kbd>OPTN</kbd> → <kbd>F6</kbd> (▷) → <kbd>F3</kbd> PROB.</li>
+<li>Choose <kbd>F1</kbd> x!, <kbd>F2</kbd> nPr or <kbd>F3</kbd> nCr, type r, <kbd>EXE</kbd>.</li>
+</ol>
+<div class="eg">9C3          84<br>6C2×5C1      75<br>11!÷(2!×2!)  9979200</div>
+<p>The PROB menu stays on the F-keys after the first use, so the next nCr is one key press.</p>
+<h4>Probability from counts</h4>
+<p>Type the whole fraction in one go, e.g. <span class="mono">(6C2×5C1)÷11C3</span>, then <kbd>S⇔D</kbd> for an exact answer.</p>
+<p class="warn">Brackets around the numerator matter: <span class="mono">6C2×5C1÷11C3</span> works left to right and is fine, but anything with a + or − needs brackets.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Home screen · MATH PROB</small></h3>
+<h4>Finding x!, nPr, nCr</h4>
+<ol>
+<li>Type n on the home screen.</li>
+<li><kbd>MATH</kbd> → <kbd>◄</kbd> to jump to the PROB menu (it wraps round from the left).</li>
+<li>Choose 2:nPr, 3:nCr or 4:!, type r, <kbd>ENTER</kbd>.</li>
+</ol>
+<div class="eg">9 nCr 3            84<br>6 nCr 2*5 nCr 1    75<br>11!/(2!*2!)        9979200</div>
+<p>n goes <b>before</b> the command and r after it, the same order you read <sup>n</sup>C<sub>r</sub> aloud.</p>
+<h4>Probability from counts</h4>
+<p>Type the whole fraction in one go, e.g. <span class="mono">6 nCr 2*5 nCr 1/11 nCr 3</span>, then <kbd>MATH</kbd> <kbd>1</kbd> (►Frac) for an exact answer.</p>
+<p class="warn">nCr is worked out before × and ÷, so the line above is fine as it is. Anything with a + or − needs brackets around the numerator and the denominator.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-discrete" data-sec="discrete" hidden>
+<header class="sec-head">
+<span class="ref">SL 4.7 · AHL 4.14</span>
+<h2>Discrete random variables</h2>
+<p class="lede">A random variable X turns each outcome into a number. "Discrete" means you can list its values. The table of values and probabilities is its whole description.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>The probabilities in the table must add to 1. Most "find k" questions are just that equation.</p>
+<p><b>E(X)</b> is the long-run average. Weight each value by how often it occurs: Σ x·P(X = x). It is the balance point of the bar chart and need not be a value X can take.</p>
+<p>A game is <b>fair</b> when the expected gain is 0. Remember to subtract the cost to play.</p>
+<p><b>Variance (HL)</b> measures spread: the average squared distance from the mean. The working form is E(X²) − [E(X)]². For E(X²), square the values but <em>not</em> the probabilities.</p>
+<p><b>Linear transforms (HL):</b> adding b shifts every value, so the mean moves but the spread doesn't. Multiplying by a stretches distances by a, so the variance scales by a².</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">Σ P(X = x) = 1</span><span class="t">find k</span></div>
+<div class="fx"><span class="f">E(X) = Σ x·P(X = x)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Var(X) = E(X²) − [E(X)]²</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">E(aX + b) = aE(X) + b</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Var(aX + b) = a²Var(X)</span><span class="bk">booklet</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>E(X²) ≠ [E(X)]². Compute E(X²) separately.</li>
+<li>Var(−2X) = 4Var(X), not −2Var(X). Variance is never negative.</li>
+<li>SD of aX + b is |a|·σ.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Shift moves the mean, not the spread.</b></li>
+<li><b>Scale squares in the variance.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: edit the distribution</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<div class="tablewrap">
+<table class="mini dtable" id="dTable">
+<tr><th>x</th><th>P(X = x)</th></tr>
+</table>
+</div>
+<div class="msg" id="dMsg"></div>
+<div class="inrow">
+<label class="field" for="dA">a in aX + b<input type="number" id="dA" value="2" step="0.5"></label>
+<label class="field" for="dB">b<input type="number" id="dB" value="3" step="1"></label>
+</div>
+</div>
+<div>
+<canvas id="discCv" aria-label="Probability distribution bar chart"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>P(X = x)</span><span><i style="background:var(--amber)"></i>E(X), the balance point</span></div>
+<div class="readout">
+<div><span>Σ P</span><b id="dSum"></b></div>
+<div class="hi"><span>E(X)</span><b id="dE"></b></div>
+<div><span>E(X²)</span><b id="dE2"></b></div>
+<div><span>Var(X)</span><b id="dV"></b></div>
+<div><span>E(aX + b)</span><b id="dEt"></b></div>
+<div><span>Var(aX + b)</span><b id="dVt"></b></div>
+</div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="discrete"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Statistics · 1-VAR</small></h3>
+<p>Treat the probabilities as frequencies. The calculator then gives E(X) and the standard deviation directly.</p>
+<h4>E(X) and Var(X)</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Statistics</b>. x-values in List 1, probabilities in List 2.</li>
+<li><kbd>F2</kbd> CALC → <kbd>F6</kbd> SET. Set <b>1Var XList</b> = List1 and <b>1Var Freq</b> = List2. <kbd>EXIT</kbd>.</li>
+<li><kbd>F1</kbd> 1-VAR.</li>
+<li>Read <b>x̄ = E(X)</b> and <b>σx</b>. Then Var(X) = σx².</li>
+</ol>
+<div class="eg">x̄  = 1.9     → E(X)<br>σx = 1.1358  → Var = 1.29<br>n  = 1       → probabilities sum to 1 ✓</div>
+<p class="warn">Use <b>σx</b>, not sx. Also check that n = 1: if it doesn't, your table isn't a valid distribution.</p>
+<p class="small">If you see a frequency error, multiply every probability by 100 (0.3 → 30). x̄ and σx don't change.</p>
+<h4>E(aX + b)</h4>
+<p>Use the formulas on x̄ and σx², or fill List 3 with <span class="mono">2×List 1+3</span> and run 1-VAR on List 3 with the same frequencies.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>STAT · 1-Var Stats</small></h3>
+<p>Treat the probabilities as frequencies. The calculator then gives E(X) and the standard deviation directly.</p>
+<h4>E(X) and Var(X)</h4>
+<ol>
+<li><kbd>STAT</kbd> → 1:Edit. x-values in L1, probabilities in L2.</li>
+<li><kbd>STAT</kbd> → ► CALC → 1:1-Var Stats.</li>
+<li>Set <b>List</b>: L1 (<kbd>2nd</kbd> <kbd>1</kbd>) and <b>FreqList</b>: L2 (<kbd>2nd</kbd> <kbd>2</kbd>). Scroll to Calculate and press <kbd>ENTER</kbd>.</li>
+<li>Read <b>x̄ = E(X)</b> and <b>σx</b>. Then Var(X) = σx².</li>
+</ol>
+<div class="eg">x̄  = 1.9     → E(X)<br>σx = 1.1358  → Var = 1.29<br>n  = 1       → probabilities sum to 1 ✓</div>
+<p class="warn">Use <b>σx</b>, not Sx. Also check that n = 1: if it doesn't, your table isn't a valid distribution.</p>
+<p class="small">No List/FreqList screen? Stat Wizards is off. Either switch it on in <kbd>MODE</kbd>, or type <span class="mono">1-Var Stats L1,L2</span> directly.</p>
+<h4>E(aX + b)</h4>
+<p>Use the formulas on x̄ and σx², or put <span class="mono">2L1+3</span> in the L3 heading and run 1-Var Stats with List: L3, FreqList: L2.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-binomial" data-sec="binomial" hidden>
+<header class="sec-head">
+<span class="ref">SL 4.8</span>
+<h2>Binomial distribution</h2>
+<p class="lede">Count the number of successes in a fixed number of identical, independent trials. X ~ B(n, p).</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Check the conditions with <b>BINS</b>: <b>B</b>inary outcomes, <b>I</b>ndependent trials, <b>N</b>umber of trials fixed, <b>S</b>ame p each time.</p>
+<p>Why the formula works: one particular sequence with r successes and n − r failures has probability p<sup>r</sup>(1 − p)<sup>n−r</sup>. There are <sup>n</sup>C<sub>r</sub> ways to choose which trials are the successes, and each way is equally likely. Multiply.</p>
+<p>The mean np is intuitive: 20 trials at 30% gives 6 successes on average.</p>
+<p data-calc="casio">On the fx-CG50, <b>Bcd</b> adds up every value from a whole-number Lower to Upper. So the real skill is turning words like "fewer than" or "more than" into those bounds. The conversions on the right are the same logic, written as ≤ statements, which is how you show the step in your working.</p>
+<p data-calc="ti84">On the TI-84, <b>binomcdf</b> only gives P(X ≤ x), always counting from 0. So the real skill is turning words like "fewer than" or "more than" into ≤ statements. The conversions on the right do exactly that, and writing them down is how you show the step in your working.</p>
+<p>"Smallest n so that P(at least one) &gt; 0.95": P(X ≥ 1) = 1 − (1 − p)<sup>n</sup>. Solve with logs or a GDC table, then round <b>up</b>.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">P(X = r) = <sup>n</sup>C<sub>r</sub> p<sup>r</sup>(1 − p)<sup>n − r</sup></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">E(X) = np</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Var(X) = np(1 − p)</span><span class="bk">booklet</span></div>
+</div>
+<p class="label" style="margin-top:14px">Convert to ≤ (whole numbers only)</p>
+<div class="fx-list">
+<div class="fx"><span class="f">P(X &lt; k) = P(X ≤ k − 1)</span></div>
+<div class="fx"><span class="f">P(X ≥ k) = 1 − P(X ≤ k − 1)</span></div>
+<div class="fx"><span class="f">P(X &gt; k) = 1 − P(X ≤ k)</span></div>
+<div class="fx"><span class="f">P(a ≤ X ≤ b) = P(X ≤ b) − P(X ≤ a − 1)</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>"More than 3" starts at 4. "At least 3" starts at 3.</li>
+<li>Without replacement from a small population is not binomial (p changes).</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Strict sign? Step one integer inward.</b> &lt; 4 → Upper 3; &gt; 4 → Lower 5.</li>
+<li><b>At least one = 1 − none.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: B(n, p)</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<div class="ctrl"><label for="bnN">n (trials)</label><output id="bnNo"></output><input type="range" id="bnN" min="1" max="40" step="1" value="15"></div>
+<div class="ctrl"><label for="bnP">p (success)</label><output id="bnPo"></output><input type="range" id="bnP" min="0" max="1" step="0.01" value="0.35"></div>
+<label class="field" for="bnOp">Probability to find
+<select id="bnOp">
+<option value="eq">P(X = k)</option>
+<option value="le" selected>P(X ≤ k)</option>
+<option value="lt">P(X &lt; k)</option>
+<option value="ge">P(X ≥ k)</option>
+<option value="gt">P(X &gt; k)</option>
+<option value="btw">P(k ≤ X ≤ k₂)</option>
+</select>
+</label>
+<div class="inrow">
+<label class="field" for="bnK">k<input type="number" id="bnK" value="4" min="0" step="1"></label>
+<label class="field" for="bnK2" id="bnK2wrap" hidden>k₂<input type="number" id="bnK2" value="7" min="0" step="1"></label>
+</div>
+</div>
+<div>
+<canvas id="binCv" aria-label="Binomial distribution chart"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>included in the probability</span><span><i style="background:var(--amber)"></i>mean np</span></div>
+<div class="readout">
+<div class="hi"><span id="bnLbl">P</span><b id="bnRes"></b></div>
+<div><span>E(X) = np</span><b id="bnE"></b></div>
+<div><span>Var(X) = np(1 − p)</span><b id="bnV"></b></div>
+<div><span>Most likely value</span><b id="bnMode"></b></div>
+</div>
+<div class="gdc" id="bnGdc"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="binomial"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Statistics · DIST</small></h3>
+<h4>Bpd: P(X = x)</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Statistics</b> → <kbd>F5</kbd> DIST → <kbd>F5</kbd> BINOMIAL → <kbd>F1</kbd> Bpd.</li>
+<li>Set <b>Data</b> to Variable (<kbd>F2</kbd> Var).</li>
+<li>Enter x, Numtrial (n), p. Scroll to Execute and press <kbd>EXE</kbd>.</li>
+</ol>
+<h4>Bcd: a range of values</h4>
+<ol>
+<li>Same path, then <kbd>F2</kbd> Bcd, Data: Variable.</li>
+<li>Enter <b>Lower</b>, <b>Upper</b>, Numtrial, p.</li>
+</ol>
+<p>Bcd adds up every value from Lower to Upper. So turn the words into whole-number bounds:</p>
+<div class="eg">P(X ≤ 4)    Lower 0   Upper 4<br>P(X &lt; 4)    Lower 0   Upper 3<br>P(X ≥ 4)    Lower 4   Upper n<br>P(X &gt; 4)    Lower 5   Upper n<br>P(2≤X≤6)   Lower 2   Upper 6</div>
+<p class="small">If your Bcd screen shows only "x", your OS is older: it gives P(X ≤ x). Use the complement conversions on the left instead.</p>
+<h4>Smallest n for "at least one"</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>. Y1 = <span class="mono">1−(1−p)^X</span> (X is the <kbd>X,θ,T</kbd> key).</li>
+<li><kbd>F5</kbd> SET: Start 1, End 100, Step 1. <kbd>EXIT</kbd> → <kbd>F6</kbd> TABLE.</li>
+<li>Scroll to the first X where Y1 passes the target.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>DISTR</small></h3>
+<h4>binompdf: P(X = x)</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>VARS</kbd> (DISTR) → A:binompdf(. Press <kbd>▲</kbd> from item 1 to reach it quickly.</li>
+<li>Enter <b>trials</b> (n), <b>p</b>, <b>x value</b>. Select Paste, then <kbd>ENTER</kbd> twice.</li>
+</ol>
+<h4>binomcdf: P(X ≤ x)</h4>
+<ol>
+<li>Same menu, B:binomcdf(.</li>
+<li>Enter trials, p, x value. It always adds from 0 up to x.</li>
+</ol>
+<p>binomcdf only does "≤", so rewrite every inequality as ≤ first:</p>
+<div class="eg">P(X ≤ 4)    binomcdf(n,p,4)<br>P(X &lt; 4)    binomcdf(n,p,3)<br>P(X ≥ 4)    1−binomcdf(n,p,3)<br>P(X &gt; 4)    1−binomcdf(n,p,4)<br>P(2≤X≤6)   binomcdf(n,p,6)−binomcdf(n,p,1)</div>
+<p class="small">The order is trials, p, x: the same order you write B(n, p), then the value.</p>
+<h4>Smallest n for "at least one"</h4>
+<ol>
+<li><kbd>Y=</kbd> and set Y1 = <span class="mono">1−(1−p)^X</span> (X is the <kbd>X,T,θ,n</kbd> key).</li>
+<li><kbd>2nd</kbd> <kbd>WINDOW</kbd> (TBLSET): TblStart 1, ΔTbl 1.</li>
+<li><kbd>2nd</kbd> <kbd>GRAPH</kbd> (TABLE). Scroll to the first X where Y1 passes the target.</li>
+</ol>
+</aside></div>
+</section>
+<section class="sec" id="s-normal" data-sec="normal" hidden>
+<header class="sec-head">
+<span class="ref">SL 4.9, 4.12</span>
+<h2>Normal distribution</h2>
+<p class="lede">The model for continuous measurements that cluster symmetrically around a mean: heights, masses, exam scores, errors. X ~ N(μ, σ²).</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Probability is the <b>area under the curve</b>. The total area is 1, the curve is symmetric about μ, and mean = median = mode.</p>
+<p>Because X is continuous, P(X = a) = 0. So P(X &lt; a) and P(X ≤ a) are the same. No integer adjustments here, unlike the binomial.</p>
+<p>Roughly <b>68%</b> lies within 1σ of μ, <b>95%</b> within 2σ, <b>99.7%</b> within 3σ.</p>
+<p><b>Standardising:</b> z = (x − μ)/σ counts how many standard deviations x is from the mean. Then Z ~ N(0, 1).</p>
+<p>You need z whenever <b>μ or σ is unknown</b>:</p>
+<ol>
+<li>Turn the probability into a z-value with the inverse normal (μ = 0, σ = 1).</li>
+<li>Write (x − μ)/σ = z.</li>
+<li>Solve for the unknown. With two unknowns you get two equations: solve simultaneously.</li>
+</ol>
+</div>
+<div class="panel">
+<h3>Formulas and calculator</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">z = <span class="fr"><span>x − μ</span><span>σ</span></span></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">P(a &lt; X &lt; b): <span data-calc="casio">Ncd(Lower a, Upper b, σ, μ)</span><span data-calc="ti84">normalcdf(a, b, μ, σ)</span></span><span class="t">±1E99 for ∞</span></div>
+<div class="fx"><span class="f">x from area: <span data-calc="casio">InvN(Tail, Area, σ, μ)</span><span data-calc="ti84">invNorm(left area, μ, σ)</span></span><span class="t">inverse</span></div>
+<div class="fx"><span class="f">μ + zσ = x</span><span class="t">unknown μ or σ</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>N(50, 16) means σ² = 16, so <b>σ = 4</b>. The calculator wants σ.</li>
+<li data-calc="casio">Casio asks for <b>σ before μ</b>.</li><li data-calc="ti84">The TI asks for <b>μ before σ</b> (the reverse of Casio).</li>
+<li data-calc="casio">InvN's Tail must match the inequality. P(X &gt; k) = 0.1 → Tail Right, Area 0.1.</li><li data-calc="ti84">invNorm uses the area to the <b>left</b>. P(X &gt; k) = 0.1 → invNorm(0.9, μ, σ).</li>
+<li>When finding σ or μ, get z with σ = 1 and μ = 0, not with the real parameters.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li data-calc="casio"><b>Tail follows the sign:</b> &gt; is Right, &lt; is Left.</li><li data-calc="ti84"><b>invNorm thinks left:</b> for &gt;, feed it 1 − area.</li>
+<li><b>z = "how many σ from μ".</b></li>
+<li><b>Always sketch the curve and shade it</b> before pressing buttons.</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: N(μ, σ²)</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<div class="inrow">
+<label class="field" for="nMu">μ<input type="number" id="nMu" value="170" step="1"></label>
+<label class="field" for="nSd">σ<input type="number" id="nSd" value="8" step="0.5" min="0.1"></label>
+</div>
+<label class="field" for="nMode">Find
+<select id="nMode">
+<option value="lt">P(X &lt; b)</option>
+<option value="gt">P(X &gt; a)</option>
+<option value="btw" selected>P(a &lt; X &lt; b)</option>
+<option value="inv">x from an area (inverse)</option>
+</select>
+</label>
+<div class="inrow" id="nAB">
+<label class="field" for="nA">a<input type="number" id="nA" value="160" step="1"></label>
+<label class="field" for="nB">b<input type="number" id="nB" value="180" step="1"></label>
+</div>
+<div class="inrow" id="nInv" hidden>
+<label class="field" for="nArea">area<input type="number" id="nArea" value="0.9" step="0.01" min="0.001" max="0.999"></label>
+<label class="field" for="nTail">tail
+<select id="nTail"><option value="left">left of x</option><option value="right">right of x</option><option value="centre">centred</option></select>
+</label>
+</div>
+<div class="msg" id="nMsg"></div>
+</div>
+<div>
+<canvas id="normCv" aria-label="Normal distribution curve"></canvas>
+<div class="readout">
+<div class="hi"><span id="nResL">Probability</span><b id="nRes"></b></div>
+<div><span id="nZl">z-values</span><b id="nZ"></b></div>
+<div><span>Variance σ²</span><b id="nVar"></b></div>
+</div>
+<div class="gdc" id="nGdc"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="normal"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Statistics · DIST</small></h3>
+<h4>Ncd: P(a &lt; X &lt; b)</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Statistics</b> → <kbd>F5</kbd> DIST → <kbd>F1</kbd> NORM → <kbd>F2</kbd> Ncd.</li>
+<li>Data: Variable (<kbd>F2</kbd>). Enter <b>Lower</b>, <b>Upper</b>, <b>σ</b>, <b>μ</b>, then Execute.</li>
+<li>No lower limit? Type <kbd>(−)</kbd> <kbd>1</kbd> <kbd>×10ˣ</kbd> <kbd>99</kbd>. No upper limit? <kbd>1</kbd> <kbd>×10ˣ</kbd> <kbd>99</kbd>.</li>
+</ol>
+<p class="warn">Casio asks for <b>σ before μ</b>. Typing them in the order you'd write N(μ, σ²) is the most common slip.</p>
+<h4>InvN: x from a probability</h4>
+<ol>
+<li>Same path, then <kbd>F3</kbd> InvN.</li>
+<li><b>Tail</b>: Left, Right or Central. Then Area, σ, μ.</li>
+</ol>
+<div class="eg">P(X &gt; k) = 0.1   Tail Right, Area 0.1<br>P(X &lt; k) = 0.1   Tail Left,  Area 0.1<br>middle 90%       Tail Central, Area 0.9</div>
+<p>The Tail setting does the "1 − area" step for you, as long as it matches the inequality.</p>
+<h4>Unknown μ or σ</h4>
+<ol>
+<li>Get z from InvN with <b>σ = 1, μ = 0</b>.</li>
+<li>One unknown: rearrange (x − μ)/σ = z by hand.</li>
+<li>Two unknowns: <kbd>MENU</kbd> → <b>Equation</b> → <kbd>F1</kbd> SIMUL, 2 unknowns. Enter rows <span class="mono">1  z₁ | a</span> and <span class="mono">1  z₂ | b</span> for μ + zσ = x. <kbd>F1</kbd> SOLV.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>DISTR</small></h3>
+<h4>normalcdf: P(a &lt; X &lt; b)</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>VARS</kbd> (DISTR) → 2:normalcdf(.</li>
+<li>Enter <b>lower</b>, <b>upper</b>, <b>μ</b>, <b>σ</b>. Paste, then <kbd>ENTER</kbd>.</li>
+<li>No lower limit? Type <kbd>(−)</kbd> <kbd>1</kbd> <kbd>2nd</kbd> <kbd>,</kbd> (EE) <kbd>99</kbd>. No upper limit? <kbd>1</kbd> <kbd>2nd</kbd> <kbd>,</kbd> (EE) <kbd>99</kbd>.</li>
+</ol>
+<p class="warn">The TI asks for <b>μ before σ</b>, the opposite way round to Casio. It also wants σ, not σ²: square-root the variance first.</p>
+<h4>invNorm: x from a probability</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>VARS</kbd> (DISTR) → 3:invNorm(.</li>
+<li>Enter <b>area</b>, μ, σ. The area is to the <b>left</b> of x.</li>
+</ol>
+<div class="eg">P(X &lt; k) = 0.1   invNorm(0.1, μ, σ)<br>P(X &gt; k) = 0.1   invNorm(0.9, μ, σ)<br>middle 90%       invNorm(0.05, μ, σ) and invNorm(0.95, μ, σ)</div>
+<p class="small">Newer operating systems add a Tail setting (LEFT, CENTER, RIGHT) to the invNorm screen, which does the 1 − area step for you. If yours doesn't have it, convert to a left area as above.</p>
+<h4>Unknown μ or σ</h4>
+<ol>
+<li>Get z from <span class="mono">invNorm(area, 0, 1)</span>.</li>
+<li>One unknown: rearrange (x − μ)/σ = z by hand.</li>
+<li>Two unknowns: <kbd>APPS</kbd> → PlySmlt2 → 2:SIMULTANEOUS EQN SOLVER, 2 equations, 2 unknowns. Enter rows <span class="mono">1  z₁ | a</span> and <span class="mono">1  z₂ | b</span> for μ + zσ = x, then SOLVE (<kbd>GRAPH</kbd>).</li>
+</ol>
+<p class="small">No PlySmlt2? Subtract the equations: σ = (b − a)/(z₂ − z₁), then μ = a − z₁σ.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-continuous" data-sec="continuous" hidden>
+<header class="sec-head">
+<span class="ref">AHL 4.14</span>
+<h2>Continuous random variables</h2>
+<p class="lede">A probability density function f(x) describes a continuous variable. Probabilities are areas, so every question is an integral.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>f(x) is not a probability. It is a density, and can exceed 1. Probability is the area under f between two values.</p>
+<p>For f to be a valid pdf, f(x) ≥ 0 everywhere and the total area is 1. "Find k" questions use that second condition.</p>
+<p>The discrete formulas carry over with Σ replaced by ∫ and P(X = x) replaced by f(x) dx.</p>
+<ul>
+<li><b>Mean:</b> the balance point, ∫ x f(x) dx.</li>
+<li><b>Median m:</b> the vertical line splitting the area in half, ∫ f from the lower end to m = 0.5.</li>
+<li><b>Mode:</b> where f is highest. Check f′(x) = 0 <em>and</em> the endpoints.</li>
+</ul>
+<p>A right-skewed shape pulls the mean further into the tail than the median. Watch the three lines in the model.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">∫ f(x) dx = 1 over the domain</span><span class="t">find k</span></div>
+<div class="fx"><span class="f">P(a &lt; X &lt; b) = ∫<sub>a</sub><sup>b</sup> f(x) dx</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">E(X) = ∫ x f(x) dx</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">Var(X) = ∫ x² f(x) dx − μ²</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">∫<sub>low</sub><sup>m</sup> f(x) dx = 0.5</span><span class="t">median</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>The mode can sit at an endpoint, where f′(x) ≠ 0.</li>
+<li>When solving for the median, keep only the root inside the domain.</li>
+<li>For piecewise f, split each integral at the joins.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Area = probability. Balance = mean. Half-area = median. Peak = mode.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a pdf on [0, a]</h3>
+<div class="lab-grid">
+<div class="ctrls">
+<label class="field" for="ctFam">Shape of f(x)
+<select id="ctFam"><option value="pow">k xⁿ</option><option value="para">k x(a − x)</option></select>
+</label>
+<div class="ctrl" id="ctNwrap"><label for="ctN">power n</label><output id="ctNo"></output><input type="range" id="ctN" min="0" max="4" step="1" value="2"></div>
+<div class="ctrl"><label for="ctA">upper limit a</label><output id="ctAo"></output><input type="range" id="ctA" min="1" max="6" step="0.5" value="3"></div>
+<div class="ctrl"><label for="ctC">shade P(X &lt; c)</label><output id="ctCo"></output><input type="range" id="ctC" min="0" max="1" step="0.01" value="0.6"></div>
+<p class="small" id="ctEq"></p>
+</div>
+<div>
+<canvas id="contCv" aria-label="Probability density function"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>mean</span><span><i style="background:var(--amber)"></i>median</span><span><i style="background:var(--muted)"></i>mode</span></div>
+<div class="readout">
+<div><span>k</span><b id="ctK"></b></div>
+<div class="hi"><span>P(X &lt; c)</span><b id="ctP"></b></div>
+<div><span>E(X)</span><b id="ctE"></b></div>
+<div><span>Median</span><b id="ctMed"></b></div>
+<div><span>Mode</span><b id="ctMode"></b></div>
+<div><span>Var(X)</span><b id="ctV"></b></div>
+</div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="continuous"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · Graph · Equation</small></h3>
+<h4>Definite integrals (find k, E(X), probabilities)</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx.</li>
+<li>Fill the template: the function (use <kbd>X,θ,T</kbd> for x), then lower and upper limits. <kbd>EXE</kbd>.</li>
+</ol>
+<div class="eg">find k:  ∫(X², 0, 3) = 9   → k = 1/9<br>E(X):    ∫(X×X²÷9, 0, 3) = 2.25<br>E(X²):   ∫(X²×X²÷9, 0, 3) = 5.4<br>Var:     5.4 − 2.25² = 0.3375</div>
+<p>To find k, integrate f without k first. Then k = 1 ÷ answer.</p>
+<h4>Median</h4>
+<ol>
+<li>Integrate by hand to get an expression in m, e.g. m³/27.</li>
+<li><kbd>MENU</kbd> → <b>Equation</b> → <kbd>F3</kbd> SOLVER. Type <span class="mono">X^3÷27=0.5</span>.</li>
+<li>Set Lower and Upper to the domain (0 and 3) so you get the root inside it. <kbd>F6</kbd> SOLVE.</li>
+</ol>
+<h4>Mode</h4>
+<p><kbd>MENU</kbd> → <b>Graph</b>, enter f(x), <kbd>F6</kbd> DRAW, then <kbd>F5</kbd> G-SOLVE → <kbd>F2</kbd> MAX. If the maximum sits at an endpoint, the graph will show it.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MATH · Solver · CALC</small></h3>
+<h4>Definite integrals (find k, E(X), probabilities)</h4>
+<ol>
+<li><kbd>MATH</kbd> → 9:fnInt(.</li>
+<li>Fill the template: lower and upper limits, then the function (use <kbd>X,T,θ,n</kbd> for x). <kbd>ENTER</kbd>.</li>
+</ol>
+<div class="eg">find k:  ∫₀³ X² dX = 9        → k = 1/9<br>E(X):    ∫₀³ X*X²/9 dX = 2.25<br>E(X²):   ∫₀³ X²*X²/9 dX = 5.4<br>Var:     5.4 − 2.25² = .3375</div>
+<p>To find k, integrate f without k first. Then k = 1 ÷ answer.</p>
+<h4>Median</h4>
+<ol>
+<li>Integrate by hand to get an expression in m, e.g. m³/27.</li>
+<li><kbd>MATH</kbd> → Solver… (press <kbd>▲</kbd> from item 1 to reach it). Enter the equation: on older screens type <span class="mono">X^3/27−0.5</span> after "0 =", on newer ones put <span class="mono">X^3/27</span> on one side and <span class="mono">0.5</span> on the other.</li>
+<li>Give X a starting guess inside the domain and set bound = {0, 3}, so you get the root inside it. Press SOLVE (<kbd>ALPHA</kbd> <kbd>ENTER</kbd>, or the SOLVE key on newer screens).</li>
+</ol>
+<h4>Mode</h4>
+<p><kbd>Y=</kbd> enter f(x), set <kbd>WINDOW</kbd> to the domain, <kbd>GRAPH</kbd>, then <kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 4:maximum. Move to a left bound, right bound and guess, pressing <kbd>ENTER</kbd> each time. If f is largest at an endpoint, read it off the graph: maximum can miss an endpoint.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-drill" data-sec="drill" hidden>
+<header class="sec-head">
+<span class="ref">Mixed</span>
+<h2>Mixed drill</h2>
+<p class="lede">Questions from every topic, in random order. This is closest to a real paper, because part of the skill is recognising which tool a question wants before you start.</p>
+</header>
+<div class="practice" data-sec="drill"></div>
+<div class="panel prose">
+<h3>Exam habits that save marks</h3>
+<ul>
+<li>Write the distribution down first, e.g. "X ~ B(20, 0.3)" or "X ~ N(170, 8²)". It earns method marks and catches variance/SD mix-ups.</li>
+<li>Write the probability statement before the number: "P(X ≥ 4) = 1 − P(X ≤ 3) = …".</li>
+<li>Give answers to 3 significant figures unless told otherwise. Keep full GDC precision in intermediate steps.</li>
+<li>Sketch every normal question. A shaded sketch takes 10 seconds and catches most tail errors.</li>
+</ul>
+</div>
+</section>
+<section class="sec" id="s-casio" data-sec="casio" hidden>
+<header class="sec-head">
+<span class="ref"><span data-calc="casio">fx-CG50 AU</span><span data-calc="ti84">TI-84 Plus CE</span></span>
+<h2>Calculator cheat sheet</h2>
+<p class="lede">Every probability keystroke in one place. Each topic page also has its own calculator panel next to the practice questions, with worked examples.</p>
+</header>
+<div class="panel" data-calc="casio">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP): Input/Output = <b>Math/Math</b>, Display = <b>Norm1</b>. A Fix or Sci setting rounds intermediate answers and can cost accuracy marks.</li>
+<li>In every DIST screen, set <b>Data: Variable</b> (<kbd>F2</kbd>). "List" expects data in a list and gives errors or odd answers.</li>
+<li>Press <kbd>EXE</kbd> on <b>Execute</b> at the bottom of the input screen. <kbd>EXIT</kbd> returns to edit the inputs, which is quicker than starting over.</li>
+</ul>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>P(X = x), binomial</td><td><b>Statistics</b> → <kbd>F5</kbd> DIST → <kbd>F5</kbd> BINOMIAL → <kbd>F1</kbd> Bpd</td><td>x, Numtrial, p</td></tr>
+<tr><td>P(a ≤ X ≤ b), binomial</td><td><b>Statistics</b> → <kbd>F5</kbd> DIST → <kbd>F5</kbd> BINOMIAL → <kbd>F2</kbd> Bcd</td><td>Lower, Upper, Numtrial, p</td></tr>
+<tr><td>P(a &lt; X &lt; b), normal</td><td><b>Statistics</b> → <kbd>F5</kbd> DIST → <kbd>F1</kbd> NORM → <kbd>F2</kbd> Ncd</td><td>Lower, Upper, <b>σ, μ</b></td></tr>
+<tr><td>x from probability, normal</td><td><b>Statistics</b> → <kbd>F5</kbd> DIST → <kbd>F1</kbd> NORM → <kbd>F3</kbd> InvN</td><td>Tail, Area, σ, μ</td></tr>
+<tr><td>z-value</td><td>InvN as above</td><td>σ = 1, μ = 0</td></tr>
+<tr><td>E(X), Var(X) from a table</td><td><b>Statistics</b> → <kbd>F2</kbd> CALC → <kbd>F6</kbd> SET, then <kbd>F1</kbd> 1-VAR</td><td>XList = List1, Freq = List2. Read x̄ and σx</td></tr>
+<tr><td>n!, nPr, nCr</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F6</kbd> ▷ → <kbd>F3</kbd> PROB</td><td>n, then the function, then r</td></tr>
+<tr><td>∫ f(x) dx</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx</td><td>f(x), lower, upper</td></tr>
+<tr><td>Solve one equation (median, n)</td><td><b>Equation</b> → <kbd>F3</kbd> SOLVER</td><td>Equation, then Lower and Upper search range</td></tr>
+<tr><td>Two unknowns (μ and σ)</td><td><b>Equation</b> → <kbd>F1</kbd> SIMUL → 2</td><td>Rows: 1, z | x</td></tr>
+<tr><td>Smallest n</td><td><b>Table</b> → Y1, <kbd>F5</kbd> SET, <kbd>F6</kbd> TABLE</td><td>Y1 = 1 − (1 − p)^X</td></tr>
+<tr><td>Mode of a pdf</td><td><b>Graph</b> → <kbd>F6</kbd> DRAW → <kbd>F5</kbd> G-SOLVE → <kbd>F2</kbd> MAX</td><td>f(x) as Y1</td></tr>
+<tr><td>Infinity</td><td><kbd>1</kbd> <kbd>×10ˣ</kbd> <kbd>99</kbd>, with <kbd>(−)</kbd> in front for −∞</td><td>Ncd Lower or Upper</td></tr>
+<tr><td>Fraction ↔ decimal</td><td><kbd>S⇔D</kbd></td><td>Run-Matrix output</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Turning words into Lower and Upper</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question says</th><th>Binomial (Bcd)</th><th>Normal (Ncd)</th></tr>
+<tr><td>at most 4 / ≤ 4</td><td>Lower 0, Upper 4</td><td>Lower −1E99, Upper 4</td></tr>
+<tr><td>fewer than 4 / &lt; 4</td><td>Lower 0, Upper <b>3</b></td><td>Lower −1E99, Upper 4</td></tr>
+<tr><td>at least 4 / ≥ 4</td><td>Lower 4, Upper n</td><td>Lower 4, Upper 1E99</td></tr>
+<tr><td>more than 4 / &gt; 4</td><td>Lower <b>5</b>, Upper n</td><td>Lower 4, Upper 1E99</td></tr>
+<tr><td>between 2 and 6 inclusive</td><td>Lower 2, Upper 6</td><td>Lower 2, Upper 6</td></tr>
+</table>
+</div>
+<p class="small" style="margin-top:10px">The binomial column shifts by one on strict signs because X only takes whole numbers. The normal column never shifts because P(X = 4) = 0.</p>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>MODE</kbd>: <b>NORMAL</b>, <b>FLOAT</b>, <b>MATHPRINT</b>, and <b>STAT WIZARDS: ON</b>. A FIX setting rounds intermediate answers and can cost accuracy marks. Wizards give you a fill-in screen for every DISTR command, so you can't get the argument order wrong.</li>
+<li>Turn stat plots off (<kbd>2nd</kbd> <kbd>Y=</kbd> → 4:PlotsOff) and clear old Y= functions. Leftover plots cause ERR: INVALID DIM when you graph.</li>
+<li>On a wizard screen choose <b>Paste</b>, then <kbd>ENTER</kbd>. To fix a typo, <kbd>2nd</kbd> <kbd>ENTER</kbd> (ENTRY) brings the last line back for editing, which is quicker than starting over.</li>
+</ul>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>P(X = x), binomial</td><td><kbd>2nd</kbd> <kbd>VARS</kbd> (DISTR) → A:binompdf(</td><td>trials, p, x</td></tr>
+<tr><td>P(X ≤ x), binomial</td><td><kbd>2nd</kbd> <kbd>VARS</kbd> (DISTR) → B:binomcdf(</td><td>trials, p, x. Counts from 0</td></tr>
+<tr><td>P(a &lt; X &lt; b), normal</td><td><kbd>2nd</kbd> <kbd>VARS</kbd> (DISTR) → 2:normalcdf(</td><td>lower, upper, <b>μ, σ</b></td></tr>
+<tr><td>x from probability, normal</td><td><kbd>2nd</kbd> <kbd>VARS</kbd> (DISTR) → 3:invNorm(</td><td>area to the <b>left</b>, μ, σ</td></tr>
+<tr><td>z-value</td><td>invNorm as above</td><td>μ = 0, σ = 1</td></tr>
+<tr><td>E(X), Var(X) from a table</td><td><kbd>STAT</kbd> → CALC → 1:1-Var Stats</td><td>List L1, FreqList L2. Read x̄ and σx</td></tr>
+<tr><td>n!, nPr, nCr</td><td><kbd>MATH</kbd> → PROB → 4:!, 2:nPr, 3:nCr</td><td>n, then the command, then r</td></tr>
+<tr><td>∫ f(x) dx</td><td><kbd>MATH</kbd> → 9:fnInt(</td><td>limits, then f(x)</td></tr>
+<tr><td>Solve one equation (median, n)</td><td><kbd>MATH</kbd> → Solver…</td><td>Equation, a guess, and bound</td></tr>
+<tr><td>Two unknowns (μ and σ)</td><td><kbd>APPS</kbd> → PlySmlt2 → 2:SIMULTANEOUS</td><td>Rows: 1, z | x</td></tr>
+<tr><td>Smallest n</td><td><kbd>Y=</kbd>, <kbd>2nd</kbd> <kbd>WINDOW</kbd> TBLSET, <kbd>2nd</kbd> <kbd>GRAPH</kbd> TABLE</td><td>Y1 = 1 − (1 − p)^X</td></tr>
+<tr><td>Mode of a pdf</td><td><kbd>GRAPH</kbd> → <kbd>2nd</kbd> <kbd>TRACE</kbd> CALC → 4:maximum</td><td>f(x) as Y1</td></tr>
+<tr><td>Infinity</td><td><kbd>1</kbd> <kbd>2nd</kbd> <kbd>,</kbd> (EE) <kbd>99</kbd>, with <kbd>(−)</kbd> in front for −∞</td><td>normalcdf lower or upper</td></tr>
+<tr><td>Decimal → fraction</td><td><kbd>MATH</kbd> → 1:►Frac</td><td>Home screen answer</td></tr>
+<tr><td>Store a value</td><td><kbd>STO→</kbd>, then <kbd>ALPHA</kbd> + letter</td><td>Reuse without retyping</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Turning words into calculator input</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question says</th><th>Binomial</th><th>Normal</th></tr>
+<tr><td>at most 4 / ≤ 4</td><td>binomcdf(n, p, 4)</td><td>normalcdf(−1E99, 4, μ, σ)</td></tr>
+<tr><td>fewer than 4 / &lt; 4</td><td>binomcdf(n, p, <b>3</b>)</td><td>normalcdf(−1E99, 4, μ, σ)</td></tr>
+<tr><td>at least 4 / ≥ 4</td><td>1 − binomcdf(n, p, <b>3</b>)</td><td>normalcdf(4, 1E99, μ, σ)</td></tr>
+<tr><td>more than 4 / &gt; 4</td><td>1 − binomcdf(n, p, 4)</td><td>normalcdf(4, 1E99, μ, σ)</td></tr>
+<tr><td>between 2 and 6 inclusive</td><td>binomcdf(n, p, 6) − binomcdf(n, p, <b>1</b>)</td><td>normalcdf(2, 6, μ, σ)</td></tr>
+</table>
+</div>
+<p class="small" style="margin-top:10px">The binomial column shifts by one on strict signs because X only takes whole numbers. The normal column never shifts because P(X = 4) = 0.</p>
+</div>
+</section>
+</main>
+</div>
+</div>
+<script src="learn.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
