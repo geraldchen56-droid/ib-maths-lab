@@ -2,7 +2,7 @@
 
 Interactive study site for IB Mathematics: Analysis & Approaches HL. Live at **https://ib-aahl-probability-lab.vercel.app**.
 
-The home page is a **course hub**. Units so far: **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14) and **Vectors** (AHL 3.12–3.16, with rotatable 3D models). Every topic page follows the same pattern, so new units can be added in the same style.
+The home page is a **course hub**. Units so far: **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14), **Vectors** (AHL 3.12–3.16, with rotatable 3D models) and **Calculus**, which so far covers differential equations (AHL 5.18, with live slope-field models). Every topic page follows the same pattern, so new units can be added in the same style.
 
 ---
 
@@ -41,6 +41,7 @@ probability/          one folder per unit
   app.js              the live models and the practice generators (GEN)
   learn.js            How to answer guides and Worked examples (the object L)
 vectors/              same three files as probability/ (app.js also has the 3D engine)
+calculus/             same three files; app.js has the 2D plot and slope-field helpers. Differential equations so far
 tools/check-marks.js  checks every unit's worked examples add up
 ```
 
@@ -100,9 +101,11 @@ The AA HL syllabus, for planning:
 | 2. Functions | Graphs, composites and inverses, transformations, quadratics, rational functions, polynomials, inequalities, modulus |
 | 3. Geometry & trigonometry | 3D shapes, trig ratios and identities, radians, unit circle, trig equations and graphs, **vectors, lines and planes (done)** |
 | 4. Statistics & probability | Sampling, statistical measures, regression, **probability (done)** |
-| 5. Calculus | Limits, differentiation, integration, kinematics, related rates, differential equations, Maclaurin series |
+| 5. Calculus | Limits, differentiation, integration, kinematics, related rates, **differential equations (done)**, Maclaurin series |
 
 \*Counting is already on the Probability page.
+
+To add more topics to an existing unit (for example the rest of Calculus), add sections to that unit's folder rather than a new folder, and keep section ids unique within the unit.
 
 To add a unit: create a folder (for example `calculus/`) with `index.html`, `app.js` and `learn.js` modelled on `vectors/`, add it to the `UNITS` list in `shared/core.js` and a card in the root `index.html`. The unit page's `<body>` needs `data-unit="calculus"`, and its scripts load in this order: `../shared/core.js`, `learn.js`, `app.js`, `../shared/learn-render.js`, `../shared/boot.js`. `tools/check-marks.js` finds any folder that has a `learn.js`.
 

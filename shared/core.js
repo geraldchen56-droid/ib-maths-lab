@@ -36,7 +36,8 @@ const cv=(...a)=>{if(a.length===1&&Array.isArray(a[0]))a=a[0];return '<span clas
 const tableHTML=(head,rows)=>`<div class="tablewrap"><table class="mini">${rows.map(r=>`<tr>${r.map((c,i)=>i===0||head?`<th>${c}</th>`:`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
 const UNITS=[
 {id:'probability',name:'Probability',ref:'Topic 4',href:'../probability/'},
-{id:'vectors',name:'Vectors',ref:'Topic 3 · AHL',href:'../vectors/'}
+{id:'vectors',name:'Vectors',ref:'Topic 3 · AHL',href:'../vectors/'},
+{id:'calculus',name:'Calculus',ref:'Topic 5',href:'../calculus/'}
 ];
 window.LAB={$,$$,tok,hexRgb,rgba,prep,MONO,fact,nCr,nPr,bpdf,bcdf,erf,Phi,invPhi,gcd,frac,sf,p4,r2,ri,pick,C,lbl3,big,K,G,M,cv,tableHTML,UNITS,
 unit:(document.body&&document.body.dataset.unit)||'',

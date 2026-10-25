@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Interactive guide to IB Maths AA HL calculus, starting with differential equations: modelling, Euler's method, separation of variables, homogeneous equations and integrating factors, with live slope fields, worked exam questions, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>IB Calculus Lab</title>
+<script>try{document.documentElement.dataset.calc=localStorage.getItem('ibprob-calc')==='ti84'?'ti84':'casio';}catch(e){document.documentElement.dataset.calc='casio';}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body data-unit="calculus">
+<div class="wrap">
+<header class="top">
+<div>
+<div class="eyebrow"><a class="crumb" href="../">IB Maths Lab</a> · Topic 5 · Calculus</div>
+<h1>Calculus <em>Lab</em></h1>
+<p class="sub">Starting with differential equations (AHL 5.18): setting up a model, Euler's method, separation of variables, homogeneous equations and integrating factors. Each topic has the core reasoning, the formulas, a live slope-field model, worked exam questions, and unlimited practice with full working.</p>
+</div>
+<div class="top-side">
+<div class="calcpick" role="group" aria-label="Calculator for keystroke instructions">
+<span class="lbl">Calculator</span>
+<div class="seg">
+<button type="button" data-pick="casio" aria-pressed="true">Casio fx-CG50</button>
+<button type="button" data-pick="ti84" aria-pressed="false">TI-84 Plus CE</button>
+</div>
+</div>
+<div class="tally" aria-live="polite">
+<div><b id="tCorrect">0</b>correct</div>
+<div><b id="tAttempt">0</b>attempted</div>
+<div><b id="tRate">–</b>accuracy</div>
+</div>
+</div>
+</header>
+<div class="shell">
+<nav class="rail" id="rail" aria-label="Topics">
+<div class="grp">Start</div>
+<button class="navb" data-go="overview"><span class="r">map</span><span class="n">Overview</span><span class="s"></span></button>
+<div class="grp">Differential equations</div>
+<button class="navb" data-go="euler"><span class="r">HL 5.18</span><span class="n">Modelling &amp; Euler</span><span class="s" data-s="euler"></span></button>
+<button class="navb" data-go="sep"><span class="r">HL 5.18</span><span class="n">Separation of variables</span><span class="s" data-s="sep"></span></button>
+<button class="navb" data-go="homog"><span class="r">HL 5.18</span><span class="n">Homogeneous (y = vx)</span><span class="s" data-s="homog"></span></button>
+<button class="navb" data-go="ifac"><span class="r">HL 5.18</span><span class="n">Integrating factor</span><span class="s" data-s="ifac"></span></button>
+<div class="grp">Test yourself</div>
+<button class="navb" data-go="drill"><span class="r">mix</span><span class="n">Mixed drill</span><span class="s" data-s="drill"></span></button>
+<button class="navb" data-go="casio"><span class="r"><span data-calc="casio">CG50</span><span data-calc="ti84">TI-84</span></span><span class="n">Calculator sheet</span><span class="s"></span></button>
+</nav>
+<main id="main">
+<section class="sec" id="s-overview" data-sec="overview">
+<header class="sec-head">
+<span class="ref">Map</span>
+<h2>How the topic fits together</h2>
+<p class="lede">A differential equation tells you the <em>slope</em> of the unknown curve at every point, not the curve itself. Solving it means rebuilding the curve from its slopes. Euler's method does this numerically, one short step at a time. The other three methods do it exactly, and each one only works on a particular shape of equation. Most of the skill is recognising the shape.</p>
+</header>
+<div class="cards" id="cards"></div>
+<div class="theory">
+<div class="panel">
+<h3>Which method does the question want?</h3>
+<p class="small" style="margin-bottom:12px">Read the equation and the command word. Take the first line that fits.</p>
+<div class="decide">
+<div><span>"Rate is proportional to…", "write down a differential equation"</span><b>Modelling → 5.18</b></div>
+<div><span>"Use Euler's method with step length h"</span><b>Euler → 5.18</b></div>
+<div><span>dy/dx factorises as g(x) × h(y)</span><b>Separate → 5.18</b></div>
+<div><span>Every term has the same total degree, or "use y = vx"</span><b>Homogeneous → 5.18</b></div>
+<div><span>y and dy/dx appear only to the first power: dy/dx + P(x)y = Q(x)</span><b>Integrating factor → 5.18</b></div>
+<div><span>None of these shapes, or "estimate"</span><b>Euler → 5.18</b></div>
+</div>
+<p class="small" style="margin-top:12px">Some equations fit two shapes. dy/dx = (x + y)/x is homogeneous <em>and</em> linear, so either method works. Use the one the question names.</p>
+</div>
+<div class="panel prose">
+<h3>How to use each topic page</h3>
+<ol>
+<li><b>Read the idea first.</b> Each page starts with why the method works.</li>
+<li><b>Break the model.</b> Every page has a slope field. Drag the starting point, the step size or the constant, and watch which curve you land on.</li>
+<li><b>Do five practice questions.</b> They are randomised. Answer to 3 significant figures; fractions like 4/3 are accepted.</li>
+<li><b>Read the working even when you're right.</b> The shorthand line at the bottom is the part to memorise.</li>
+</ol>
+<p class="small">Formulas marked <span class="bk">booklet</span> are in the IB formula booklet. More calculus topics (limits, differentiation, integration, kinematics, Maclaurin series) will be added to this unit.</p>
+</div>
+</div>
+</section>
+<section class="sec" id="s-euler" data-sec="euler" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.18</span>
+<h2>Modelling and Euler's method</h2>
+<p class="lede">Turn a sentence about a rate into an equation, then estimate its solution by following the slope one small step at a time.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p><b>Modelling.</b> "The rate of change of y" is dy/dt. "Proportional to" means "equals a constant k times". So "the population grows at a rate proportional to its size" is dP/dt = kP. Newton's law of cooling, "the temperature falls at a rate proportional to the difference from room temperature", is dT/dt = −k(T − Tₐ) with k &gt; 0. The minus sign carries the word "falls". Find k from one piece of data, usually an initial rate.</p>
+<p><b>Euler's method.</b> The equation dy/dx = f(x, y) gives the slope at any point. Stand at (x₀, y₀), work out the slope there, and walk along that tangent for a short horizontal distance h. That lands you at a new point. Re-aim using the slope at the new point and repeat. Each step is <b>new = old + h × slope at old</b>.</p>
+<p>The tangent drifts off a curved solution, so Euler has an error. If the solution is <b>concave up</b> the tangent lies below it and Euler <b>underestimates</b>. If concave down, it overestimates. Halving h roughly halves the error. To check concavity, differentiate the differential equation to get d²y/dx².</p>
+<p class="small">Slope fields (the grid of short lines in the model) are not examined in AA, but they show exactly what Euler's method is doing.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">y<sub>n+1</sub> = y<sub>n</sub> + h × f(x<sub>n</sub>, y<sub>n</sub>)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">x<sub>n+1</sub> = x<sub>n</sub> + h</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">number of steps = (x<sub>end</sub> − x₀) ÷ h</span></div>
+<div class="fx"><span class="f">proportional to y: dy/dt = ky</span></div>
+<div class="fx"><span class="f">cooling: dT/dt = −k(T − Tₐ), k &gt; 0</span></div>
+<div class="fx"><span class="f">limited growth: dP/dt = kP(N − P)</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Use the slope at the <em>old</em> point. Update x and y only after computing the slope.</li>
+<li>Count the steps: from x = 0 to x = 1 with h = 0.25 is four steps, not five.</li>
+<li>"Decreasing at a rate…" means dy/dt is negative.</li>
+<li>Keep full calculator values between steps. Round only the final answer.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>New = old + h × slope at old.</b></li>
+<li><b>Concave up → Euler under. Concave down → Euler over.</b></li>
+<li><b>"Proportional to" = "k ×".</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: Euler's method on a slope field</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="euler-pre"></div><div class="ctrls" id="euler-ctrls"></div></div>
+<div>
+<canvas id="euler-cv" aria-label="slope field with Euler's method and the accurate solution"></canvas>
+<div class="legend"><span><i style="background:var(--muted)"></i>slope field</span><span><i style="background:var(--good)"></i>accurate solution</span><span><i style="background:var(--accent)"></i>Euler steps</span><span><i style="background:var(--bad)"></i>error at x</span></div>
+<div id="euler-ro"></div>
+<div class="gdc" id="euler-gdc"></div>
+<div id="euler-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="euler"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Recursion</small></h3>
+<p>Write the Euler step as a recursion. The table then does every step for you and keeps full precision.</p>
+<h4>Set up the recursion</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Recursion</b>. Press <kbd>F3</kbd> TYPE → <kbd>F2</kbd> a<sub>n+1</sub>.</li>
+<li>Write x through n: x<sub>n</sub> = x₀ + nh. Enter a<sub>n+1</sub> = a<sub>n</sub> + h × f(x₀ + nh, a<sub>n</sub>). The n and a<sub>n</sub> symbols are on the F-key bar while you type.</li>
+<li><kbd>F5</kbd> SET: Start 0, End = number of steps, a₀ = y₀. <kbd>EXIT</kbd>.</li>
+<li><kbd>F6</kbd> TABLE. The row n gives y at x = x₀ + nh.</li>
+</ol>
+<div class="eg">dy/dx = x + y, y(0) = 1, h = 0.1<br>aₙ₊₁ = aₙ + 0.1(0.1n + aₙ)<br>Start 0  End 3  a₀ 1<br>n=3:  1.362</div>
+<p class="warn">The x in f must become x₀ + nh, written with n. Typing X uses whatever value is stored in X, not the step's x.</p>
+<p class="small">Menu labels move slightly between OS versions. If TYPE or SET are not on F3 and F5, look along the F-key bar for them.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Sequence mode</small></h3>
+<p>Write the Euler step as a sequence. The table then does every step for you and keeps full precision.</p>
+<h4>Set up the sequence</h4>
+<ol>
+<li><kbd>MODE</kbd> → choose <b>SEQ</b> on the graph-type line, <kbd>ENTER</kbd>.</li>
+<li><kbd>Y=</kbd>: nMin = 0. u(n) = u(n−1) + h × f(x₀ + (n−1)h, u(n−1)). Type u with <kbd>2nd</kbd> <kbd>7</kbd> and n with <kbd>X,T,θ,n</kbd>. u(nMin) = y₀.</li>
+<li><kbd>2nd</kbd> <kbd>WINDOW</kbd> (TBLSET): TblStart = 0, ΔTbl = 1.</li>
+<li><kbd>2nd</kbd> <kbd>GRAPH</kbd> (TABLE). The row n gives y at x = x₀ + nh.</li>
+</ol>
+<div class="eg">dy/dx = x + y, y(0) = 1, h = 0.1<br>u(n)=u(n−1)+0.1(0.1(n−1)+u(n−1))<br>nMin=0  u(nMin)=1<br>n=3:  1.362</div>
+<p class="warn">The TI defines u(n) from u(n−1), so the x-value of the previous point is x₀ + (n−1)h, not x₀ + nh.</p>
+<p class="small">Set <kbd>MODE</kbd> back to <b>FUNCTION</b> afterwards, or Y= will keep showing sequences.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-sep" data-sec="sep" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.18</span>
+<h2>Separation of variables</h2>
+<p class="lede">When dy/dx is a function of x times a function of y, move each variable to its own side and integrate both sides.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>If dy/dx = g(x) h(y), divide by h(y): (1/h(y)) dy/dx = g(x). The left side is the derivative of ∫(1/h(y)) dy with respect to x, by the <b>chain rule</b>. So integrating both sides with respect to x gives <b>∫ dy/h(y) = ∫ g(x) dx + c</b>. Writing "dy" and "dx" on separate sides is shorthand for that chain-rule step.</p>
+<p>You get <b>one</b> constant, from one integral. That gives a whole <b>family</b> of curves (the general solution). A starting value, called an initial condition, picks out one member (the particular solution). Substitute it as soon as c appears, before rearranging. It is usually easier.</p>
+<p>dy/dx = ky separates to ln|y| = kx + c, so y = ±e<sup>c</sup>e<sup>kx</sup> = Ae<sup>kx</sup>. The constant changes shape when you exponentiate: e<sup>kx + c</sup> is Ae<sup>kx</sup>, never e<sup>kx</sup> + c.</p>
+<p>Dividing by h(y) assumes h(y) ≠ 0. A value with h(y) = 0, like y = 0 in dy/dx = ky, is a constant solution that the division loses. Set y₀ = 0 in the model to see it.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">∫ dy ÷ h(y) = ∫ g(x) dx + c</span></div>
+<div class="fx"><span class="f">∫ dy ÷ y = ln|y| + c</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">dy/dx = ky ⇒ y = Ae<sup>kx</sup></span></div>
+<div class="fx"><span class="f">dT/dt = −k(T − Tₐ) ⇒ T = Tₐ + (T₀ − Tₐ)e<sup>−kt</sup></span></div>
+<div class="fx"><span class="f">1 ÷ (P(N − P)) = (1/N)(1/P + 1/(N − P))</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>One constant only. Two constants (one per side) combine into one.</li>
+<li>e<sup>x + c</sup> = Ae<sup>x</sup>, not e<sup>x</sup> + c.</li>
+<li>Forgetting c until after rearranging loses the marks for the particular solution.</li>
+<li>Write ln|y| unless you know y &gt; 0.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>y's with dy, x's with dx, one + c.</b></li>
+<li><b>Use the initial condition the moment c appears.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a family of solutions</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="sep-pre"></div><div class="ctrls" id="sep-ctrls"></div></div>
+<div>
+<canvas id="sep-cv" aria-label="slope field and family of solution curves"></canvas>
+<div class="legend"><span><i style="background:var(--muted)"></i>slope field</span><span><i style="background:var(--accent-soft)"></i>other members of the family</span><span><i style="background:var(--accent)"></i>particular solution</span><span><i style="background:var(--amber)"></i>initial point and y at x</span></div>
+<div id="sep-ro"></div>
+<div class="gdc" id="sep-gdc"></div>
+<div id="sep-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="sep"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Equation · Run-Matrix</small></h3>
+<p>The algebra is done by hand. The calculator finds k from data and checks your answer.</p>
+<h4>Find k from a data point</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Equation</b> → <kbd>F3</kbd> SOLVER.</li>
+<li>Type the equation with K as the unknown, e.g. <span class="mono">55=20+70e^(−10K)</span>. <kbd>e^x</kbd> is <kbd>SHIFT</kbd> <kbd>ln</kbd>.</li>
+<li><kbd>F6</kbd> SOLVE.</li>
+</ol>
+<div class="eg">55=20+70e^(−10K)<br>K = 0.06931…   (= ln 2 ÷ 10)</div>
+<h4>Check a solution</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx gives the slope of your y at a point.</li>
+<li>Compare it with the right-hand side of the differential equation at the same point. They should match.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MATH · Solver</small></h3>
+<p>The algebra is done by hand. The calculator finds k from data and checks your answer.</p>
+<h4>Find k from a data point</h4>
+<ol>
+<li><kbd>MATH</kbd> → Solver… (press <kbd>▲</kbd> from item 1 to reach it).</li>
+<li>Enter the equation using X for k, e.g. <span class="mono">20+70e^(−10X)</span> on one side and <span class="mono">55</span> on the other (older screens: <span class="mono">20+70e^(−10X)−55</span> after "0 ="). <kbd>e^x</kbd> is <kbd>2nd</kbd> <kbd>LN</kbd>.</li>
+<li>Give a guess such as 0.1 and press SOLVE (<kbd>ALPHA</kbd> <kbd>ENTER</kbd>).</li>
+</ol>
+<div class="eg">20+70e^(−10X)=55<br>X = .0693147…   (= ln 2 ÷ 10)</div>
+<h4>Check a solution</h4>
+<ol>
+<li><kbd>MATH</kbd> → 8:nDeriv( gives the slope of your y at a point.</li>
+<li>Compare it with the right-hand side of the differential equation at the same point. They should match.</li>
+</ol>
+</aside></div>
+</section>
+<section class="sec" id="s-homog" data-sec="homog" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.18</span>
+<h2>Homogeneous equations: y = vx</h2>
+<p class="lede">When dy/dx depends only on the ratio y/x, the substitution y = vx turns the equation into one you can separate.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>An equation is <b>homogeneous</b> if dy/dx can be written as a function of y/x alone: dy/dx = F(y/x). The test: divide the top and bottom by the highest power of x. If every x and y pairs up into y/x, it is homogeneous. This happens when every term has the same total degree, like x², xy and y².</p>
+<p>Geometrically, the slope is the same at every point on a line through the origin, because y/x is constant along it. Slide the ray in the model and watch every slope segment on it line up.</p>
+<p>So name the ratio: <b>v = y/x</b>, which means y = vx. Differentiate with the <b>product rule</b>: dy/dx = v + x dv/dx. Substituting gives v + x dv/dx = F(v), so <b>x dv/dx = F(v) − v</b>. That separates: ∫ dv ÷ (F(v) − v) = ∫ dx ÷ x = ln|x| + c.</p>
+<p>The answer is in v. Replace v by y/x at the end, and use the initial condition in either form.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">dy/dx = F(y/x)</span></div>
+<div class="fx"><span class="f">y = vx ⇒ dy/dx = v + x dv/dx</span></div>
+<div class="fx"><span class="f">x dv/dx = F(v) − v</span></div>
+<div class="fx"><span class="f">∫ dv ÷ (F(v) − v) = ln|x| + c</span></div>
+<div class="fx"><span class="f">∫ f′(v) ÷ f(v) dv = ln|f(v)| + c</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>dy/dx = v + x dv/dx, not just dv/dx. The product rule is the whole point.</li>
+<li>Finishing in v loses the last mark. Put v = y/x back.</li>
+<li>Subtract v from F(v) before separating: x dv/dx = F(v) − v.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Divide by x until only y/x is left.</b></li>
+<li><b>y = vx, dy/dx = v + xv′. Separate. Put y/x back.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: constant slope along every ray</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="homog-pre"></div><div class="ctrls" id="homog-ctrls"></div></div>
+<div>
+<canvas id="homog-cv" aria-label="slope field of a homogeneous equation, a ray y = vx and the solution through a point"></canvas>
+<div class="legend"><span><i style="background:var(--muted)"></i>slope field</span><span><i style="background:var(--amber)"></i>ray y = vx, all one slope</span><span><i style="background:var(--accent)"></i>solution through the point</span></div>
+<div id="homog-ro"></div>
+<div class="gdc" id="homog-gdc"></div>
+<div id="homog-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="homog"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Graph · Run-Matrix</small></h3>
+<p>The substitution is done by hand. Use the calculator to evaluate and check the final answer.</p>
+<h4>Evaluate and graph your solution</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Graph</b>. Enter your y in terms of x as Y1, e.g. <span class="mono">X(ln X+2)</span>. <kbd>F6</kbd> DRAW.</li>
+<li><kbd>SHIFT</kbd> <kbd>F5</kbd> (G-SOLVE) → Y-CAL, then type the x-value, to read y.</li>
+</ol>
+<h4>Check it satisfies the equation</h4>
+<ol>
+<li>In <b>Run-Matrix</b>: <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx of Y1 at a point.</li>
+<li>Work out F(y/x) at the same point. The two numbers should match.</li>
+</ol>
+<div class="eg">dy/dx = (x + y)/x, answer y = x(ln x + 2)<br>at x = 2:  y = 5.386…<br>d/dx(Y1)      = 3.693…<br>(2 + 5.386)/2 = 3.693…  ✓</div>
+<p class="small">If the two numbers differ, the slip is usually a missing v in dy/dx = v + x dv/dx.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Y= · CALC</small></h3>
+<p>The substitution is done by hand. Use the calculator to evaluate and check the final answer.</p>
+<h4>Evaluate and graph your solution</h4>
+<ol>
+<li><kbd>Y=</kbd>, enter your y as Y1, e.g. <span class="mono">X(ln(X)+2)</span>. <kbd>GRAPH</kbd>.</li>
+<li><kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 1:value, type the x-value, <kbd>ENTER</kbd>.</li>
+</ol>
+<h4>Check it satisfies the equation</h4>
+<ol>
+<li><kbd>MATH</kbd> → 8:nDeriv(Y1, X, 2) gives the slope at x = 2. Y1 is under <kbd>ALPHA</kbd> <kbd>TRACE</kbd> (the shortcut menu) or <kbd>VARS</kbd> → Y-VARS → Function.</li>
+<li>Work out F(y/x) at the same point. The two numbers should match.</li>
+</ol>
+<p class="small">Graph only for x &gt; 0 when the solution has ln x: set Xmin to a small positive number in <kbd>WINDOW</kbd>.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-ifac" data-sec="ifac" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.18</span>
+<h2>Integrating factor</h2>
+<p class="lede">For linear equations dy/dx + P(x)y = Q(x), multiply through by a factor that turns the left side into one derivative.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>The product rule says d/dx(I y) = I dy/dx + I′ y. Compare it with I dy/dx + I P y, the left side after multiplying the equation by I. They are the same when <b>I′ = IP</b>, and the function that does that is <b>I = e<sup>∫P dx</sup></b>. That is the integrating factor.</p>
+<p>With it, the equation becomes <b>d/dx(I y) = I Q</b>. Integrate once: I y = ∫ I Q dx + c. Then divide by I. The c is divided too, which is why the answer ends with a term like c e<sup>−2x</sup> or c ÷ x².</p>
+<p>The method needs the <b>standard form</b> first: dy/dx with coefficient 1. If the question gives x dy/dx + 2y = x², divide by x before reading off P = 2/x. Logs in the exponent cancel: e<sup>2 ln x</sup> = x². No constant is needed in ∫P dx; any one integrating factor works.</p>
+<p>The model splits the solution into two parts: a <b>steady part</b> that follows Q, and a <b>transient</b> c e<sup>−kx</sup> set by the starting value. With k &gt; 0 the transient dies away. Make k negative and watch it take over.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">dy/dx + P(x)y = Q(x)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">integrating factor I = e<sup>∫P(x) dx</sup></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">d/dx(I y) = I Q</span></div>
+<div class="fx"><span class="f">y = (1/I)(∫ I Q dx + c)</span></div>
+<div class="fx"><span class="f">e<sup>n ln x</sup> = xⁿ, e<sup>−ln cos x</sup> = sec x</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Divide to get dy/dx on its own before finding P.</li>
+<li>Keep the sign: dy/dx − 3y = … has P = −3, so I = e<sup>−3x</sup>.</li>
+<li>Add c before dividing by I, so c gets divided too.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Standard form, I = e<sup>∫P</sup>, (Iy)′ = IQ, integrate, divide.</b></li>
+<li><b>Check: (Iy)′ should expand back to I × left side.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: steady part and transient</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="ifac-pre"></div><div class="ctrls" id="ifac-ctrls"></div></div>
+<div>
+<canvas id="ifac-cv" aria-label="solution of a linear equation split into steady part and transient"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>solution y</span><span><i style="background:var(--amber)"></i>steady part</span><span><i style="background:var(--muted)"></i>transient c e<sup>−kx</sup></span></div>
+<div id="ifac-ro"></div>
+<div class="gdc" id="ifac-gdc"></div>
+<div id="ifac-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="ifac"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · Graph</small></h3>
+<p>Find the solution by hand. The calculator checks the integral and answers the follow-up parts.</p>
+<h4>Check ∫ I Q dx</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx.</li>
+<li>Integrate I Q between two numbers, e.g. 0 and 1. Your antiderivative should give the same difference.</li>
+</ol>
+<div class="eg">I Q = e^(2X) × e^(−X)<br>∫(e^(2X)e^(−X), 0, 1) = 1.718…<br>[e^X] from 0 to 1  = e − 1 = 1.718…  ✓</div>
+<h4>Maximum or zero of the solution</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Graph</b>, enter y as Y1, <kbd>F6</kbd> DRAW.</li>
+<li><kbd>SHIFT</kbd> <kbd>F5</kbd> (G-SOLVE) → <kbd>F2</kbd> MAX or <kbd>F1</kbd> ROOT.</li>
+</ol>
+<p class="small">Set radians (<kbd>SHIFT</kbd> <kbd>MENU</kbd> SET UP → Angle: Rad) whenever the solution contains sin, cos or tan.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MATH · CALC</small></h3>
+<p>Find the solution by hand. The calculator checks the integral and answers the follow-up parts.</p>
+<h4>Check ∫ I Q dx</h4>
+<ol>
+<li><kbd>MATH</kbd> → 9:fnInt(.</li>
+<li>Integrate I Q between two numbers, e.g. 0 and 1. Your antiderivative should give the same difference.</li>
+</ol>
+<div class="eg">fnInt(e^(2X)e^(−X), X, 0, 1) = 1.718…<br>e^(1) − e^(0)              = 1.718…  ✓</div>
+<h4>Maximum or zero of the solution</h4>
+<ol>
+<li><kbd>Y=</kbd>, enter y as Y1, <kbd>GRAPH</kbd>.</li>
+<li><kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 4:maximum or 2:zero. Move to a left bound, right bound and guess, pressing <kbd>ENTER</kbd> each time.</li>
+</ol>
+<p class="small">Set <kbd>MODE</kbd> to <b>RADIAN</b> whenever the solution contains sin, cos or tan.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-drill" data-sec="drill" hidden>
+<header class="sec-head">
+<span class="ref">Mixed</span>
+<h2>Mixed drill</h2>
+<p class="lede">Questions from every differential-equations topic in random order. Part of the skill is recognising which method a question wants before you start.</p>
+</header>
+<div class="practice" data-sec="drill"></div>
+<div class="panel prose">
+<h3>Exam habits that save marks</h3>
+<ul>
+<li>Write the separated or multiplied form as its own line. That line usually carries an M1.</li>
+<li>Put + c in as soon as you integrate, and use the initial condition straight away.</li>
+<li>For Euler, write a table with columns n, x, y and slope. Keep full precision between rows.</li>
+<li>For y = vx, show dy/dx = v + x dv/dx explicitly, and finish in x and y.</li>
+<li>Check a final answer by differentiating it, or with d/dx on the calculator at one point.</li>
+</ul>
+</div>
+</section>
+<section class="sec" id="s-casio" data-sec="casio" hidden>
+<header class="sec-head">
+<span class="ref"><span data-calc="casio">fx-CG50 AU</span><span data-calc="ti84">TI-84 Plus CE</span></span>
+<h2>Calculator cheat sheet</h2>
+<p class="lede">Every differential-equations keystroke in one place. Each topic page also has its own calculator panel next to the practice questions.</p>
+</header>
+<div class="panel" data-calc="casio">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP): Input/Output = <b>Math/Math</b>. Angle = <b>Rad</b> for calculus with trig.</li>
+<li>Practise one Euler recursion in <b>Recursion</b> so the setup is familiar.</li>
+<li>The calculator cannot solve a differential equation exactly. It finds constants, checks answers and evaluates.</li>
+</ul>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Euler's method</td><td><b>Recursion</b> → <kbd>F3</kbd> TYPE → <kbd>F2</kbd> a<sub>n+1</sub>, <kbd>F5</kbd> SET, <kbd>F6</kbd> TABLE</td><td>aₙ + h × f(x₀ + nh, aₙ), a₀ = y₀</td></tr>
+<tr><td>Find k from data</td><td><b>Equation</b> → <kbd>F3</kbd> SOLVER</td><td>equation in K, then <kbd>F6</kbd> SOLVE</td></tr>
+<tr><td>Slope of y at a point</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx</td><td>y(X), x-value</td></tr>
+<tr><td>Definite integral</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx</td><td>function, lower, upper</td></tr>
+<tr><td>Value, maximum, zero</td><td><b>Graph</b> → <kbd>F6</kbd> DRAW → <kbd>SHIFT</kbd> <kbd>F5</kbd> G-SOLVE</td><td>Y-CAL, MAX, ROOT</td></tr>
+<tr><td>Fraction ↔ decimal</td><td><kbd>S⇔D</kbd></td><td>Run-Matrix output</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Which tool for which question?</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>"Use Euler's method"</td><td>Recursion table, read the last row</td></tr>
+<tr><td>Find k, given y at some time</td><td>SOLVER on the particular solution</td></tr>
+<tr><td>"Find the time when…"</td><td>SOLVER, or Graph → G-SOLVE → X-CAL</td></tr>
+<tr><td>Check your solution</td><td>d/dx at a point vs the right-hand side</td></tr>
+<tr><td>Maximum of the solution</td><td>Graph → G-SOLVE → MAX</td></tr>
+<tr><td>Area under the solution</td><td>∫dx in Run-Matrix</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>MODE</kbd>: <b>RADIAN</b>, <b>FUNCTION</b>, <b>MATHPRINT</b>.</li>
+<li>Practise one Euler sequence in SEQ mode, then switch back to FUNCTION.</li>
+<li>The calculator cannot solve a differential equation exactly. It finds constants, checks answers and evaluates.</li>
+</ul>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Euler's method</td><td><kbd>MODE</kbd> SEQ, <kbd>Y=</kbd>, then <kbd>2nd</kbd> <kbd>GRAPH</kbd> TABLE</td><td>u(n) = u(n−1) + h × f(x₀ + (n−1)h, u(n−1)), u(nMin) = y₀</td></tr>
+<tr><td>Find k from data</td><td><kbd>MATH</kbd> → Solver…</td><td>equation in X, a guess</td></tr>
+<tr><td>Slope of y at a point</td><td><kbd>MATH</kbd> → 8:nDeriv(</td><td>y(X), X, x-value</td></tr>
+<tr><td>Definite integral</td><td><kbd>MATH</kbd> → 9:fnInt(</td><td>function, X, lower, upper</td></tr>
+<tr><td>Value, maximum, zero</td><td><kbd>GRAPH</kbd> → <kbd>2nd</kbd> <kbd>TRACE</kbd> CALC</td><td>1:value, 4:maximum, 2:zero</td></tr>
+<tr><td>Decimal → fraction</td><td><kbd>MATH</kbd> → 1:►Frac</td><td>Home screen answer</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Which tool for which question?</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>"Use Euler's method"</td><td>SEQ table, read the last row</td></tr>
+<tr><td>Find k, given y at some time</td><td>Solver on the particular solution</td></tr>
+<tr><td>"Find the time when…"</td><td>Solver, or graph and CALC → 5:intersect</td></tr>
+<tr><td>Check your solution</td><td>nDeriv( at a point vs the right-hand side</td></tr>
+<tr><td>Maximum of the solution</td><td>CALC → 4:maximum</td></tr>
+<tr><td>Area under the solution</td><td>fnInt(</td></tr>
+</table>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+<script src="../shared/core.js"></script>
+<script src="learn.js"></script>
+<script src="app.js"></script>
+<script src="../shared/learn-render.js"></script>
+<script src="../shared/boot.js"></script>
+</body>
+</html>
