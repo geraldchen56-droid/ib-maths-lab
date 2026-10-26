@@ -35,6 +35,7 @@ const M=s=>`<span class="mk">${s}</span>`;
 const cv=(...a)=>{if(a.length===1&&Array.isArray(a[0]))a=a[0];return '<span class="cv">'+a.map(x=>`<i>${String(x).replace(/^-/,'−')}</i>`).join('')+'</span>';};
 const tableHTML=(head,rows)=>`<div class="tablewrap"><table class="mini">${rows.map(r=>`<tr>${r.map((c,i)=>i===0||head?`<th>${c}</th>`:`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
 const UNITS=[
+{id:'algebra',name:'Number & algebra',ref:'Topic 1',href:'../algebra/'},
 {id:'probability',name:'Probability',ref:'Topic 4',href:'../probability/'},
 {id:'vectors',name:'Vectors',ref:'Topic 3 · AHL',href:'../vectors/'},
 {id:'calculus',name:'Calculus',ref:'Topic 5',href:'../calculus/'}

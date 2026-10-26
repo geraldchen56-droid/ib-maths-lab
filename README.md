@@ -2,7 +2,7 @@
 
 Interactive study site for IB Mathematics: Analysis & Approaches HL. Live at **https://ib-aahl-probability-lab.vercel.app**.
 
-The home page is a **course hub**. Units so far: **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14), **Vectors** (AHL 3.12–3.16, with rotatable 3D models) and **Calculus**, which so far covers differential equations (AHL 5.18, with live slope-field models). Every topic page follows the same pattern, so new units can be added in the same style.
+The home page is a **course hub**. Units so far: **Number & algebra**, which so far covers proof (SL 1.6, AHL 1.15: direct proof, induction, contradiction, counterexamples), **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14), **Vectors** (AHL 3.12–3.16, with rotatable 3D models) and **Calculus**, which so far covers differential equations (AHL 5.18, with live slope-field models). Every topic page follows the same pattern, so new units can be added in the same style.
 
 ---
 
@@ -42,6 +42,7 @@ probability/          one folder per unit
   learn.js            How to answer guides and Worked examples (the object L)
 vectors/              same three files as probability/ (app.js also has the 3D engine)
 calculus/             same three files; app.js has the 2D plot and slope-field helpers. Differential equations so far
+algebra/              same three files; app.js has the proof models (cell grids, dominoes, remainder bars). Proof so far
 tools/check-marks.js  checks every unit's worked examples add up
 ```
 
@@ -97,7 +98,7 @@ The AA HL syllabus, for planning:
 
 | Unit | Contents |
 |---|---|
-| 1. Number & algebra | Sequences and series, exponents and logs, binomial theorem, counting*, proof, complex numbers, systems of equations |
+| 1. Number & algebra | Sequences and series, exponents and logs, binomial theorem, counting*, **proof (done)**, complex numbers, systems of equations |
 | 2. Functions | Graphs, composites and inverses, transformations, quadratics, rational functions, polynomials, inequalities, modulus |
 | 3. Geometry & trigonometry | 3D shapes, trig ratios and identities, radians, unit circle, trig equations and graphs, **vectors, lines and planes (done)** |
 | 4. Statistics & probability | Sampling, statistical measures, regression, **probability (done)** |

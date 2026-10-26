@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Interactive guide to IB Maths AA HL number and algebra, starting with proof: direct proof, mathematical induction (series, divisibility, inequalities, derivatives), proof by contradiction and counterexamples, with live models, worked exam questions with mark schemes, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>IB Number &amp; Algebra Lab</title>
+<script>try{document.documentElement.dataset.calc=localStorage.getItem('ibprob-calc')==='ti84'?'ti84':'casio';}catch(e){document.documentElement.dataset.calc='casio';}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body data-unit="algebra">
+<div class="wrap">
+<header class="top">
+<div>
+<div class="eyebrow"><a class="crumb" href="../">IB Maths Lab</a> · Topic 1 · Number &amp; algebra</div>
+<h1>Number &amp; Algebra <em>Lab</em></h1>
+<p class="sub">Starting with proof (SL 1.6, AHL 1.15): direct proof, mathematical induction, proof by contradiction and counterexamples. Each topic has the core reasoning, the standard layouts, a live model you can break, worked exam questions with mark schemes, and unlimited practice with full working.</p>
+</div>
+<div class="top-side">
+<div class="calcpick" role="group" aria-label="Calculator for keystroke instructions">
+<span class="lbl">Calculator</span>
+<div class="seg">
+<button type="button" data-pick="casio" aria-pressed="true">Casio fx-CG50</button>
+<button type="button" data-pick="ti84" aria-pressed="false">TI-84 Plus CE</button>
+</div>
+</div>
+<div class="tally" aria-live="polite">
+<div><b id="tCorrect">0</b>correct</div>
+<div><b id="tAttempt">0</b>attempted</div>
+<div><b id="tRate">–</b>accuracy</div>
+</div>
+</div>
+</header>
+<div class="shell">
+<nav class="rail" id="rail" aria-label="Topics">
+<div class="grp">Start</div>
+<button class="navb" data-go="overview"><span class="r">map</span><span class="n">Overview</span><span class="s"></span></button>
+<div class="grp">Proof</div>
+<button class="navb" data-go="direct"><span class="r">SL 1.6</span><span class="n">Direct proof</span><span class="s" data-s="direct"></span></button>
+<button class="navb" data-go="indsum"><span class="r">HL 1.15</span><span class="n">Induction: series</span><span class="s" data-s="indsum"></span></button>
+<button class="navb" data-go="inddiv"><span class="r">HL 1.15</span><span class="n">Induction: divisibility</span><span class="s" data-s="inddiv"></span></button>
+<button class="navb" data-go="indmore"><span class="r">HL 1.15</span><span class="n">Induction: inequalities &amp; derivatives</span><span class="s" data-s="indmore"></span></button>
+<button class="navb" data-go="contra"><span class="r">HL 1.15</span><span class="n">Proof by contradiction</span><span class="s" data-s="contra"></span></button>
+<button class="navb" data-go="counter"><span class="r">HL 1.15</span><span class="n">Counterexamples</span><span class="s" data-s="counter"></span></button>
+<div class="grp">Test yourself</div>
+<button class="navb" data-go="drill"><span class="r">mix</span><span class="n">Mixed drill</span><span class="s" data-s="drill"></span></button>
+<button class="navb" data-go="casio"><span class="r"><span data-calc="casio">CG50</span><span data-calc="ti84">TI-84</span></span><span class="n">Calculator sheet</span><span class="s"></span></button>
+</nav>
+<main id="main">
+<section class="sec" id="s-overview" data-sec="overview">
+<header class="sec-head">
+<span class="ref">Map</span>
+<h2>How proof fits together</h2>
+<p class="lede">A proof is an argument that covers <em>every</em> case at once, which is exactly what examples can't do. There are four tools. A direct proof writes the general case in algebra. Induction builds a chain from n = 1 upwards. Contradiction assumes the opposite and breaks it. A counterexample does the reverse job: one case that kills a false "for all". Most of the skill is picking the right tool from the wording.</p>
+</header>
+<div class="cards" id="cards"></div>
+<div class="theory">
+<div class="panel">
+<h3>Which proof does the question want?</h3>
+<p class="small" style="margin-bottom:12px">Read the command words. Take the first line that fits.</p>
+<div class="decide">
+<div><span>"Show that … ≡ …", consecutive, odd, even, "for any integer"</span><b>Direct → 1.6</b></div>
+<div><span>"Prove by induction", Σ from r = 1 to n</span><b>Induction: series → 1.15</b></div>
+<div><span>"divisible by … for all n ∈ ℤ⁺" with a power like 7ⁿ</span><b>Induction: divisibility → 1.15</b></div>
+<div><span>"for all n ≥ n₀" with &gt;, or "the nth derivative"</span><b>Induction: inequalities &amp; derivatives → 1.15</b></div>
+<div><span>"irrational", "infinitely many", "cannot", "at least one"</span><b>Contradiction → 1.15</b></div>
+<div><span>"Show that the statement is false", "disprove", "prove or disprove"</span><b>Counterexample → 1.15</b></div>
+</div>
+<p class="small" style="margin-top:12px">Some claims can be proved more than one way. n³ − n is divisible by 6 by direct factorisation, (n − 1)n(n + 1), or by induction. Use the method the question names; if it names none, the direct proof is usually shorter.</p>
+</div>
+<div class="panel prose">
+<h3>How to use each topic page</h3>
+<ol>
+<li><b>Read the idea first.</b> Each page starts with why the method is valid, not just the layout.</li>
+<li><b>Break the model.</b> Every page has a model that lets you watch a proof fail: a domino chain with a missing link, a divisor that's too big, a base case in the wrong place.</li>
+<li><b>Write out one worked example in full.</b> Proof marks are for layout and reasons as much as algebra. Reveal one line at a time and compare.</li>
+<li><b>Do five practice questions.</b> They test the numerical side of each topic: the constant in a step, the base case, the first counterexample. Read the shorthand line at the bottom.</li>
+</ol>
+<p class="small">Formulas marked <span class="bk">booklet</span> are in the IB formula booklet. More number and algebra topics (sequences, logs, binomial theorem, complex numbers, systems of equations) will be added to this unit.</p>
+</div>
+</div>
+</section>
+
+<section class="sec" id="s-direct" data-sec="direct" hidden>
+<header class="sec-head">
+<span class="ref">SL 1.6</span>
+<h2>Direct proof</h2>
+<p class="lede">Write the general case in algebra, then rearrange it until the claim is visible. One argument covers every integer at once.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Checking examples never proves a "for all" claim. There are infinitely many integers and you can only check finitely many. The way round this is to let a <b>letter stand for every case at once</b>: "let n be an integer". Anything you show about n is then true for 1, for 2, for −57 and for every other integer, because you never used which one it was.</p>
+<p>So the work is <b>translation</b>. An even number is 2n, an odd number 2n + 1, three consecutive integers n, n + 1, n + 2. Then rearrange until the claim shows: "divisible by 3" means you can write 3 × (an integer). Finish by saying why the bracket is an integer.</p>
+<p>An <b>identity</b>, written ≡, is true for every value of the variable, unlike an equation, which picks out particular values. To prove LHS ≡ RHS, <b>start from one side and transform it into the other</b>. Writing the identity first and simplifying both sides is a logical error: it assumes what you are trying to show, and it can "prove" false things (squaring both sides of −1 = 1 gives 1 = 1).</p>
+<p>Two facts do a lot of the work: <b>of two consecutive integers, one is even</b>, and <b>of three consecutive integers, one is a multiple of 3</b>. In the model, set the divisor above what the algebra allows and watch a counterexample appear.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">even: 2n   odd: 2n + 1   (n ∈ ℤ)</span></div>
+<div class="fx"><span class="f">consecutive: n, n + 1, n + 2</span></div>
+<div class="fx"><span class="f">n(n + 1) is always even</span></div>
+<div class="fx"><span class="f">(n − 1)n(n + 1) is always a multiple of 6</span></div>
+<div class="fx"><span class="f">(A + B)² − (A − B)² ≡ 4AB</span></div>
+<div class="fx"><span class="f">A² − B² ≡ (A − B)(A + B)</span></div>
+<div class="fx"><span class="f">Sₙ = n/2 (2u₁ + (n − 1)d)</span><span class="bk">booklet</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Examples prove nothing about "every n". They score 0.</li>
+<li>Two independent odd numbers are 2m + 1 and 2n + 1, not both 2n + 1.</li>
+<li>Work from one side to the other. Don't simplify both sides of the identity at once.</li>
+<li>"= 3(n + 1)" is not finished. Say n + 1 is an integer.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Let n, write it, factor it, say why.</b></li>
+<li><b>LHS → RHS, never both at once.</b></li>
+<li><b>Consecutive pair → a 2. Consecutive triple → a 6.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: evidence versus proof</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="direct-pre"></div><div class="ctrls" id="direct-ctrls"></div></div>
+<div>
+<canvas id="direct-cv" aria-label="grid of values of the expression for n = 1 to N, marked by whether d divides them"></canvas>
+<div class="legend"><span><i style="background:var(--good)"></i>d divides it</span><span><i style="background:var(--bad)"></i>d does not divide it</span><span><i style="background:var(--amber)"></i>first counterexample</span></div>
+<div id="direct-ro"></div>
+<div class="gdc" id="direct-gdc"></div>
+<div id="direct-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="direct"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Table</small></h3>
+<p>The proof is done by hand. Use a table first to check the claim is true, and to find the number that always divides.</p>
+<h4>Test a divisibility claim</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>. Enter Y1 as the expression divided by d, e.g. <span class="mono">(X³−X)÷6</span>.</li>
+<li><kbd>F5</kbd> SET: Start 1, End 20, Step 1. <kbd>EXIT</kbd>.</li>
+<li><kbd>F6</kbd> TABLE. A decimal anywhere in Y1 is a counterexample. Whole numbers all the way down are evidence only.</li>
+</ol>
+<div class="eg">Y1 = (X³−X)÷6<br>X: 1  2  3   4   5<br>Y1: 0  1  4  10  20   (all whole)</div>
+<p class="warn">The table can't replace the algebra. "I checked n = 1 to 20" earns no marks; "(n − 1)n(n + 1) contains a multiple of 2 and of 3" does.</p>
+<p class="small">Menu labels move slightly between OS versions. If SET is not on F5, look along the F-key bar.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Y= · TABLE</small></h3>
+<p>The proof is done by hand. Use a table first to check the claim is true, and to find the number that always divides.</p>
+<h4>Test a divisibility claim</h4>
+<ol>
+<li><kbd>Y=</kbd>, enter Y1 as the expression divided by d, e.g. <span class="mono">(X^3−X)/6</span>.</li>
+<li><kbd>2nd</kbd> <kbd>WINDOW</kbd> (TBLSET): TblStart = 1, ΔTbl = 1.</li>
+<li><kbd>2nd</kbd> <kbd>GRAPH</kbd> (TABLE). A decimal anywhere in Y1 is a counterexample. Whole numbers all the way down are evidence only.</li>
+</ol>
+<div class="eg">Y1 = (X^3−X)/6<br>X: 1  2  3   4   5<br>Y1: 0  1  4  10  20   (all whole)</div>
+<p class="warn">The table can't replace the algebra. "I checked n = 1 to 20" earns no marks; "(n − 1)n(n + 1) contains a multiple of 2 and of 3" does.</p>
+</aside></div>
+</section>
+
+<section class="sec" id="s-indsum" data-sec="indsum" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.15</span>
+<h2>Induction: series</h2>
+<p class="lede">Prove the first case, prove that each case forces the next, and every case follows, like a line of falling dominoes.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Induction proves a statement P(n) for every positive integer with two finite pieces of work. The <b>base case</b> shows P(1) is true. The <b>inductive step</b> shows that <em>if</em> P(k) is true, then P(k + 1) must be true, for any k. Then P(1) gives P(2), P(2) gives P(3), and so on forever. Each domino knocks over the next.</p>
+<p>Both halves matter, and the model shows why. Pick <b>faulty: base</b>: the formula Σ r = (n² + n + 2)/2 passes every inductive step, yet it's false everywhere, because the first domino never falls. Pick <b>faulty: step</b>: that formula is true for n = 1, 2 and 3, then the chain breaks. Checking a few cases is exactly what induction is <em>not</em>.</p>
+<p>In the step you <b>assume</b> P(k). That is not circular: you're proving the implication "P(k) ⇒ P(k + 1)", not P(k) itself. For a series, the sum to k + 1 is the sum to k plus one more term, so <b>S(k + 1) = S(k) + u(k + 1)</b>. Replace S(k) by the assumed formula, then simplify towards the target. Writing the target down first tells you what to factorise out, usually (k + 1).</p>
+<p>The conclusion is a required sentence, and it carries a mark: P(1) is true, P(k) true implies P(k + 1) true, so P(n) is true for all n ∈ ℤ⁺.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">S(k + 1) = S(k) + u(k + 1)</span></div>
+<div class="fx"><span class="f">Σ r = n(n + 1)/2</span></div>
+<div class="fx"><span class="f">Σ r² = n(n + 1)(2n + 1)/6</span></div>
+<div class="fx"><span class="f">Σ r³ = n²(n + 1)²/4</span></div>
+<div class="fx"><span class="f">Σ<sub>r=a</sub><sup>b</sup> = S(b) − S(a − 1)</span></div>
+<div class="fx"><span class="f">Sₙ = u₁(rⁿ − 1)/(r − 1)</span><span class="bk">booklet</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Never assume P(k + 1). Write it as the target, then reach it.</li>
+<li>The (k + 1)th term: put r = k + 1 into the term, carefully (r × 2<sup>r−1</sup> becomes (k + 1)2ᵏ).</li>
+<li>Show both sides in the base case, not just "true for n = 1".</li>
+<li>The conclusion sentence is a mark. Write it every time.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Base, Assume, Add the next term, Aim at the target, Announce.</b></li>
+<li><b>Factor out (k + 1) first, expand last.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: the domino chain</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="indsum-pre"></div><div class="ctrls" id="indsum-ctrls"></div></div>
+<div>
+<canvas id="indsum-cv" aria-label="dominoes for n = 1 to N: fallen dominoes are proved, links show whether each inductive step holds"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>fallen: proved by induction</span><span><i style="background:var(--good)"></i>step k → k + 1 holds</span><span><i style="background:var(--bad)"></i>step fails, or P(n) false</span><span><i style="background:var(--amber)"></i>step being inspected</span></div>
+<div id="indsum-ro"></div>
+<div class="gdc" id="indsum-gdc"></div>
+<div id="indsum-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="indsum"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · Table</small></h3>
+<p>Check a formula before proving it, and use it afterwards for "hence" parts.</p>
+<h4>Evaluate a sum</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → Σ(. On most OS versions Σ( is on the second page: press <kbd>F6</kbd> (▷), then <kbd>F3</kbd>.</li>
+<li>Type the term, the variable, the start and the end: <span class="mono">Σ(X², X, 1, 10)</span>.</li>
+<li>Compare with the formula at the same n.</li>
+</ol>
+<div class="eg">Σ(X²,X,1,10)       = 385<br>10×11×21÷6         = 385  ✓</div>
+<h4>Smallest n for which the sum exceeds T</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>, Y1 = the proved formula with X for n.</li>
+<li>Scan for the first row above T. Quote that row and the one before.</li>
+</ol>
+<p class="small">If the Σ( key is not where described, look along the CALC F-key bar after pressing <kbd>F6</kbd> (▷).</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>LIST · TABLE</small></h3>
+<p>Check a formula before proving it, and use it afterwards for "hence" parts.</p>
+<h4>Evaluate a sum</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>STAT</kbd> (LIST) → MATH → 5:sum(.</li>
+<li>Then <kbd>2nd</kbd> <kbd>STAT</kbd> → OPS → 5:seq(. Type term, variable, start, end: <span class="mono">sum(seq(X², X, 1, 10))</span>.</li>
+<li>Compare with the formula at the same n.</li>
+</ol>
+<div class="eg">sum(seq(X²,X,1,10))  = 385<br>10*11*21/6           = 385  ✓</div>
+<h4>Smallest n for which the sum exceeds T</h4>
+<ol>
+<li><kbd>Y=</kbd>, Y1 = the proved formula with X for n. <kbd>2nd</kbd> <kbd>GRAPH</kbd> (TABLE).</li>
+<li>Scan for the first row above T. Quote that row and the one before.</li>
+</ol>
+<p class="small">Newer OS versions also have a summation template, <kbd>MATH</kbd> → 0:summation Σ(. If yours doesn't, sum(seq( always works.</p>
+</aside></div>
+</section>
+
+<section class="sec" id="s-inddiv" data-sec="inddiv" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.15</span>
+<h2>Induction: divisibility</h2>
+<p class="lede">Show f(1) is a multiple of d, then write f(k + 1) as a multiple of f(k) plus something that is clearly a multiple of d.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>The structure is the same as for series: base case, assume P(k), prove P(k + 1), conclude. What changes is the step. P(k) says <b>f(k) = dm for some integer m</b>. Giving the multiple a name is what makes the assumption usable.</p>
+<p>For powers, split one factor off: 7ᵏ⁺¹ = 7 × 7ᵏ. Then either <b>substitute</b> 7ᵏ = 6m + 1 from the assumption, or <b>add and subtract</b> to make f(k) appear: 7ᵏ⁺¹ − 1 = 7(7ᵏ − 1) + 6. Both routes end with d × (an integer).</p>
+<p>The model shows the second route numerically. f(k + 1) is rebuilt as (a × f(k)) + extra term. If f(k) is a multiple of d and so is the extra term, the sum is too, and the remainders stay at zero for ever. Raise d above what works and the remainder bars appear: the extra term is no longer a multiple of d, and the step breaks.</p>
+<p>For polynomials like n³ + 2n there's no power to split. Instead, look at <b>f(k + 1) − f(k)</b>: here 3k² + 3k + 3, a multiple of 3. Then f(k + 1) = f(k) + 3(k² + k + 1), a sum of multiples of 3.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">assume f(k) = dm, m ∈ ℤ</span></div>
+<div class="fx"><span class="f">aᵏ⁺¹ = a × aᵏ</span></div>
+<div class="fx"><span class="f">aᵏ⁺¹ + c = a(aᵏ + c) − c(a − 1)</span></div>
+<div class="fx"><span class="f">aᵏ⁺¹ − bᵏ⁺¹ = a(aᵏ − bᵏ) + (a − b)bᵏ</span></div>
+<div class="fx"><span class="f">(k + 1)³ = k³ + 3k² + 3k + 1</span></div>
+<div class="fx"><span class="f">a − b always divides aⁿ − bⁿ</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>"Assume divisible by d" with no letter gives nothing to substitute. Write f(k) = dm.</li>
+<li>3²⁽ᵏ⁺¹⁾ = 9 × 3²ᵏ, not 3 × 3²ᵏ.</li>
+<li>End with d × (bracket) and say the bracket is an integer.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Split one power off, substitute, factor out d.</b></li>
+<li><b>Polynomial? f(k + 1) − f(k).</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: does the remainder stay at zero?</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="inddiv-pre"></div><div class="ctrls" id="inddiv-ctrls"></div></div>
+<div>
+<canvas id="inddiv-cv" aria-label="remainder of f(n) on division by d for n = 1 to 12"></canvas>
+<div class="legend"><span><i style="background:var(--good)"></i>remainder 0</span><span><i style="background:var(--bad)"></i>non-zero remainder</span><span><i style="background:var(--amber)"></i>k and k + 1</span></div>
+<div id="inddiv-ro"></div>
+<div class="gdc" id="inddiv-gdc"></div>
+<div id="inddiv-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="inddiv"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Table</small></h3>
+<p>Before proving "d divides f(n)", check it and find the largest d.</p>
+<h4>Find the largest d</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>, Y1 = f(X), e.g. <span class="mono">7^X−1</span>. <kbd>F5</kbd> SET: Start 1, End 6. <kbd>F6</kbd> TABLE.</li>
+<li>The HCF of the first two or three values is the largest possible d.</li>
+<li>Check it: change Y1 to <span class="mono">(7^X−1)÷6</span>. Every value should be a whole number.</li>
+</ol>
+<div class="eg">Y1 = 7^X−1:  6, 48, 342, 2400<br>HCF(6, 48, 342) = 6<br>(7^X−1)÷6:  1, 8, 57, 400  ✓</div>
+<p class="warn">The screen shows 10 digits. Past about 10¹⁰, values switch to scientific notation and you can't tell whether they are whole. Keep End small.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Y= · TABLE</small></h3>
+<p>Before proving "d divides f(n)", check it and find the largest d.</p>
+<h4>Find the largest d</h4>
+<ol>
+<li><kbd>Y=</kbd>, Y1 = f(X), e.g. <span class="mono">7^X−1</span>. <kbd>2nd</kbd> <kbd>WINDOW</kbd>: TblStart = 1, ΔTbl = 1. <kbd>2nd</kbd> <kbd>GRAPH</kbd>.</li>
+<li>The HCF of the first two or three values is the largest possible d. <kbd>MATH</kbd> → NUM → gcd( finds it.</li>
+<li>Check it: change Y1 to <span class="mono">(7^X−1)/6</span>. Every value should be a whole number.</li>
+</ol>
+<div class="eg">Y1 = 7^X−1:  6, 48, 342, 2400<br>gcd(6,48) = 6, gcd(6,342) = 6<br>(7^X−1)/6:  1, 8, 57, 400  ✓</div>
+<p class="warn">The screen shows 10 digits. Past about 10¹⁰, values switch to scientific notation and you can't tell whether they are whole. Keep the table short.</p>
+<p class="small">gcd( takes two numbers at a time, so nest it for three: gcd(gcd(6,48),342).</p>
+</aside></div>
+</section>
+
+<section class="sec" id="s-indmore" data-sec="indmore" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.15</span>
+<h2>Induction: inequalities and derivatives</h2>
+<p class="lede">Start the chain where the statement starts being true, and in the step build an inequality one link at a time.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Induction doesn't have to start at 1. If a claim is "for all n ≥ 5", the <b>base case is P(5)</b> and the step assumes P(k) <b>for some k ≥ 5</b>. That condition on k is often what makes the step work.</p>
+<p>For an inequality, start from the left side of P(k + 1) and peel off the left side of P(k): 2ᵏ⁺¹ = 2 × 2ᵏ, or (k + 1)! = (k + 1) × k!. Use the assumption once to get &gt; something. Then show that something is ≥ the right side of P(k + 1), using k ≥ n₀. You are building a chain, <b>LHS &gt; … ≥ RHS</b>, never an equation.</p>
+<p>The model separates the two requirements. The <b>base</b> must be true, and the <b>step</b> must work from the base onwards. For 2ⁿ &gt; n², the step works for every k ≥ 3, but P(3) and P(4) are false, so the earliest valid base is 5. Drag n₀ to 1: P(1) is true, but the step can't carry it past 2. Small cases can hold and then fail.</p>
+<p>For an <b>nth derivative</b>, the step is: differentiate the formula for the kth derivative, and simplify it into the formula with k + 1. Don't differentiate the original function again, and don't just substitute k + 1 into the formula. That second one is assuming the answer.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">base: P(n₀); assume P(k), k ≥ n₀</span></div>
+<div class="fx"><span class="f">2ᵏ⁺¹ = 2 × 2ᵏ,   (k + 1)! = (k + 1) × k!</span></div>
+<div class="fx"><span class="f">a &gt; b and b ≥ c ⇒ a &gt; c</span></div>
+<div class="fx"><span class="f">f<sup>(k+1)</sup>(x) = d/dx [f<sup>(k)</sup>(x)]</span></div>
+<div class="fx"><span class="f">(uv)′ = u′v + uv′</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">d/dx (eˣ) = eˣ, so d/dx (e<sup>ax</sup>) = ae<sup>ax</sup></span><span class="bk">booklet</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>The base case is the starting value in the question, not n = 1.</li>
+<li>State k ≥ n₀ in the assumption. You'll need it.</li>
+<li>Keep &gt; and ≥ in the chain. One "=" where it doesn't belong breaks the proof.</li>
+<li>Derivatives: differentiate the k case, don't restart from f(x).</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Peel off, use P(k), compare, chain.</b></li>
+<li><b>Base = first n after the last failure.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: where can the chain start?</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="indmore-pre"></div><div class="ctrls" id="indmore-ctrls"></div></div>
+<div>
+<canvas id="indmore-cv" aria-label="left and right sides of the inequality for n = 1 to 12 on a log scale, with the base case marked"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>left side</span><span><i style="background:var(--amber)"></i>right side</span><span><i style="background:var(--good-soft)"></i>inequality true</span><span><i style="background:var(--bad-soft)"></i>false</span></div>
+<div id="indmore-ro"></div>
+<div class="gdc" id="indmore-gdc"></div>
+<div id="indmore-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="indmore"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Table · Run-Matrix</small></h3>
+<p>Find the base case with a table; check a derivative formula at a point.</p>
+<h4>Find n₀ for an inequality</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>. Y1 = left side, Y2 = right side, e.g. <span class="mono">X!</span> and <span class="mono">3^X</span>. The ! is in <kbd>OPTN</kbd> → <kbd>F6</kbd> (▷) → <kbd>F3</kbd> PROB → <kbd>F1</kbd> x!.</li>
+<li><kbd>F5</kbd> SET: Start 1, End 12. <kbd>F6</kbd> TABLE.</li>
+<li>Find the <em>last</em> row where Y1 ≤ Y2. n₀ is the row after it.</li>
+</ol>
+<div class="eg">X   Y1=X!   Y2=3^X<br>6   720     729    ✗<br>7   5040    2187   ✓   → n₀ = 7</div>
+<h4>Check an nth-derivative formula</h4>
+<ol>
+<li><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F3</kbd> d²/dx² gives a second derivative at a point.</li>
+<li>Compare with your formula at n = 2 and the same x.</li>
+</ol>
+<div class="eg">d²/dx²(Xe^(2X), 0.5)  = 16.30…<br>2¹(2 + 1)e¹           = 16.30…  ✓</div>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Y= · TABLE · MATH</small></h3>
+<p>Find the base case with a table; check a derivative formula at a point.</p>
+<h4>Find n₀ for an inequality</h4>
+<ol>
+<li><kbd>Y=</kbd>. Y1 = left side, Y2 = right side, e.g. <span class="mono">X!</span> and <span class="mono">3^X</span>. The ! is in <kbd>MATH</kbd> → PROB → 4:!.</li>
+<li><kbd>2nd</kbd> <kbd>WINDOW</kbd>: TblStart = 1, ΔTbl = 1. <kbd>2nd</kbd> <kbd>GRAPH</kbd>.</li>
+<li>Find the <em>last</em> row where Y1 ≤ Y2. n₀ is the row after it.</li>
+</ol>
+<div class="eg">X   Y1=X!   Y2=3^X<br>6   720     729    ✗<br>7   5040    2187   ✓   → n₀ = 7</div>
+<h4>Check a derivative formula</h4>
+<ol>
+<li><kbd>MATH</kbd> → 8:nDeriv( gives a first derivative at a point.</li>
+<li>Compare with your formula at n = 1. For a second derivative, enter your f′ formula as Y1 and use nDeriv(Y1, X, a).</li>
+</ol>
+<div class="eg">nDeriv(Xe^(2X),X,0.5) = 5.436…<br>2⁰(1 + 1)e¹          = 5.436…  ✓</div>
+<p class="small">nDeriv( cannot be nested, which is why the second derivative goes through Y1.</p>
+</aside></div>
+</section>
+
+<section class="sec" id="s-contra" data-sec="contra" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.15</span>
+<h2>Proof by contradiction</h2>
+<p class="lede">Assume the statement is false, follow the consequences, and reach something impossible. The assumption must be wrong.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Some statements are hard to prove head-on, because they say something <em>can't</em> happen: √2 is not a fraction, the primes never run out. Contradiction turns them round. <b>Suppose the opposite</b>, deduce carefully, and arrive at a statement that is both true and false. Since correct reasoning can't produce a falsehood from a truth, the supposition was false.</p>
+<p>For √2: suppose √2 = p/q in <b>lowest terms</b>. Squaring gives p² = 2q², so p² is even, so p is even (a small lemma, itself proved by contradiction). Writing p = 2m gives q² = 2m², so q is even too. Both even contradicts lowest terms. The phrase "no common factor" in the first line is what the whole proof hangs on.</p>
+<p>The model hunts for a fraction p/q with p² = dq². For d = 2 the gap |p² − 2q²| never drops below 1, however far you search. But a search is still only evidence. Set d = 4 and an exact fraction appears, so the proof <em>must</em> fail somewhere: it fails at "d | p² ⇒ d | p", since 4 | 2² but 4 ∤ 2. Try d = 8: √8 is irrational, yet that step still fails. The fix is to argue with the prime 2 instead.</p>
+<p>Euclid's proof that there are infinitely many primes works the same way. Suppose p₁, …, pₙ is the complete list, and build N = p₁p₂…pₙ + 1. Every pᵢ leaves remainder 1, so N has a prime factor that isn't on the list. N itself need not be prime.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">rational: p/q, p, q ∈ ℤ, q ≠ 0, no common factor</span></div>
+<div class="fx"><span class="f">n² even ⇒ n even (p prime: p | n² ⇒ p | n)</span></div>
+<div class="fx"><span class="f">even ≠ odd</span></div>
+<div class="fx"><span class="f">log<sub>a</sub> b = p/q ⇔ aᵖ = bᵠ</span></div>
+<div class="fx"><span class="f">N = p₁p₂…pₙ + 1 leaves remainder 1 on division by each pᵢ</span></div>
+<div class="fx"><span class="f">log<sub>a</sub> x = log<sub>b</sub> x ÷ log<sub>b</sub> a</span><span class="bk">booklet</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Leave out "no common factor" and there is no contradiction at the end.</li>
+<li>"N is prime" is false in general (30 031 = 59 × 509). Say N has a prime factor not on the list.</li>
+<li>Name the contradiction explicitly, then conclude.</li>
+<li>Decimals on a calculator are never a proof of irrationality.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Suppose not. Push until something is both true and false.</b></li>
+<li><b>√d: lowest terms → both divisible → contradiction.</b></li>
+<li><b>Logs: aᵖ = bᵠ, even = odd.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: hunting for √d = p/q</h3>
+<div class="lab-grid">
+<div class="lcol"><div class="ctrls" id="contra-ctrls"></div></div>
+<div>
+<canvas id="contra-cv" aria-label="gap between p squared and d times q squared for the best p at each q"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>gap of exactly 1</span><span><i style="background:var(--accent-soft)"></i>larger gap</span><span><i style="background:var(--bad)"></i>gap 0: an exact fraction</span><span><i style="background:var(--good)"></i>floor at 1</span></div>
+<div id="contra-ro"></div>
+<div class="gdc" id="contra-gdc"></div>
+<div id="contra-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="contra"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · Table</small></h3>
+<p>Contradiction proofs are written by hand. The calculator helps with the numerical parts, such as testing a Euclid number for factors.</p>
+<h4>Find the smallest prime factor of N</h4>
+<ol>
+<li><b>Run-Matrix</b>: compute N, e.g. <span class="mono">2×3×5×7×11×13+1</span> = 30031.</li>
+<li><kbd>MENU</kbd> → <b>Table</b>, Y1 = <span class="mono">30031÷X</span>. <kbd>F5</kbd> SET: Start 2, End 200. <kbd>F6</kbd> TABLE.</li>
+<li>Scroll for the first whole number. Its X is the smallest factor.</li>
+</ol>
+<div class="eg">Y1 = 30031÷X<br>X = 59:  Y1 = 509   → 30031 = 59 × 509</div>
+<p class="warn">√2 = 1.414213562 on screen proves nothing: every rational number also shows only 10 digits. Irrationality needs the argument.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Home · TABLE</small></h3>
+<p>Contradiction proofs are written by hand. The calculator helps with the numerical parts, such as testing a Euclid number for factors.</p>
+<h4>Find the smallest prime factor of N</h4>
+<ol>
+<li>Home screen: compute N, e.g. <span class="mono">2*3*5*7*11*13+1</span> = 30031.</li>
+<li><kbd>Y=</kbd>, Y1 = <span class="mono">30031/X</span>. <kbd>2nd</kbd> <kbd>WINDOW</kbd>: TblStart = 2, ΔTbl = 1. <kbd>2nd</kbd> <kbd>GRAPH</kbd>.</li>
+<li>Scroll for the first whole number. Its X is the smallest factor.</li>
+</ol>
+<div class="eg">Y1 = 30031/X<br>X = 59:  Y1 = 509   → 30031 = 59 × 509</div>
+<p class="warn">√2 = 1.414213562 on screen proves nothing: every rational number also shows only 10 digits. Irrationality needs the argument.</p>
+</aside></div>
+</section>
+
+<section class="sec" id="s-counter" data-sec="counter" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.15</span>
+<h2>Counterexamples</h2>
+<p class="lede">A "for all" claim needs a proof to be true, but only one case to be false. Find that case and check it fully.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Proof and disproof are lopsided. "n² + n + 41 is prime for every n" holds for n = 1 to 39, which is a lot of evidence and no proof at all. At <b>n = 40</b> it gives 1681 = 41². <b>One counterexample</b> is a complete disproof, and nothing more is needed.</p>
+<p>The reason is the logic of "for all". Its negation is "there exists at least one case where it fails". So a counterexample needs two checks: the case meets the claim's condition (n is a positive integer, p is prime, a &gt; b), and the conclusion fails for it.</p>
+<p>Where to look: <b>0 and 1</b>, <b>negative numbers</b> (squaring hides signs), <b>fractions between 0 and 1</b> (squaring makes them smaller), and the <b>constants in the formula</b>. For n² + n + c, put n = c − 1 or n = c, and every term shares a factor c.</p>
+<p>Watch the direction of a claim. "2ᵖ − 1 is prime ⇒ p is prime" is true. Its converse, "p is prime ⇒ 2ᵖ − 1 is prime", is false: p = 11 gives 2047 = 23 × 89. In the model, search further and watch a claim survive dozens of cases before it breaks, or never break at all within the range, which still proves nothing.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">not (for all x, P(x)) ⇔ there exists x with not P(x)</span></div>
+<div class="fx"><span class="f">n² + n + c at n = c − 1: (c − 1)c + c = c²</span></div>
+<div class="fx"><span class="f">2ᵃᵇ − 1 = (2ᵃ − 1)(2<sup>a(b−1)</sup> + … + 2ᵃ + 1)</span></div>
+<div class="fx"><span class="f">x² &gt; a² ⇔ x &gt; a or x &lt; −a</span></div>
+<div class="fx"><span class="f">0 &lt; x &lt; 1 ⇒ x² &lt; x</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Show the arithmetic. "n = 40 works" alone is not a counterexample.</li>
+<li>The case must satisfy the condition: a counterexample to "for every prime p" must use a prime.</li>
+<li>No counterexample found ≠ true. Prove it instead.</li>
+<li>Don't confuse a statement with its converse.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>One case kills "for all". Check condition ✓, conclusion ✗.</b></li>
+<li><b>Try 0, 1, negatives, ½, and the constant in the formula.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: hunting for a counterexample</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="counter-pre"></div><div class="ctrls" id="counter-ctrls"></div></div>
+<div>
+<canvas id="counter-cv" aria-label="grid of cases, each marked prime or not prime"></canvas>
+<div class="legend"><span><i style="background:var(--good)"></i>claim holds (prime)</span><span><i style="background:var(--bad)"></i>claim fails</span><span><i style="background:var(--amber)"></i>first counterexample</span></div>
+<div id="counter-ro"></div>
+<div class="gdc" id="counter-gdc"></div>
+<div id="counter-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="counter"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Table</small></h3>
+<p>Search for a counterexample, then confirm it by finding a factor.</p>
+<h4>Search, then test a factor</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>. Y1 = the expression, e.g. <span class="mono">X²+X+41</span>.</li>
+<li>Y2 = the expression divided by a suspected factor, e.g. <span class="mono">(X²+X+41)÷41</span>. <kbd>F5</kbd> SET: Start 1, End 45. <kbd>F6</kbd> TABLE.</li>
+<li>A whole number in Y2 (other than 1) means Y1 is not prime. Quote both numbers.</li>
+</ol>
+<div class="eg">X = 40:  Y1 = 1681,  Y2 = 41<br>so 1681 = 41 × 41, not prime</div>
+<h4>Factorise a single number</h4>
+<ol>
+<li>Y1 = <span class="mono">2047÷X</span>, Start 2. The first whole number gives the factor pair: X = 23, Y1 = 89.</li>
+</ol>
+<p class="warn">Guess the factor from the formula (41 in n² + n + 41) rather than dividing by everything.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Y= · TABLE</small></h3>
+<p>Search for a counterexample, then confirm it by finding a factor.</p>
+<h4>Search, then test a factor</h4>
+<ol>
+<li><kbd>Y=</kbd>. Y1 = the expression, e.g. <span class="mono">X²+X+41</span>.</li>
+<li>Y2 = the expression divided by a suspected factor, e.g. <span class="mono">(X²+X+41)/41</span>. <kbd>2nd</kbd> <kbd>WINDOW</kbd>: TblStart = 1, ΔTbl = 1. <kbd>2nd</kbd> <kbd>GRAPH</kbd>.</li>
+<li>A whole number in Y2 (other than 1) means Y1 is not prime. Quote both numbers.</li>
+</ol>
+<div class="eg">X = 40:  Y1 = 1681,  Y2 = 41<br>so 1681 = 41 × 41, not prime</div>
+<h4>Factorise a single number</h4>
+<ol>
+<li>Y1 = <span class="mono">2047/X</span>, TblStart = 2. The first whole number gives the factor pair: X = 23, Y1 = 89.</li>
+</ol>
+<p class="warn">Guess the factor from the formula (41 in n² + n + 41) rather than dividing by everything.</p>
+</aside></div>
+</section>
+
+<section class="sec" id="s-drill" data-sec="drill" hidden>
+<header class="sec-head">
+<span class="ref">Mixed</span>
+<h2>Mixed drill</h2>
+<p class="lede">Questions from every proof topic in random order. Part of the skill is recognising which method a question wants before you start.</p>
+</header>
+<div class="practice" data-sec="drill"></div>
+<div class="panel prose">
+<h3>Exam habits that save marks</h3>
+<ul>
+<li>Start every direct proof with "Let n be an integer" or "Let the odd number be 2n + 1, n ∈ ℤ".</li>
+<li>In induction, write P(k + 1) as a target before you start the step. You'll know what to factorise.</li>
+<li>Always write the induction conclusion sentence. It is worth a mark, and it is only awarded if the base and step are there.</li>
+<li>In contradiction, write the assumption in full, including "no common factor" or "this is the complete list".</li>
+<li>For a counterexample, show the arithmetic and say "so the statement is false".</li>
+<li>Prove identities from one side to the other. Never simplify both sides at once.</li>
+</ul>
+</div>
+</section>
+
+<section class="sec" id="s-casio" data-sec="casio" hidden>
+<header class="sec-head">
+<span class="ref"><span data-calc="casio">fx-CG50 AU</span><span data-calc="ti84">TI-84 Plus CE</span></span>
+<h2>Calculator cheat sheet</h2>
+<p class="lede">The calculator never writes a proof, but it tests a claim before you prove it, finds base cases and counterexamples, and answers the "hence" parts. Each topic page also has its own calculator panel.</p>
+</header>
+<div class="panel" data-calc="casio">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP): Input/Output = <b>Math/Math</b>, so fractions and powers display exactly.</li>
+<li>Practise one Table with two functions (Y1 and Y2) so the setup is quick.</li>
+<li>Proof questions are mostly on Paper 1. On Paper 2, expect a "check" or "hence" part that needs a table or a sum.</li>
+</ul>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Table of values</td><td><b>Table</b> → <kbd>F5</kbd> SET, <kbd>F6</kbd> TABLE</td><td>Y1, Y2 in X; Start, End, Step</td></tr>
+<tr><td>Sum of a series</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → (<kbd>F6</kbd> ▷) Σ(</td><td>term, X, start, end</td></tr>
+<tr><td>Factorial</td><td><kbd>OPTN</kbd> → <kbd>F6</kbd> (▷) → <kbd>F3</kbd> PROB → <kbd>F1</kbd> x!</td><td>after the number</td></tr>
+<tr><td>Divisibility test</td><td><b>Table</b>, Y1 = f(X)÷d</td><td>look for decimals</td></tr>
+<tr><td>Derivative at a point</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx or <kbd>F3</kbd> d²/dx²</td><td>f(X), x-value</td></tr>
+<tr><td>Fraction ↔ decimal</td><td><kbd>S⇔D</kbd></td><td>Run-Matrix output</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="casio">
+<h3>Which tool for which question?</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>"Find the largest integer that always divides…"</td><td>Table of f(X), HCF of the first values</td></tr>
+<tr><td>"Hence find Σ from a to b"</td><td>Formula S(b) − S(a − 1), check with Σ(</td></tr>
+<tr><td>"Smallest n such that the sum exceeds…"</td><td>Table of the formula</td></tr>
+<tr><td>Base case n₀ for an inequality</td><td>Table of Y1 and Y2, last failure + 1</td></tr>
+<tr><td>A counterexample to "… is prime"</td><td>Table with Y2 = Y1 ÷ suspected factor</td></tr>
+<tr><td>Check an nth-derivative formula</td><td>d/dx or d²/dx² at a point</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Before the exam</h3>
+<div class="prose">
+<ul>
+<li><kbd>MODE</kbd>: <b>FUNCTION</b>, <b>MATHPRINT</b>, so fractions and powers display exactly.</li>
+<li>Practise one TABLE with two functions (Y1 and Y2) so the setup is quick.</li>
+<li>Proof questions are mostly on Paper 1. On Paper 2, expect a "check" or "hence" part that needs a table or a sum.</li>
+</ul>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Menu paths</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Table of values</td><td><kbd>Y=</kbd>, <kbd>2nd</kbd> <kbd>WINDOW</kbd> TBLSET, <kbd>2nd</kbd> <kbd>GRAPH</kbd> TABLE</td><td>Y1, Y2 in X; TblStart, ΔTbl</td></tr>
+<tr><td>Sum of a series</td><td><kbd>2nd</kbd> <kbd>STAT</kbd> → MATH → 5:sum( and OPS → 5:seq(</td><td>sum(seq(term, X, start, end))</td></tr>
+<tr><td>Factorial</td><td><kbd>MATH</kbd> → PROB → 4:!</td><td>after the number</td></tr>
+<tr><td>HCF</td><td><kbd>MATH</kbd> → NUM → gcd(</td><td>two numbers</td></tr>
+<tr><td>Derivative at a point</td><td><kbd>MATH</kbd> → 8:nDeriv(</td><td>f(X), X, x-value</td></tr>
+<tr><td>Decimal → fraction</td><td><kbd>MATH</kbd> → 1:►Frac</td><td>Home screen answer</td></tr>
+</table>
+</div>
+</div>
+<div class="panel" data-calc="ti84">
+<h3>Which tool for which question?</h3>
+<div class="tablewrap">
+<table class="cheat">
+<tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>"Find the largest integer that always divides…"</td><td>TABLE of f(X), gcd( of the first values</td></tr>
+<tr><td>"Hence find Σ from a to b"</td><td>Formula S(b) − S(a − 1), check with sum(seq(</td></tr>
+<tr><td>"Smallest n such that the sum exceeds…"</td><td>TABLE of the formula</td></tr>
+<tr><td>Base case n₀ for an inequality</td><td>TABLE of Y1 and Y2, last failure + 1</td></tr>
+<tr><td>A counterexample to "… is prime"</td><td>TABLE with Y2 = Y1 / suspected factor</td></tr>
+<tr><td>Check an nth-derivative formula</td><td>nDeriv( at a point</td></tr>
+</table>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+<script src="../shared/core.js"></script>
+<script src="learn.js"></script>
+<script src="app.js"></script>
+<script src="../shared/learn-render.js"></script>
+<script src="../shared/boot.js"></script>
+</body>
+</html>
