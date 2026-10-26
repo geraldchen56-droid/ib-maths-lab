@@ -108,6 +108,8 @@ The AA HL syllabus, for planning:
 
 To add more topics to an existing unit (for example the rest of Calculus), add sections to that unit's folder rather than a new folder, and keep section ids unique within the unit.
 
+Every page loads Vercel Web Analytics with two script lines just before `</head>` (`window.va` stub plus `/_vercel/insights/script.js`). Copy them into any new page, or its visits won't be counted.
+
 To add a unit: create a folder (for example `calculus/`) with `index.html`, `app.js` and `learn.js` modelled on `vectors/`, add it to the `UNITS` list in `shared/core.js` and a card in the root `index.html`. The unit page's `<body>` needs `data-unit="calculus"`, and its scripts load in this order: `../shared/core.js`, `learn.js`, `app.js`, `../shared/learn-render.js`, `../shared/boot.js`. `tools/check-marks.js` finds any folder that has a `learn.js`.
 
 ## 6. Checks before every push
