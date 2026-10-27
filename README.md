@@ -30,7 +30,7 @@ Then open http://localhost:8000. Refresh after each edit; no restart is needed.
 ## 3. What each file does
 
 ```
-index.html            the course hub (links to each unit; old /#topic links redirect to probability/)
+index.html            the course hub: dark topic browser (index, line-art topic plates, details panel). Topic data is a TOPICS array in the page; add a row and an ART drawing when a topic is added. Old /#topic links redirect to probability/
 shared/               code every unit uses
   core.js             helpers, the calculator switch (C, G, K, M, cv), the window.LAB namespace, the UNITS list
   boot.js             navigation, scoring, the practice engine
