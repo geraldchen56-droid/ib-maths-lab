@@ -92,7 +92,7 @@ Use `exact: true` for whole-number answers (counting). Otherwise answers within 
 
 ## 5. Adding a new unit (the rest of the course)
 
-Build each unit in a **fresh Claude chat** and ask it to use the **ib-maths-topic-lab** skill. A good first message: *"Use the ib-maths-topic-lab skill to add Calculus to my IB Maths Lab."* The skill has the full template, the checks, and the deploy steps, so every unit matches this one. One chat per unit keeps each conversation short, which makes your usage go much further.
+Build each unit in a **fresh chat** using the **ib-maths-topic-lab** skill. A good first message: *"Use the ib-maths-topic-lab skill to add Calculus to my IB Maths Lab."* The skill has the full template, the checks, and the deploy steps, so every unit matches this one. One chat per unit keeps each conversation short, which makes your usage go much further.
 
 The AA HL syllabus, for planning:
 
