@@ -16,7 +16,7 @@ edit files  →  git push to main  →  Vercel redeploys automatically (≈20 se
 
 - Every push to `main` goes live at the URL above.
 - Every push to any other branch gets its own preview URL (shown in the Vercel dashboard). Use a branch when you want to check something before it goes live.
-- The old address, ib-aahl-probability-lab.vercel.app, permanently redirects here (see `vercel.json`); keep that domain attached to the project so old links keep working.
+- The old address, ib-aahl-probability-lab.vercel.app, redirects here (a one-line script at the top of each page); keep that domain attached to the project so old links keep working.
 - To undo a bad deploy, open Vercel → project **ib-aahl-lab** → Deployments, then use **Promote** or **Instant Rollback** on the last good one.
 
 ## 2. Preview on your own computer
