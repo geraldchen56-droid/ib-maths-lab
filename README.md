@@ -1,6 +1,6 @@
-# IB Maths Lab
+# IB AA HL Lab
 
-Interactive study site for IB Mathematics: Analysis & Approaches HL. Live at **https://ib-aahl-probability-lab.vercel.app**.
+Interactive study site for IB Mathematics: Analysis & Approaches HL. Live at **https://ib-aahl-lab.vercel.app**.
 
 The home page is a **course hub**. Units so far: **Number & algebra**, which so far covers proof (SL 1.6, AHL 1.15: direct proof, induction, contradiction, counterexamples), **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14), **Vectors** (AHL 3.12–3.16, with rotatable 3D models) and **Calculus**, which so far covers differential equations (AHL 5.18, with live slope-field models). Every topic page follows the same pattern, so new units can be added in the same style.
 
@@ -16,7 +16,8 @@ edit files  →  git push to main  →  Vercel redeploys automatically (≈20 se
 
 - Every push to `main` goes live at the URL above.
 - Every push to any other branch gets its own preview URL (shown in the Vercel dashboard). Use a branch when you want to check something before it goes live.
-- To undo a bad deploy, open Vercel → project **ib-aahl-probability-lab** → Deployments, then use **Promote** or **Instant Rollback** on the last good one.
+- The old address, ib-aahl-probability-lab.vercel.app, permanently redirects here (see `vercel.json`); keep that domain attached to the project so old links keep working.
+- To undo a bad deploy, open Vercel → project **ib-aahl-lab** → Deployments, then use **Promote** or **Instant Rollback** on the last good one.
 
 ## 2. Preview on your own computer
 
@@ -92,7 +93,7 @@ Use `exact: true` for whole-number answers (counting). Otherwise answers within 
 
 ## 5. Adding a new unit (the rest of the course)
 
-Build each unit in a **fresh chat** using the **ib-maths-topic-lab** skill. A good first message: *"Use the ib-maths-topic-lab skill to add Calculus to my IB Maths Lab."* The skill has the full template, the checks, and the deploy steps, so every unit matches this one. One chat per unit keeps each conversation short, which makes your usage go much further.
+Build each unit in a **fresh chat** using the **ib-maths-topic-lab** skill. A good first message: *"Use the ib-maths-topic-lab skill to add Calculus to my IB AA HL Lab."* The skill has the full template, the checks, and the deploy steps, so every unit matches this one. One chat per unit keeps each conversation short, which makes your usage go much further.
 
 The AA HL syllabus, for planning:
 
