@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<script>if(location.hostname==="ib-aahl-probability-lab.vercel.app")location.replace("https://ib-aahl-lab.vercel.app"+location.pathname+location.search+location.hash);</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="More sites built by Gerald Chen: IB revision tools, trading-interview games, option pricing, game theory and a behavioural economics blog.">
+<meta name="theme-color" content="#0A0D16">
+<title>More I've built · IB AA HL Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../shared/styles.css">
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+:root{--hub-bg:#0A0D16;--plate:#10141F;--rule:#1D2333;--dim:#5E677E}
+body.more{margin:0;background:var(--hub-bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-family:var(--f-body)}
+body.more::before{content:"";position:fixed;inset:0;pointer-events:none;
+background:radial-gradient(55% 45% at 50% 0%,rgba(126,151,255,.08),transparent 70%)}
+.mw{position:relative;max-width:1180px;margin:0 auto;
+padding:max(18px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) 64px max(24px,env(safe-area-inset-left))}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.mark{display:flex;align-items:baseline;gap:12px;text-decoration:none;color:var(--ink)}
+.mark b{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:-.01em}
+.mark b i{color:var(--accent)}
+.mark span{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.back{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap}
+.back:hover{color:var(--ink)}
+.intro{padding:64px 0 40px;max-width:720px}
+.kick{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-.02em;margin:0}
+h1 i{color:var(--accent)}
+.intro p{color:var(--muted);font-size:16px;line-height:1.6;margin:20px 0 0;max-width:600px}
+h2{font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+margin:40px 0 16px;display:flex;align-items:center;gap:14px}
+h2::after{content:"";flex:1;height:1px;background:var(--rule)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.card{display:flex;flex-direction:column;background:var(--plate);border:1px solid var(--rule);border-radius:14px;overflow:hidden;
+text-decoration:none;color:var(--ink);transition:border-color .25s,transform .25s}
+.card:hover,.card:focus-visible{border-color:var(--accent);transform:translateY(-3px)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.shot{aspect-ratio:16/10;background:#0D111B;overflow:hidden;border-bottom:1px solid var(--rule)}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;opacity:.88;transition:opacity .3s,transform .5s}
+.card:hover .shot img{opacity:1;transform:scale(1.03)}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.kind{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.name{font-family:var(--f-display);font-size:23px;line-height:1.15;letter-spacing:-.01em;margin:0}
+.what{color:var(--muted);font-size:14px;line-height:1.55;margin:0;flex:1}
+.go{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:6px}
+.go svg{width:14px;height:14px;transition:transform .25s}
+.card:hover .go svg{transform:translateX(3px)}
+.all{margin-top:56px;padding:32px;border:1px solid var(--rule);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--plate)}
+.all p{margin:0;font-family:var(--f-display);font-size:22px;line-height:1.3;max-width:560px}
+.all p span{display:block;font-family:var(--f-body);font-size:14px;color:var(--muted);margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--accent-ink);text-decoration:none;
+padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;white-space:nowrap}
+.btn:hover{filter:brightness(1.08)}
+.btn svg{width:14px;height:14px}
+@media (max-width:600px){.intro{padding:40px 0 24px}.mark span{display:none}.all{padding:22px}}
+@media (prefers-reduced-motion:reduce){.card,.shot img,.go svg{transition:none}.card:hover{transform:none}.card:hover .shot img{transform:none}}
+</style>
+</head>
+<body class="more">
+<div class="mw">
+<header class="bar">
+<a class="mark" href="../"><b>IB AA HL <i>Lab</i></b><span>Analysis &amp; Approaches · Higher Level</span></a>
+<a class="back" href="../">← Back to topics</a>
+</header>
+
+<section class="intro">
+<p class="kick">More from Gerald</p>
+<h1>If you liked what I've built here, <i>here's more.</i></h1>
+<p>I'm Gerald, an IB student who builds small sites to understand things properly. Some are revision tools like this one; others are about markets, game theory and why people make irrational choices.</p>
+</section>
+
+<h2>More for IB students</h2>
+<div class="grid" id="ib"></div>
+<h2>Everything else</h2>
+<div class="grid" id="rest"></div>
+
+<div class="all">
+<p>Want the story behind each one?<span>Why I built it, what it does, and a preview of every project.</span></p>
+<a class="btn" href="https://geralds-projects.vercel.app/">See all my projects<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</div>
+</div>
+
+<script>
+/* Fallback list, used only if the live list from the projects page can't load. */
+window.PROJECTS_FALLBACK=[
+{slug:"nuclear",name:"IB Physics Nuclear Summary",kind:"IB Physics SL revision",url:"https://ib-physics-nuclear.vercel.app/",what:"Mass defect, binding energy and the BEN curve, with worked calculation methods."},
+{slug:"ib-planner",name:"IB Planner",kind:"Study planner",url:"https://ib-planner-sooty.vercel.app/",what:"A weekly IB timetable that locks in your classes and lets you plan study around them."},
+{slug:"study-tracker",name:"Study Tracker",kind:"Study hub",url:"https://gerald-study-tracker.vercel.app/",what:"One hub for everything study-related."},
+{slug:"edge-lab",name:"Edge Lab",kind:"Trading-interview games",url:"https://edgelab-games.vercel.app/",what:"Interactive games for trading-interview prep: market making, arbitrage, Bayes and Kelly sizing."},
+{slug:"root-t",name:"Root T",kind:"Option pricing",url:"https://root-t.vercel.app/",what:"Prices a European call with 100,000 random simulations and compares it with Black–Scholes."},
+{slug:"equilibrium",name:"Equilibrium",kind:"Game theory course",url:"https://equilibrium-lab.vercel.app/",what:"An interactive game theory course where every game is solved live."},
+{slug:"irrational-margin",name:"The Irrational Margin",kind:"Behavioural economics blog",url:"https://eco-psych-blog-app.vercel.app/",what:"Essays on behavioural economics, where psychology meets money."},
+{slug:"mahjong",name:"Mahjong Crash Course",kind:"Mahjong, from scratch",url:"https://mahjong-crash-course.vercel.app/",what:"Chinese and Hong Kong mahjong from scratch, with a tile explorer and hand checker."},
+{slug:"healing-pages",name:"The Healing Pages",kind:"Journal",url:"https://the-healing-pages.vercel.app/",what:"A daily journal with streaks, a calendar and a recite mode."}];
+</script>
+<script src="https://geralds-projects.vercel.app/assets/projects.js" onerror="void 0"></script>
+<script>
+(function(){
+var HOME='https://geralds-projects.vercel.app';
+var SELF='ib-aahl-lab';
+var IB=['nuclear','ib-planner','study-tracker'];
+var list=(window.PROJECTS&&window.PROJECTS.length?window.PROJECTS:window.PROJECTS_FALLBACK)
+  .filter(function(p){return p&&p.slug!==SELF&&p.url&&!/probability/i.test(p.slug);});
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function card(p){
+  return '<a class="card" href="'+esc(p.url)+'" target="_blank" rel="noopener" data-slug="'+esc(p.slug)+'">'+
+  '<div class="shot"><img src="'+HOME+'/media/'+encodeURIComponent(p.slug)+'.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>'+
+  '<div class="body"><div class="kind">'+esc(p.kind)+'</div><h3 class="name">'+esc(p.name)+'</h3>'+
+  '<p class="what">'+esc(p.what)+'</p>'+
+  '<span class="go">Open site<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div></a>';
+}
+var ib=list.filter(function(p){return IB.indexOf(p.slug)>-1;}).sort(function(a,b){return IB.indexOf(a.slug)-IB.indexOf(b.slug);});
+var rest=list.filter(function(p){return IB.indexOf(p.slug)<0;});
+document.getElementById('ib').innerHTML=ib.map(card).join('');
+document.getElementById('rest').innerHTML=rest.map(card).join('');
+if(!ib.length){var h=document.querySelector('h2');h.style.display='none';document.getElementById('ib').style.display='none';}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.card');if(a&&window.va)window.va('event',{name:'more-project-click',data:{project:a.dataset.slug}});});
+})();
+</script>
+</body>
+</html>

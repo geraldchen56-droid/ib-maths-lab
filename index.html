@@ -41,6 +41,8 @@ padding:max(18px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) 
 color:var(--dim);padding:6px 10px;border-radius:999px;white-space:nowrap;transition:color .2s,background .2s}
 .filters button:hover{color:var(--ink)}
 .filters button[aria-pressed="true"]{color:var(--ink);background:var(--faint)}
+.morelink{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;white-space:nowrap;padding:6px 0 6px 10px;flex-shrink:0}
+.morelink:hover{color:var(--ink)}
 /* three columns */
 .main{display:grid;grid-template-columns:250px minmax(0,1fr) 330px;gap:32px;min-height:0;padding-top:22px}
 /* index */
@@ -145,6 +147,7 @@ body.hub{overflow:auto}
 <header class="bar">
 <a class="mark" href="./"><b>IB AA HL <i>Lab</i></b><span>Analysis &amp; Approaches · Higher Level</span></a>
 <nav class="filters" id="filters" aria-label="Filter by unit"></nav>
+<a class="morelink" href="more/">More I've built →</a>
 </header>
 <div class="main">
 <nav class="index" id="index" aria-label="Topic index"></nav>
