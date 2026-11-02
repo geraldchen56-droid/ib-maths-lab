@@ -4,7 +4,7 @@
 <script>if(location.hostname==="ib-aahl-probability-lab.vercel.app")location.replace("https://ib-aahl-lab.vercel.app"+location.pathname+location.search+location.hash);</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Interactive guide to IB Maths AA HL calculus, starting with differential equations: modelling, Euler's method, separation of variables, homogeneous equations and integrating factors, with live slope fields, worked exam questions, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
+<meta name="description" content="Interactive guide to IB Maths AA HL calculus: limits, first principles, l'Hôpital, differentiation rules, tangents, stationary points, optimisation, implicit differentiation, related rates, integration techniques, areas, volumes of revolution, kinematics, Maclaurin series and differential equations, with live models, worked exam questions, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Calculus · IB AA HL Lab</title>
 <script>try{document.documentElement.dataset.calc=localStorage.getItem('ibprob-calc')==='ti84'?'ti84':'casio';}catch(e){document.documentElement.dataset.calc='casio';}</script>
@@ -21,7 +21,7 @@
 <div>
 <div class="eyebrow"><a class="crumb" href="../">IB AA HL Lab</a> · Topic 5 · Calculus</div>
 <h1>Calculus <em>Lab</em></h1>
-<p class="sub">Starting with differential equations (AHL 5.18): setting up a model, Euler's method, separation of variables, homogeneous equations and integrating factors. Each topic has the core reasoning, the formulas, a live slope-field model, worked exam questions, and unlimited practice with full working.</p>
+<p class="sub">The whole of Topic 5, SL and HL: limits and first principles, differentiation, curve sketching, optimisation, related rates, integration techniques, areas and volumes, kinematics, Maclaurin series and differential equations. Each topic has the core reasoning, the formulas, a live model, worked exam questions, and unlimited practice with full working.</p>
 </div>
 <div class="top-side">
 <div class="calcpick" role="group" aria-label="Calculator for keystroke instructions">
@@ -42,6 +42,22 @@
 <nav class="rail" id="rail" aria-label="Topics">
 <div class="grp">Start</div>
 <button class="navb" data-go="overview"><span class="r">map</span><span class="n">Overview</span><span class="s"></span></button>
+<div class="grp">Differentiation</div>
+<button class="navb" data-go="limits"><span class="r">SL 5.1</span><span class="n">Limits &amp; first principles</span><span class="s" data-s="limits"></span></button>
+<button class="navb" data-go="lhop"><span class="r">HL 5.13</span><span class="n">L'Hôpital's rule</span><span class="s" data-s="lhop"></span></button>
+<button class="navb" data-go="diff"><span class="r">SL 5.6</span><span class="n">Differentiation rules</span><span class="s" data-s="diff"></span></button>
+<button class="navb" data-go="tangent"><span class="r">SL 5.4</span><span class="n">Tangents &amp; normals</span><span class="s" data-s="tangent"></span></button>
+<button class="navb" data-go="curve"><span class="r">SL 5.8</span><span class="n">Stationary points &amp; inflexion</span><span class="s" data-s="curve"></span></button>
+<button class="navb" data-go="optim"><span class="r">SL 5.8</span><span class="n">Optimisation</span><span class="s" data-s="optim"></span></button>
+<button class="navb" data-go="implicit"><span class="r">HL 5.14</span><span class="n">Implicit &amp; related rates</span><span class="s" data-s="implicit"></span></button>
+<div class="grp">Integration</div>
+<button class="navb" data-go="integ"><span class="r">SL 5.10</span><span class="n">Integration</span><span class="s" data-s="integ"></span></button>
+<button class="navb" data-go="tech"><span class="r">HL 5.16</span><span class="n">Integration techniques</span><span class="s" data-s="tech"></span></button>
+<button class="navb" data-go="area"><span class="r">SL 5.11</span><span class="n">Areas</span><span class="s" data-s="area"></span></button>
+<button class="navb" data-go="volume"><span class="r">HL 5.17</span><span class="n">Volumes of revolution</span><span class="s" data-s="volume"></span></button>
+<button class="navb" data-go="kinem"><span class="r">SL 5.9</span><span class="n">Kinematics</span><span class="s" data-s="kinem"></span></button>
+<div class="grp">Series</div>
+<button class="navb" data-go="maclaurin"><span class="r">HL 5.19</span><span class="n">Maclaurin series</span><span class="s" data-s="maclaurin"></span></button>
 <div class="grp">Differential equations</div>
 <button class="navb" data-go="euler"><span class="r">HL 5.18</span><span class="n">Modelling &amp; Euler</span><span class="s" data-s="euler"></span></button>
 <button class="navb" data-go="sep"><span class="r">HL 5.18</span><span class="n">Separation of variables</span><span class="s" data-s="sep"></span></button>
@@ -55,35 +71,1082 @@
 <section class="sec" id="s-overview" data-sec="overview">
 <header class="sec-head">
 <span class="ref">Map</span>
-<h2>How the topic fits together</h2>
-<p class="lede">A differential equation tells you the <em>slope</em> of the unknown curve at every point, not the curve itself. Solving it means rebuilding the curve from its slopes. Euler's method does this numerically, one short step at a time. The other three methods do it exactly, and each one only works on a particular shape of equation. Most of the skill is recognising the shape.</p>
+<h2>How calculus fits together</h2>
+<p class="lede">Calculus has two halves joined at the middle. <em>Differentiation</em> finds the rate of change at a point: the gradient of the tangent. <em>Integration</em> adds up thin strips: an area, a volume, a distance. The fundamental theorem says each undoes the other. Every topic here is one of those two ideas applied to a different question, and most of the exam skill is recognising which one a question wants.</p>
 </header>
 <div class="cards" id="cards"></div>
 <div class="theory">
 <div class="panel">
-<h3>Which method does the question want?</h3>
-<p class="small" style="margin-bottom:12px">Read the equation and the command word. Take the first line that fits.</p>
+<h3>Which topic does the question want?</h3>
+<p class="small" style="margin-bottom:12px">Read the command words. Take the first line that fits.</p>
 <div class="decide">
-<div><span>"Rate is proportional to…", "write down a differential equation"</span><b>Modelling → 5.18</b></div>
-<div><span>"Use Euler's method with step length h"</span><b>Euler → 5.18</b></div>
-<div><span>dy/dx factorises as g(x) × h(y)</span><b>Separate → 5.18</b></div>
-<div><span>Every term has the same total degree, or "use y = vx"</span><b>Homogeneous → 5.18</b></div>
-<div><span>y and dy/dx appear only to the first power: dy/dx + P(x)y = Q(x)</span><b>Integrating factor → 5.18</b></div>
-<div><span>None of these shapes, or "estimate"</span><b>Euler → 5.18</b></div>
+<div><span>"From first principles", continuous, differentiable at a join</span><b>Limits → 5.1, 5.12</b></div>
+<div><span>A limit that comes out 0/0 or ∞/∞</span><b>L'Hôpital → 5.13 (or Maclaurin)</b></div>
+<div><span>"Differentiate", "find f′(x)", products, quotients, compositions</span><b>Rules → 5.6, 5.15</b></div>
+<div><span>Tangent, normal, "increasing for"</span><b>Tangents → 5.2, 5.4</b></div>
+<div><span>Stationary points, nature, inflexion, concave</span><b>Curve → 5.7, 5.8</b></div>
+<div><span>"Maximum volume", "least cost", "minimum distance"</span><b>Optimisation → 5.8</b></div>
+<div><span>An equation in x and y, or "rate at which … is increasing"</span><b>Implicit &amp; related rates → 5.14</b></div>
+<div><span>"Find ∫", "given f′(x), find f"</span><b>Integration → 5.10</b></div>
+<div><span>"By parts", "use the substitution", partial fractions</span><b>Techniques → 5.15, 5.16</b></div>
+<div><span>"Area of the region", "enclosed by"</span><b>Areas → 5.11, 5.17</b></div>
+<div><span>"Rotated 2π about the … axis"</span><b>Volumes → 5.17</b></div>
+<div><span>Velocity, acceleration, displacement, distance</span><b>Kinematics → 5.9</b></div>
+<div><span>"Maclaurin series", "first three terms", approximate</span><b>Maclaurin → 5.19</b></div>
+<div><span>dy/dx given as a formula in x and y</span><b>Differential equations → 5.18</b></div>
 </div>
-<p class="small" style="margin-top:12px">Some equations fit two shapes. dy/dx = (x + y)/x is homogeneous <em>and</em> linear, so either method works. Use the one the question names.</p>
 </div>
 <div class="panel prose">
 <h3>How to use each topic page</h3>
 <ol>
 <li><b>Read the idea first.</b> Each page starts with why the method works.</li>
-<li><b>Break the model.</b> Every page has a slope field. Drag the starting point, the step size or the constant, and watch which curve you land on.</li>
+<li><b>Break the model.</b> Every page has something to drag: a chord sliding into a tangent, a box being folded, a slope field. Watch what changes.</li>
 <li><b>Do five practice questions.</b> They are randomised. Answer to 3 significant figures; fractions like 4/3 are accepted.</li>
 <li><b>Read the working even when you're right.</b> The shorthand line at the bottom is the part to memorise.</li>
 </ol>
-<p class="small">Formulas marked <span class="bk">booklet</span> are in the IB formula booklet. More calculus topics (limits, differentiation, integration, kinematics, Maclaurin series) will be added to this unit.</p>
+<p class="small">Formulas marked <span class="bk">booklet</span> are in the IB formula booklet. Topics marked SL are on both papers for SL and HL; HL topics are AHL only.</p>
 </div>
 </div>
+</section>
+<section class="sec" id="s-limits" data-sec="limits" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.1 · AHL 5.12</span>
+<h2>Limits, continuity and first principles</h2>
+<p class="lede">The derivative is the limit of chord gradients as the second point slides into the first. Continuity and differentiability are about whether that limit exists.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>A <b>limit</b> is the value a function approaches, not necessarily the value it takes. (x² − 9) ÷ (x − 3) is undefined at x = 3, but it equals x + 3 everywhere else, so its limit at 3 is 6. When substitution gives 0/0, there is a common factor to cancel.</p>
+<p>The gradient of the chord from (a, f(a)) to (a + h, f(a + h)) is <b>(f(a + h) − f(a)) ÷ h</b>. As h shrinks the chord swings round into the tangent, so the derivative is defined as <b>f′(a) = lim<sub>h→0</sub> (f(a + h) − f(a)) ÷ h</b>. "From first principles" means using this definition: expand, cancel the f(a) terms, divide by h, then let h → 0.</p>
+<p>f is <b>continuous</b> at a if you can draw through x = a without lifting the pen: f(a) exists and the limits from both sides equal it. f is <b>differentiable</b> at a if the chord gradient has the same limit from both sides. Differentiable implies continuous, but not the other way: |x| is continuous at 0 with a corner, so the left and right gradients are −1 and 1.</p>
+<p>In the model, slide h towards 0 from both sides and watch the blue chord turn into the green tangent. Pick |x| with a = 0 to see the two one-sided chords refuse to agree.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">f′(x) = lim<sub>h→0</sub> (f(x + h) − f(x)) ÷ h</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">chord gradient = (f(a + h) − f(a)) ÷ h</span></div>
+<div class="fx"><span class="f">continuous at a: lim<sub>x→a⁻</sub> f = lim<sub>x→a⁺</sub> f = f(a)</span></div>
+<div class="fx"><span class="f">differentiable at a: continuous, and left and right gradients agree</span></div>
+<div class="fx"><span class="f">(a + h)³ = a³ + 3a²h + 3ah² + h³</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Using the power rule when "first principles" is asked scores 0.</li>
+<li>Divide by h before letting h → 0, never after.</li>
+<li>Matching gradients is not enough; check continuity too.</li>
+<li>A calculator's d/dx at a corner gives an average, not a derivative.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Expand, cancel, divide by h, then h → 0.</b></li>
+<li><b>0/0 means a common factor: factorise.</b></li>
+<li><b>Joins: values match (continuous), slopes match (differentiable).</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: chords become tangents</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="limits-pre"></div><div class="ctrls" id="limits-ctrls"></div></div>
+<div>
+<canvas id="limits-cv" aria-label="a curve with a chord through two points and the tangent at the first"></canvas>
+<div class="legend"><span><i style="background:var(--ink)"></i>curve</span><span><i style="background:var(--accent)"></i>chord through a and a + h</span><span><i style="background:var(--good)"></i>tangent at a</span><span><i style="background:var(--amber)"></i>one-sided slopes at a corner</span></div>
+<div id="limits-ro"></div>
+<div class="gdc" id="limits-gdc"></div>
+<div id="limits-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="limits"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · Table</small></h3>
+<p>First principles is algebra by hand. The calculator checks the limit and the derivative.</p>
+<h4>Check a limit with a table</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>. Enter Y1 = the expression, e.g. <span class="mono">(X²−9)÷(X−3)</span>.</li>
+<li><kbd>F5</kbd> SET: Start 2.99, End 3.01, Step 0.005. <kbd>F6</kbd> TABLE.</li>
+<li>The values either side of 3 approach the limit; at X = 3 itself the table shows ERROR.</li>
+</ol>
+<h4>Check a derivative</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx.</li>
+<li>Type the function, a comma, and the x-value: <span class="mono">d/dx(X^3, 2)</span>.</li>
+</ol>
+<div class="eg">d/dx(X^3, 2) = 12   ✓ 3x² at x = 2</div>
+<p class="warn">At a corner the calculator still prints a number: d/dx(Abs X, 0) = 0. That does not mean |x| is differentiable at 0.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>TABLE · nDeriv</small></h3>
+<p>First principles is algebra by hand. The calculator checks the limit and the derivative.</p>
+<h4>Check a limit with a table</h4>
+<ol>
+<li><kbd>Y=</kbd>: Y1 = the expression, e.g. <span class="mono">(X²−9)/(X−3)</span>.</li>
+<li><kbd>2nd</kbd> <kbd>WINDOW</kbd> (TBLSET): TblStart = 2.99, ΔTbl = 0.005.</li>
+<li><kbd>2nd</kbd> <kbd>GRAPH</kbd> (TABLE). Values either side of 3 approach the limit; X = 3 shows ERROR.</li>
+</ol>
+<h4>Check a derivative</h4>
+<ol>
+<li><kbd>MATH</kbd> → 8:nDeriv(.</li>
+<li><span class="mono">nDeriv(X³, X, 2)</span> <kbd>ENTER</kbd>.</li>
+</ol>
+<div class="eg">nDeriv(X³, X, 2) = 12   ✓ 3x² at x = 2</div>
+<p class="warn">At a corner nDeriv still prints a number: nDeriv(abs(X), X, 0) = 0. That does not mean |x| is differentiable at 0.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-lhop" data-sec="lhop" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.13</span>
+<h2>L'Hôpital's rule</h2>
+<p class="lede">When a limit comes out as 0/0 or ∞/∞, compare how fast the top and bottom are changing instead of what they are.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Near x = a, a differentiable function looks like its tangent: f(x) ≈ f(a) + f′(a)(x − a). If f(a) = g(a) = 0, then f(x) ÷ g(x) ≈ f′(a)(x − a) ÷ (g′(a)(x − a)) = f′(a) ÷ g′(a). The (x − a) cancels. That is <b>l'Hôpital's rule</b>: for 0/0 (or ∞/∞), lim f/g = lim f′/g′.</p>
+<p>Differentiate the top and bottom <b>separately</b>. It is not the quotient rule. If the new fraction is still 0/0, apply the rule again, checking the form each time.</p>
+<p>Other forms must be rewritten first. 0 × ∞, like x ln x as x → 0⁺, becomes a fraction: ln x ÷ (1/x). Powers like xˣ become e<sup>x ln x</sup>: find the limit of the exponent, then exponentiate.</p>
+<p>In the model, the blue top and amber bottom both pass through 0 at x = a, but their ratio (green) heads smoothly to a finite value. Move x towards a and watch the ratio settle on f′(a) ÷ g′(a).</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">0/0 or ∞/∞: lim f(x)/g(x) = lim f′(x)/g′(x)</span></div>
+<div class="fx"><span class="f">lim<sub>x→0</sub> sin x ÷ x = 1</span></div>
+<div class="fx"><span class="f">lim<sub>x→0</sub> (eˣ − 1) ÷ x = 1</span></div>
+<div class="fx"><span class="f">lim<sub>x→0</sub> (1 − cos x) ÷ x² = ½</span></div>
+<div class="fx"><span class="f">0 × ∞: rewrite as a fraction; 0⁰, 1^∞: take ln</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Check the form every time. On a non-0/0 fraction the rule gives wrong answers.</li>
+<li>Top′ over bottom′, never the quotient rule.</li>
+<li>x ln x is 0 × ∞: rewrite before applying.</li>
+<li>Radians: d/dx sin x = cos x only in radians.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Substitute first. 0/0? Differentiate top and bottom.</b></li>
+<li><b>Still 0/0? Go again.</b></li>
+<li><b>ln on top: x ln x = ln x ÷ (1/x).</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: top, bottom and their ratio near 0/0</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="lhop-pre"></div><div class="ctrls" id="lhop-ctrls"></div></div>
+<div>
+<canvas id="lhop-cv" aria-label="two curves through zero at x = a and their ratio approaching a finite limit"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>top f(x)</span><span><i style="background:var(--amber)"></i>bottom g(x)</span><span><i style="background:var(--good)"></i>ratio f(x)/g(x)</span><span><i style="background:var(--ink)"></i>ratio at x</span></div>
+<div id="lhop-ro"></div>
+<div class="gdc" id="lhop-gdc"></div>
+<div id="lhop-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="lhop"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Table · Run-Matrix</small></h3>
+<p>The rule is by hand. The calculator confirms the answer numerically.</p>
+<h4>Check the limit with a table</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Table</b>, Y1 = the fraction, e.g. <span class="mono">(1−cos 2X)÷X²</span>.</li>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> SET UP → Angle: <b>Rad</b>.</li>
+<li><kbd>F5</kbd> SET: Start −0.01, End 0.01, Step 0.005. <kbd>F6</kbd> TABLE.</li>
+</ol>
+<div class="eg">(1−cos 2X)÷X²<br>X = 0.005:  1.99998…<br>→ limit 2</div>
+<p class="small">Very small X (like 10⁻⁸) can give 0 because of rounding inside the calculator. Stay near 0.001.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>TABLE</small></h3>
+<p>The rule is by hand. The calculator confirms the answer numerically.</p>
+<h4>Check the limit with a table</h4>
+<ol>
+<li><kbd>MODE</kbd> → <b>RADIAN</b>.</li>
+<li><kbd>Y=</kbd>: Y1 = the fraction, e.g. <span class="mono">(1−cos(2X))/X²</span>.</li>
+<li><kbd>2nd</kbd> <kbd>WINDOW</kbd>: TblStart = −0.01, ΔTbl = 0.005. <kbd>2nd</kbd> <kbd>GRAPH</kbd> TABLE.</li>
+</ol>
+<div class="eg">(1−cos(2X))/X²<br>X = .005:  1.99998…<br>→ limit 2</div>
+<p class="small">Very small X (like 10⁻⁸) can give 0 because of rounding inside the calculator. Stay near 0.001.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-diff" data-sec="diff" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.3, 5.6 · AHL 5.15</span>
+<h2>Differentiation rules</h2>
+<p class="lede">Most functions are built from simple ones by multiplying, dividing or nesting. Each way of building has its own rule.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>The <b>chain rule</b> handles a function inside a function. If y = f(u) and u = g(x), a small change in x changes u by about g′(x) times as much, which changes y by about f′(u) times that. So <b>dy/dx = dy/du × du/dx</b>: outer derivative (inner left alone) times inner derivative.</p>
+<p>The <b>product rule</b>, (uv)′ = u′v + uv′, comes from the area of a rectangle with sides u and v. Grow both sides a little: the new area is the old plus a strip v du plus a strip u dv (plus a tiny corner that vanishes in the limit).</p>
+<p>The <b>quotient rule</b>, (u/v)′ = (u′v − uv′) ÷ v², is the product rule applied to u × v⁻¹. Order matters in the numerator because of the minus sign.</p>
+<p>The HL booklet adds derivatives of tan, sec, cosec, cot, aˣ, logₐ x, arcsin, arccos and arctan. Each is used with the chain rule exactly like sin and eˣ. In the model, the dashed amber curve is f′. Its height at any x equals the slope of the blue curve there.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">(uv)′ = u′v + uv′</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">(u/v)′ = (u′v − uv′) ÷ v²</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">dy/dx = dy/du × du/dx</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">d/dx tan x = sec² x, d/dx sec x = sec x tan x</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">d/dx aˣ = aˣ ln a, d/dx logₐ x = 1/(x ln a)</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">d/dx arcsin x = 1/√(1 − x²), d/dx arctan x = 1/(1 + x²)</span><span class="bk">booklet</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Chain rule: multiply by the inner derivative; it is easy to forget the "× 2" in sin 2x.</li>
+<li>Quotient rule: u′v − uv′, in that order.</li>
+<li>d/dx eᵏˣ = keᵏˣ, not xeᵏˣ⁻¹.</li>
+<li>Radians for every trig derivative.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Outer′(inner) × inner′.</b></li>
+<li><b>Low d-high minus high d-low, over low squared.</b></li>
+<li><b>Factorise at the end: e^x and brackets come out.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a function and its derivative</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="diff-pre"></div><div class="ctrls" id="diff-ctrls"></div></div>
+<div>
+<canvas id="diff-cv" aria-label="a function, its derivative, and the tangent at a point"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>f(x)</span><span><i style="background:var(--amber)"></i>f′(x)</span><span><i style="background:var(--good)"></i>tangent at a</span><span><i style="background:var(--muted)"></i>height of f′ = slope of f</span></div>
+<div id="diff-ro"></div>
+<div class="gdc" id="diff-gdc"></div>
+<div id="diff-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="diff"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix d/dx</small></h3>
+<p>Differentiate by hand, then check the value at one point.</p>
+<h4>Check f′(a)</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx.</li>
+<li>Type <span class="mono">d/dx(X²e^(−X), 1)</span>. <kbd>e^x</kbd> is <kbd>SHIFT</kbd> <kbd>ln</kbd>.</li>
+<li>Substitute x = 1 into your own f′(x). The two must agree.</li>
+</ol>
+<div class="eg">d/dx(X²e^(−X), 1) = 0.36787…<br>your f′(1) = (2 − 1)e^(−1) = 0.36787…  ✓</div>
+<p class="small">arcsin and arctan are sin⁻¹ and tan⁻¹ (<kbd>SHIFT</kbd> <kbd>sin</kbd>, <kbd>SHIFT</kbd> <kbd>tan</kbd>). Set Angle to Rad first.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MATH nDeriv</small></h3>
+<p>Differentiate by hand, then check the value at one point.</p>
+<h4>Check f′(a)</h4>
+<ol>
+<li><kbd>MATH</kbd> → 8:nDeriv(.</li>
+<li><span class="mono">nDeriv(X²e^(−X), X, 1)</span>. <kbd>e^x</kbd> is <kbd>2nd</kbd> <kbd>LN</kbd>.</li>
+<li>Substitute x = 1 into your own f′(x). The two must agree.</li>
+</ol>
+<div class="eg">nDeriv(X²e^(−X), X, 1) = .3678794…<br>your f′(1) = (2 − 1)e^(−1) = .3678794…  ✓</div>
+<p class="small">arcsin and arctan are sin⁻¹ and tan⁻¹ (<kbd>2nd</kbd> <kbd>SIN</kbd>, <kbd>2nd</kbd> <kbd>TAN</kbd>). Set <kbd>MODE</kbd> RADIAN first.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-tangent" data-sec="tangent" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.2, 5.4</span>
+<h2>Tangents, normals, increasing and decreasing</h2>
+<p class="lede">The derivative at a point is the gradient of the tangent there. Its sign says whether the function is going up or down.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>The <b>tangent</b> at x = a touches the curve and has gradient m = f′(a). It passes through (a, f(a)), so its equation is <b>y − f(a) = f′(a)(x − a)</b>. The point comes from f, the gradient from f′: two different functions, one line.</p>
+<p>The <b>normal</b> is perpendicular to the tangent at the same point. Perpendicular gradients multiply to −1, so the normal has gradient <b>−1/f′(a)</b>. If the tangent is horizontal, the normal is the vertical line x = a.</p>
+<p>f is <b>increasing</b> where f′(x) &gt; 0 and <b>decreasing</b> where f′(x) &lt; 0. To find the intervals, solve f′(x) = 0 and test the sign of f′ between the roots. In the model the curve is drawn green where it rises and red where it falls.</p>
+<p>A line y = mx + c is tangent to a quadratic curve when they meet exactly once: substitute, and set the discriminant to zero. The model keeps equal scales on both axes so the normal really looks perpendicular.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">tangent: y − y₁ = m(x − x₁), m = f′(x₁)</span></div>
+<div class="fx"><span class="f">normal gradient = −1 ÷ m</span></div>
+<div class="fx"><span class="f">perpendicular: m₁m₂ = −1</span></div>
+<div class="fx"><span class="f">increasing ⇔ f′(x) &gt; 0, decreasing ⇔ f′(x) &lt; 0</span></div>
+<div class="fx"><span class="f">tangent to a quadratic: discriminant b² − 4ac = 0</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>The y-coordinate comes from f, not f′.</li>
+<li>Normal: flip AND change sign.</li>
+<li>"Increasing" questions want an interval of x, not a y-value.</li>
+<li>Parallel tangents have equal gradients: solve f′(x) = m.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Gradient from f′, point from f.</b></li>
+<li><b>Normal = −1 ÷ tangent gradient.</b></li>
+<li><b>Rising = f′ positive.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: tangent, normal and where f rises or falls</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="tangent-pre"></div><div class="ctrls" id="tangent-ctrls"></div></div>
+<div>
+<canvas id="tangent-cv" aria-label="a curve coloured by increasing or decreasing, with tangent and normal at a point"></canvas>
+<div class="legend"><span><i style="background:var(--good)"></i>f increasing</span><span><i style="background:var(--bad)"></i>f decreasing</span><span><i style="background:var(--accent)"></i>tangent</span><span><i style="background:var(--amber)"></i>normal</span></div>
+<div id="tangent-ro"></div>
+<div class="gdc" id="tangent-gdc"></div>
+<div id="tangent-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="tangent"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Graph · SKETCH</small></h3>
+<p>The graph screen draws tangents and normals and reports the gradient.</p>
+<h4>Gradient at a point</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> SET UP → <b>Derivative: On</b>.</li>
+<li><kbd>MENU</kbd> → <b>Graph</b>, Y1 = f, <kbd>F6</kbd> DRAW.</li>
+<li><kbd>F1</kbd> TRACE, type the x-value, <kbd>EXE</kbd>. dy/dx is shown with the coordinates.</li>
+</ol>
+<h4>Draw the tangent or normal</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>F4</kbd> (SKETCH) → Tangent (or Normal).</li>
+<li>Type the x-value and press EXE twice. The equation of the line is shown.</li>
+</ol>
+<div class="eg">Y1 = X^3−2X+1, Tangent at X = 1<br>y = 1x − 1</div>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>CALC · DRAW</small></h3>
+<p>The graph screen gives the gradient and draws a tangent.</p>
+<h4>Gradient at a point</h4>
+<ol>
+<li><kbd>Y=</kbd>: Y1 = f. <kbd>GRAPH</kbd>.</li>
+<li><kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 6:dy/dx. Type the x-value, <kbd>ENTER</kbd>.</li>
+</ol>
+<h4>Draw the tangent</h4>
+<ol>
+<li><kbd>2nd</kbd> <kbd>PRGM</kbd> (DRAW) → 5:Tangent(.</li>
+<li>Type the x-value, ENTER. The equation is shown at the bottom.</li>
+<li>The TI has no normal command: use −1/m by hand.</li>
+</ol>
+<div class="eg">Y1 = X³−2X+1, Tangent( at X = 1<br>y = 1x + −1</div>
+</aside></div>
+</section>
+<section class="sec" id="s-curve" data-sec="curve" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.7, 5.8</span>
+<h2>Stationary points, concavity and inflexion</h2>
+<p class="lede">Line up the graphs of f, f′ and f″ and every feature of one shows up as a feature of the next.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>A <b>stationary point</b> has f′(x) = 0: the tangent is horizontal. It is a <b>maximum</b> if f′ goes from + to −, a <b>minimum</b> if − to +, and a <b>stationary inflexion</b> if f′ keeps the same sign either side.</p>
+<p>f″ measures how the gradient is changing, which is the <b>concavity</b>. f″ &gt; 0: the gradient is increasing, the curve bends upwards (concave up), so a stationary point there is a minimum. f″ &lt; 0: concave down, a maximum. If f″ = 0, the second-derivative test says nothing; go back to the sign of f′.</p>
+<p>A <b>point of inflexion</b> is where the concavity changes: f″ = 0 <b>and</b> f″ changes sign. If f′ is also 0 there, it is a stationary inflexion; otherwise it is non-stationary. x⁴ has f″(0) = 0 but no inflexion, because f″ doesn't change sign.</p>
+<p>In the model, the three graphs share one x-axis. Roots of f′ (filled dots) line up with the turning points of f. Roots of f″ with a sign change (rings) line up with the inflexions of f and the turning points of f′. Green shading marks where f′ or f″ is positive.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">stationary: f′(x) = 0</span></div>
+<div class="fx"><span class="f">f″ &gt; 0 ⇒ minimum, f″ &lt; 0 ⇒ maximum</span></div>
+<div class="fx"><span class="f">f″ = 0 at a stationary point ⇒ use the sign of f′ either side</span></div>
+<div class="fx"><span class="f">inflexion: f″ = 0 and f″ changes sign</span></div>
+<div class="fx"><span class="f">concave up ⇔ f″ &gt; 0</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>f″ = 0 alone is not an inflexion: show the sign change.</li>
+<li>Find y from f, not f′.</li>
+<li>A stationary point with f″ = 0 can be a max, a min or an inflexion.</li>
+<li>eˣ factors are never 0: say so, then ignore them.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>f′ = 0 finds them, f″ sorts them.</b></li>
+<li><b>Inflexion = f″ changes sign.</b></li>
+<li><b>Turning points of f′ are inflexions of f.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: f, f′ and f″ lined up</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="curve-pre"></div><div class="ctrls" id="curve-ctrls"></div></div>
+<div>
+<canvas id="curve-cv" aria-label="three stacked graphs of f, its first and second derivatives, with stationary points and inflexions marked"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>f, and stationary points</span><span><i style="background:var(--amber)"></i>f′</span><span><i style="background:var(--good)"></i>f″, and inflexions</span><span><i style="background:var(--ink)"></i>probe</span></div>
+<div id="curve-ro"></div>
+<div class="gdc" id="curve-gdc"></div>
+<div id="curve-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="curve"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Graph · G-SOLVE</small></h3>
+<p>Use the graph for coordinates, and d/dx for the nature check.</p>
+<h4>Maximum and minimum</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Graph</b>, Y1 = f, <kbd>F6</kbd> DRAW.</li>
+<li><kbd>SHIFT</kbd> <kbd>F5</kbd> (G-SOLVE) → <kbd>F2</kbd> MAX or <kbd>F3</kbd> MIN. Press <kbd>▶</kbd> to move to the next one.</li>
+</ol>
+<h4>Inflexion points</h4>
+<ol>
+<li>Enter Y2 = <span class="mono">d²/dx²(Y1, X)</span> (<kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F3</kbd>). Y1 is <kbd>VARS</kbd> → <kbd>F4</kbd> GRAPH → Y.</li>
+<li>Draw, then <kbd>SHIFT</kbd> <kbd>F5</kbd> (G-SOLVE) → <kbd>F1</kbd> ROOT on Y2. Check Y2 changes sign there.</li>
+</ol>
+<div class="eg">Y1 = X^4−4X^3<br>MIN: (3, −27)<br>Y2 = d²/dx²(Y1, X): ROOTs 0 and 2</div>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>CALC</small></h3>
+<p>Use the graph for coordinates, and nDeriv for the nature check.</p>
+<h4>Maximum and minimum</h4>
+<ol>
+<li><kbd>Y=</kbd>: Y1 = f. <kbd>GRAPH</kbd>.</li>
+<li><kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 3:minimum or 4:maximum. Set a left bound, right bound and guess.</li>
+</ol>
+<h4>Inflexion points</h4>
+<ol>
+<li>The TI has no second derivative. Set Y2 = nDeriv(Y1, X, X), the gradient function.</li>
+<li>Inflexions of f are the max and min of Y2: <kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 3 or 4 on Y2.</li>
+</ol>
+<div class="eg">Y1 = X^4−4X³<br>minimum: (3, −27)<br>Y2 = nDeriv(Y1,X,X): minimum at X = 2</div>
+</aside></div>
+</section>
+<section class="sec" id="s-optim" data-sec="optim" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.8 · AHL 5.14</span>
+<h2>Optimisation</h2>
+<p class="lede">Write the quantity you want to make biggest or smallest as a function of one variable, then find where its derivative is zero.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Optimisation problems hide a function inside a story. The work is setting it up: <b>name the quantity</b> to optimise, write it in terms of two dimensions, then use the <b>constraint</b> (a fixed volume, perimeter or sum) to replace one of them. Now it is a function of one variable.</p>
+<p>At a maximum or minimum inside the allowed range, the tangent is horizontal, so <b>set the derivative to zero</b>. Then <b>justify</b> the nature: the sign of the second derivative, or the sign of the first derivative either side.</p>
+<p>Watch the <b>domain</b>. A box with cut x needs 0 &lt; x &lt; L/2; a root outside that range (or one that gives zero volume) is rejected. If the derivative is never zero inside the range, the optimum is at an endpoint.</p>
+<p>In the model, slide your choice of dimension along the allowed range. The amber line is the tangent to the objective: flat only at the optimum.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">optimum where f′(x) = 0 (inside the domain)</span></div>
+<div class="fx"><span class="f">f″ &lt; 0 ⇒ maximum, f″ &gt; 0 ⇒ minimum</span></div>
+<div class="fx"><span class="f">cylinder: V = πr²h, S = 2πr² + 2πrh</span></div>
+<div class="fx"><span class="f">open box from an L × L square: V = x(L − 2x)²</span></div>
+<div class="fx"><span class="f">minimise distance: minimise D²</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Use the constraint to get ONE variable before differentiating.</li>
+<li>Reject roots outside the domain or giving a zero dimension.</li>
+<li>Justify max or min; f′ = 0 alone is not enough.</li>
+<li>Answer the question: the value, the dimension, or both.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Name it, constrain it, differentiate it, justify it.</b></li>
+<li><b>Distance? Minimise D².</b></li>
+<li><b>No zero inside? Check the endpoints.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: the objective function and its optimum</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="optim-pre"></div><div class="ctrls" id="optim-ctrls"></div></div>
+<div>
+<canvas id="optim-cv" aria-label="graph of the quantity being optimised against one dimension, with the optimum marked"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>objective</span><span><i style="background:var(--good)"></i>optimum</span><span><i style="background:var(--amber)"></i>tangent at your choice</span><span><i style="background:var(--ink)"></i>your choice</span></div>
+<div id="optim-ro"></div>
+<div class="gdc" id="optim-gdc"></div>
+<div id="optim-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="optim"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Graph · G-SOLVE</small></h3>
+<p>On Paper 2, the GDC finds the optimum directly once you have the one-variable formula.</p>
+<h4>Find the optimum</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Graph</b>. Y1 = the formula, e.g. <span class="mono">2πX²+1000÷X</span>.</li>
+<li><kbd>SHIFT</kbd> <kbd>F3</kbd> V-WINDOW: Xmin 0, Xmax a sensible upper limit. <kbd>F6</kbd> DRAW.</li>
+<li><kbd>SHIFT</kbd> <kbd>F5</kbd> (G-SOLVE) → <kbd>F2</kbd> MAX or <kbd>F3</kbd> MIN.</li>
+</ol>
+<div class="eg">Y1 = 2πX²+1000÷X<br>MIN: X = 4.3013, Y = 348.73</div>
+<p class="warn">The calculator gives the answer but no justification. Write S′ = 0 and the second-derivative sign in your working.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>CALC</small></h3>
+<p>On Paper 2, the GDC finds the optimum directly once you have the one-variable formula.</p>
+<h4>Find the optimum</h4>
+<ol>
+<li><kbd>Y=</kbd>: Y1 = the formula, e.g. <span class="mono">2πX²+1000/X</span>.</li>
+<li><kbd>WINDOW</kbd>: Xmin 0, Xmax a sensible upper limit, then <kbd>ZOOM</kbd> 0:ZoomFit.</li>
+<li><kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 3:minimum or 4:maximum.</li>
+</ol>
+<div class="eg">Y1 = 2πX²+1000/X<br>Minimum: X = 4.3012701, Y = 348.73421</div>
+<p class="warn">The calculator gives the answer but no justification. Write S′ = 0 and the second-derivative sign in your working.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-implicit" data-sec="implicit" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.14</span>
+<h2>Implicit differentiation and related rates</h2>
+<p class="lede">Differentiate an equation in x and y term by term, treating y as a function of x. The same chain rule links rates that change together in time.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Many curves, like x² + y² = 25, are not written as y = f(x). You can still differentiate: treat y as an unknown function of x, and differentiate both sides with respect to x. By the chain rule, <b>d/dx (y²) = 2y dy/dx</b>. Every y-term picks up a dy/dx. A term like xy needs the product rule: y + x dy/dx.</p>
+<p>Then collect the dy/dx terms, factor and divide. The answer usually contains both x and y, which is fine: a curve like a circle has two points at each x, with different gradients.</p>
+<p><b>Related rates</b> use the same idea with time. If a balloon's volume and radius both change, V = (4/3)πr³ gives dV/dt = 4πr² dr/dt. Write the geometric formula, differentiate with respect to t, and only then substitute the values at the instant asked.</p>
+<p>In the model, slide the point around the curve. The tangent is horizontal where the numerator of dy/dx is 0 and vertical where the denominator is 0.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">d/dx (yⁿ) = nyⁿ⁻¹ dy/dx</span></div>
+<div class="fx"><span class="f">d/dx (xy) = y + x dy/dx</span></div>
+<div class="fx"><span class="f">dy/dx = (dy/dt) ÷ (dx/dt)</span></div>
+<div class="fx"><span class="f">dV/dt = dV/dr × dr/dt</span></div>
+<div class="fx"><span class="f">sphere V = (4/3)πr³, cone V = (1/3)πr²h</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Forgetting dy/dx on a y-term.</li>
+<li>xy needs the product rule.</li>
+<li>Substitute values AFTER differentiating, never before.</li>
+<li>Cones: remove r with similar triangles before differentiating.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Every y gets a dy/dx.</b></li>
+<li><b>Formula → d/dt → substitute.</b></li>
+<li><b>Horizontal: top = 0. Vertical: bottom = 0.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: gradients on implicit curves</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="implicit-pre"></div><div class="ctrls" id="implicit-ctrls"></div></div>
+<div>
+<canvas id="implicit-cv" aria-label="an implicitly defined curve with the tangent at a movable point"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>curve</span><span><i style="background:var(--amber)"></i>tangent</span><span><i style="background:var(--ink)"></i>point</span></div>
+<div id="implicit-ro"></div>
+<div class="gdc" id="implicit-gdc"></div>
+<div id="implicit-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="implicit"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix</small></h3>
+<p>The calculator cannot differentiate implicitly. Use it for the arithmetic once you have dy/dx.</p>
+<h4>Evaluate dy/dx at the point</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b>. Store the point: <span class="mono">1→X</span>, <span class="mono">2→Y</span> (<kbd>→</kbd> key).</li>
+<li>Type your dy/dx using X and Y: <span class="mono">−(2X+Y)÷(X+2Y)</span>.</li>
+</ol>
+<div class="eg">1→X: 2→Y<br>−(2X+Y)÷(X+2Y) = −0.8</div>
+<h4>Related rates</h4>
+<p>Solve for the unknown rate by hand; the calculator only evaluates. Keep π symbolic until the end.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Home screen</small></h3>
+<p>The calculator cannot differentiate implicitly. Use it for the arithmetic once you have dy/dx.</p>
+<h4>Evaluate dy/dx at the point</h4>
+<ol>
+<li>Store the point: <span class="mono">1→X</span>, <span class="mono">2→Y</span> (<kbd>STO→</kbd>, Y is <kbd>ALPHA</kbd> <kbd>1</kbd>).</li>
+<li>Type your dy/dx using X and Y: <span class="mono">−(2X+Y)/(X+2Y)</span>.</li>
+</ol>
+<div class="eg">1→X: 2→Y<br>−(2X+Y)/(X+2Y) = −.8</div>
+<h4>Related rates</h4>
+<p>Solve for the unknown rate by hand; the calculator only evaluates. Keep π symbolic until the end.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-integ" data-sec="integ" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.5, 5.10, 5.11</span>
+<h2>Integration and the fundamental theorem</h2>
+<p class="lede">Integration undoes differentiation, and a definite integral adds up thin strips to give the signed area under a curve.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>An <b>antiderivative</b> of f is any F with F′ = f. Because constants differentiate to 0, there is a whole family: <b>∫ f(x) dx = F(x) + c</b>. Any point on the curve fixes c.</p>
+<p>A <b>definite integral</b> is the limit of a sum of thin rectangles: height f(x), width dx. The <b>fundamental theorem of calculus</b> says that this sum equals F(b) − F(a) for any antiderivative F. That is why "integrate, upper minus lower" gives an area.</p>
+<p>Area below the x-axis counts as <b>negative</b>. If the curve crosses the axis, the signed integral and the total area differ; the Areas topic deals with this.</p>
+<p><b>Reverse chain rule</b>: if the integrand is f′(x) × g(f(x)), the answer is G(f(x)). Guess the answer, differentiate it, and adjust the constant. In the model, raise n and watch the rectangle sum close in on F(b) − F(a).</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">∫ xⁿ dx = xⁿ⁺¹ ÷ (n + 1) + c, n ≠ −1</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">∫ 1/x dx = ln|x| + c</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">∫ eᵏˣ dx = eᵏˣ ÷ k + c</span></div>
+<div class="fx"><span class="f">∫ sin x dx = −cos x + c, ∫ cos x dx = sin x + c</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">∫ from a to b of f(x) dx = F(b) − F(a)</span></div>
+<div class="fx"><span class="f">∫ f′(x)(f(x))ⁿ dx = (f(x))ⁿ⁺¹ ÷ (n + 1) + c</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>+ c on every indefinite integral.</li>
+<li>∫ 1/x dx is ln|x|, not x⁰/0.</li>
+<li>eᵏˣ: divide by k, don't multiply.</li>
+<li>e⁰ = 1, not 0, at a lower limit of 0.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Up one, divide by the new power.</b></li>
+<li><b>Upper minus lower.</b></li>
+<li><b>Guess, differentiate, adjust.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: rectangles closing in on the integral</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="integ-pre"></div><div class="ctrls" id="integ-ctrls"></div></div>
+<div>
+<canvas id="integ-cv" aria-label="Riemann sum rectangles under a curve between two limits"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>f(x)</span><span><i style="background:var(--good)"></i>positive strips</span><span><i style="background:var(--bad)"></i>negative strips</span></div>
+<div id="integ-ro"></div>
+<div class="gdc" id="integ-gdc"></div>
+<div id="integ-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="integ"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix ∫dx</small></h3>
+<p>Definite integrals take one line. Indefinite ones are by hand; check them with a definite integral.</p>
+<h4>Definite integral</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx.</li>
+<li>Type the function, lower limit, upper limit: <span class="mono">∫(√X+1÷√X, 1, 4)</span>.</li>
+<li>For an exact answer, compare the decimal with your exact value.</li>
+</ol>
+<div class="eg">∫(√X+1÷√X, 1, 4) = 6.6667<br>20/3 = 6.6667   ✓</div>
+<h4>Find an unknown limit</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Equation</b> → <kbd>F3</kbd> SOLVER. Enter <span class="mono">(e^(2K)−1)÷2=12</span>, <kbd>F6</kbd> SOLVE.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MATH fnInt</small></h3>
+<p>Definite integrals take one line. Indefinite ones are by hand; check them with a definite integral.</p>
+<h4>Definite integral</h4>
+<ol>
+<li><kbd>MATH</kbd> → 9:fnInt(.</li>
+<li><span class="mono">fnInt(√(X)+1/√(X), X, 1, 4)</span>.</li>
+<li>For an exact answer, compare the decimal with your exact value.</li>
+</ol>
+<div class="eg">fnInt(√(X)+1/√(X), X, 1, 4) = 6.666667<br>20/3 = 6.666667   ✓</div>
+<h4>Find an unknown limit</h4>
+<ol>
+<li><kbd>MATH</kbd> → Solver… with <span class="mono">0 = (e^(2X)−1)/2−12</span>, guess 1, <kbd>ALPHA</kbd> <kbd>ENTER</kbd>.</li>
+</ol>
+</aside></div>
+</section>
+<section class="sec" id="s-tech" data-sec="tech" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.15, 5.16</span>
+<h2>Integration techniques: parts, substitution, partial fractions</h2>
+<p class="lede">When an integral isn't standard, rewrite it until it is: undo a product rule, change the variable, or split the fraction.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p><b>Integration by parts</b> undoes the product rule. From (uv)′ = u′v + uv′, integrating gives <b>∫ u dv = uv − ∫ v du</b>. Choose u to be the factor that gets simpler when differentiated: Logs, Inverse trig, Algebraic, Trig, Exponential (LIATE), earliest first. Sometimes parts twice brings the original integral back: then solve for it as an unknown, as with ∫ eˣ sin x dx.</p>
+<p>The model draws parts as areas. Plot v against u: the region under the curve is ∫ v du, the region to its left is ∫ u dv, and together they fill the rectangle uv. That is the whole formula in one picture.</p>
+<p><b>Substitution</b> undoes the chain rule. Replace an inner function by u, replace dx using du = u′(x) dx, and change the limits to u-values. If a stray x is left over, write it in terms of u.</p>
+<p><b>Partial fractions</b> split (px + q) ÷ ((x − a)(x − b)) into A/(x − a) + B/(x − b), each of which integrates to a log. Find A and B by putting x = a and x = b (the cover-up method). Integrals with a² + x² or √(a² − x²) are booklet arctan and arcsin forms.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">∫ u dv = uv − ∫ v du</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">∫ 1/(a² + x²) dx = (1/a) arctan(x/a) + c</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">∫ 1/√(a² − x²) dx = arcsin(x/a) + c</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">∫ f′(x)/f(x) dx = ln|f(x)| + c</span></div>
+<div class="fx"><span class="f">(px + q)/((x − a)(x − b)) = A/(x − a) + B/(x − b)</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>By parts: u = the polynomial with eˣ or trig, but u = ln x whenever ln x appears.</li>
+<li>Substitution: change the limits, or go back to x before substituting old ones.</li>
+<li>Partial fractions need a factorised denominator of higher degree.</li>
+<li>eˣ sin x by parts twice: keep u as the trig both times.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>LIATE picks u.</b></li>
+<li><b>Substitute everything: dx, limits, leftover x.</b></li>
+<li><b>Cover-up: x = each root.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: integration by parts as two areas</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="tech-pre"></div><div class="ctrls" id="tech-ctrls"></div></div>
+<div>
+<canvas id="tech-cv" aria-label="curve of v against u with the areas integral v du and integral u dv shaded inside the rectangle uv"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>∫ v du</span><span><i style="background:var(--amber)"></i>∫ u dv</span><span><i style="background:var(--muted)"></i>rectangle uv</span></div>
+<div id="tech-ro"></div>
+<div class="gdc" id="tech-gdc"></div>
+<div id="tech-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="tech"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix ∫dx</small></h3>
+<p>Techniques are Paper 1 skills. Use the calculator to check a definite answer.</p>
+<h4>Check a definite integral</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx.</li>
+<li><span class="mono">∫(X^3√(1−X²), 0, 1)</span> should match your exact value.</li>
+</ol>
+<div class="eg">∫(X^3√(1−X²), 0, 1) = 0.13333<br>2/15 = 0.13333   ✓</div>
+<h4>Check partial fractions</h4>
+<ol>
+<li>Store a test value: <span class="mono">3→X</span>.</li>
+<li>Evaluate the original fraction and your split form. They must agree.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MATH fnInt</small></h3>
+<p>Techniques are Paper 1 skills. Use the calculator to check a definite answer.</p>
+<h4>Check a definite integral</h4>
+<ol>
+<li><kbd>MATH</kbd> → 9:fnInt(.</li>
+<li><span class="mono">fnInt(X³√(1−X²), X, 0, 1)</span> should match your exact value.</li>
+</ol>
+<div class="eg">fnInt(X³√(1−X²), X, 0, 1) = .1333333<br>2/15 = .1333333   ✓</div>
+<h4>Check partial fractions</h4>
+<ol>
+<li>Store a test value: <span class="mono">3→X</span> (<kbd>STO→</kbd>).</li>
+<li>Evaluate the original fraction and your split form. They must agree.</li>
+</ol>
+</aside></div>
+</section>
+<section class="sec" id="s-area" data-sec="area" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.5, 5.11 · AHL 5.17</span>
+<h2>Areas between curves</h2>
+<p class="lede">Area is the integral of (top curve − bottom curve), between the points where they meet, with every piece counted as positive.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>A thin vertical strip between two curves has height <b>top − bottom</b> and width dx. Adding the strips gives <b>Area = ∫ (f − g) dx</b> between the intersections. For the area between a curve and the x-axis, the bottom curve is y = 0.</p>
+<p>If the curves cross inside your interval, top and bottom swap, and (f − g) changes sign. A single integral then subtracts one region from the other. <b>Split at every crossing</b> and add the absolute values, or integrate |f − g| on the GDC.</p>
+<p>Some regions are easier sideways. Area between a curve and the <b>y-axis</b> uses horizontal strips: <b>∫ x dy</b>, with x written in terms of y and y-limits.</p>
+<p>In the model, green strips are where the first curve is on top and red where it is below. Drag the limits across a crossing and compare the signed integral with the true area.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">area = ∫ from a to b of |y| dx</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">area to the y-axis = ∫ from c to d of |x| dy</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">between curves: ∫ (top − bottom) dx</span></div>
+<div class="fx"><span class="f">limits: solve f(x) = g(x)</span></div>
+<div class="fx"><span class="f">x² and a line through its roots r₁, r₂: area = (r₂ − r₁)³ ÷ 6</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>A negative answer is never an area.</li>
+<li>Split where the curve crosses the axis (or the curves cross).</li>
+<li>Wrong limits: the region starts where the curves meet, not at 0.</li>
+<li>Store GDC intersections; don't retype rounded values.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Top minus bottom, meet to meet.</b></li>
+<li><b>Crossing? Split, or use |…| on the GDC.</b></li>
+<li><b>Sideways region? ∫ x dy.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: area between two curves</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="area-pre"></div><div class="ctrls" id="area-ctrls"></div></div>
+<div>
+<canvas id="area-cv" aria-label="two curves with the region between them shaded by which is on top"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>f(x)</span><span><i style="background:var(--amber)"></i>g(x)</span><span><i style="background:var(--good)"></i>f on top</span><span><i style="background:var(--bad)"></i>g on top</span></div>
+<div id="area-ro"></div>
+<div class="gdc" id="area-gdc"></div>
+<div id="area-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="area"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Graph · Run-Matrix</small></h3>
+<p>Find intersections on the graph, store them, then integrate with Abs.</p>
+<h4>Intersections</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Graph</b>: Y1 = f, Y2 = g, <kbd>F6</kbd> DRAW.</li>
+<li><kbd>SHIFT</kbd> <kbd>F5</kbd> (G-SOLVE) → <kbd>F5</kbd> INTSECT. Press <kbd>▶</kbd> for the next one.</li>
+<li>Store each x-value: on the result screen use the store option, or note it to all digits.</li>
+</ol>
+<h4>Area</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx: <span class="mono">∫(Abs (Y1−Y2), A, B)</span>. Abs is <kbd>OPTN</kbd> → <kbd>F6</kbd> → NUM → Abs.</li>
+</ol>
+<div class="eg">Y1 = e^X, Y2 = 4−X²<br>INTSECT: −1.9646, 1.0580<br>∫(Abs (Y1−Y2), A, B) = 6.4277</div>
+<p class="small">G-SOLVE → <kbd>F6</kbd> → ∫dx also shades and gives an area under one curve.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>CALC · fnInt</small></h3>
+<p>Find intersections on the graph, store them, then integrate with abs.</p>
+<h4>Intersections</h4>
+<ol>
+<li><kbd>Y=</kbd>: Y1 = f, Y2 = g. <kbd>GRAPH</kbd>.</li>
+<li><kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 5:intersect. ENTER, ENTER, then move near the point and ENTER.</li>
+<li>On the home screen, <kbd>X,T,θ,n</kbd> <kbd>STO→</kbd> <kbd>ALPHA</kbd> <kbd>MATH</kbd> stores it in A. Repeat for B.</li>
+</ol>
+<h4>Area</h4>
+<ol>
+<li><kbd>MATH</kbd> → 9:fnInt(: <span class="mono">fnInt(abs(Y1−Y2), X, A, B)</span>. abs is <kbd>MATH</kbd> → NUM → 1.</li>
+</ol>
+<div class="eg">Y1 = e^(X), Y2 = 4−X²<br>intersect: −1.964636, 1.0580064<br>fnInt(abs(Y1−Y2),X,A,B) = 6.427687</div>
+</aside></div>
+</section>
+<section class="sec" id="s-volume" data-sec="volume" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.17</span>
+<h2>Volumes of revolution</h2>
+<p class="lede">Spin a region about an axis and slice the solid into thin discs. Each disc has volume π r² × thickness.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Rotate the region under y = f(x) through 2π about the x-axis. A slice at x is a thin <b>disc</b>: radius y, thickness dx, volume πy² dx. Adding them gives <b>V = π ∫ y² dx</b>. Square y first, then integrate.</p>
+<p>About the <b>y-axis</b>, the slices are horizontal: radius x, thickness dy. So <b>V = π ∫ x² dy</b>, with x written in terms of y and the limits as y-values.</p>
+<p>If the region has a gap between it and the axis (between two curves), each slice is a <b>washer</b>: a disc with a hole. Its volume is π(R² − r²) dx, with R the outer and r the inner radius. Note R² − r², not (R − r)².</p>
+<p>In the model, the amber ellipse is one slice seen at an angle. Move it along and its area πr² grows and shrinks with the curve.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">V = π ∫ from a to b of y² dx</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">V = π ∫ from c to d of x² dy</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">washer: V = π ∫ (R² − r²) dx</span></div>
+<div class="fx"><span class="f">sin² x = ½(1 − cos 2x)</span></div>
+<div class="fx"><span class="f">cos² x = ½(1 + cos 2x)</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Square before integrating: π(∫y dx)² is wrong.</li>
+<li>Don't forget π.</li>
+<li>Washer: R² − r², never (R − r)².</li>
+<li>About the y-axis, the limits are y-values.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Disc: π y² dx. Square first.</b></li>
+<li><b>y-axis: x in terms of y, y-limits.</b></li>
+<li><b>Hole in the middle? R² − r².</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: discs that build the solid</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="volume-pre"></div><div class="ctrls" id="volume-ctrls"></div></div>
+<div>
+<canvas id="volume-cv" aria-label="a region rotated about an axis, with one disc slice drawn"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>region and curve</span><span><i style="background:var(--amber)"></i>one disc slice</span></div>
+<div id="volume-ro"></div>
+<div class="gdc" id="volume-gdc"></div>
+<div id="volume-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="volume"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix ∫dx</small></h3>
+<p>Square the function inside the integral and put π outside.</p>
+<h4>Volume about the x-axis</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx.</li>
+<li><span class="mono">π∫((ln X)², 1, 3)</span>. π is <kbd>SHIFT</kbd> <kbd>EXP</kbd>.</li>
+</ol>
+<div class="eg">π∫((ln X)², 1, 3) = 3.2332</div>
+<h4>About the y-axis</h4>
+<ol>
+<li>Write x² in terms of y, then type it with X as the variable: for x = y²/4, <span class="mono">π∫((X²÷4)², 0, 4)</span>.</li>
+</ol>
+<div class="eg">π∫((X²÷4)², 0, 4) = 40.212 = 64π/5</div>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MATH fnInt</small></h3>
+<p>Square the function inside the integral and put π outside.</p>
+<h4>Volume about the x-axis</h4>
+<ol>
+<li><kbd>MATH</kbd> → 9:fnInt(.</li>
+<li><span class="mono">π fnInt((ln(X))², X, 1, 3)</span>. π is <kbd>2nd</kbd> <kbd>^</kbd>.</li>
+</ol>
+<div class="eg">πfnInt((ln(X))²,X,1,3) = 3.233243</div>
+<h4>About the y-axis</h4>
+<ol>
+<li>Write x² in terms of y, then type it with X as the variable: for x = y²/4, <span class="mono">π fnInt((X²/4)², X, 0, 4)</span>.</li>
+</ol>
+<div class="eg">πfnInt((X²/4)²,X,0,4) = 40.21239 = 64π/5</div>
+</aside></div>
+</section>
+<section class="sec" id="s-kinem" data-sec="kinem" hidden>
+<header class="sec-head">
+<span class="ref">SL 5.9</span>
+<h2>Kinematics</h2>
+<p class="lede">Displacement, velocity and acceleration are one chain: differentiate to go down it, integrate to come back up.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>For motion along a line, <b>v = ds/dt</b> and <b>a = dv/dt</b>. Going the other way, s = ∫ v dt and v = ∫ a dt, each with a constant fixed by an initial condition.</p>
+<p><b>Displacement</b> is where you end up relative to where you started: ∫ v dt, signs and all. <b>Distance</b> is how far you actually travelled: ∫ |v| dt. They differ whenever the particle turns round, which happens where v = 0 and changes sign.</p>
+<p>A particle is <b>at rest</b> when v = 0. It is <b>speeding up</b> when v and a have the same sign, and slowing down when they have opposite signs. "Speed" is |v|.</p>
+<p>In the model, the shaded areas under the velocity graph are the displacements: green forward, red back. The strip below shows the particle moving along the line, turning where v crosses zero.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">v = ds/dt, a = dv/dt = d²s/dt²</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">displacement = ∫ from t₁ to t₂ of v dt</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">distance = ∫ from t₁ to t₂ of |v| dt</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">at rest: v = 0</span></div>
+<div class="fx"><span class="f">speeding up: v and a have the same sign</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Distance needs |v|: split where v = 0, or use abs on the GDC.</li>
+<li>"At rest" is v = 0, not a = 0.</li>
+<li>Two integrations, two constants: use v(0) then s(0).</li>
+<li>Maximum velocity is where a = 0.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>s → v → a: differentiate.</b></li>
+<li><b>Distance = area, all positive.</b></li>
+<li><b>Same signs speed up.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: velocity, displacement and distance</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="kinem-pre"></div><div class="ctrls" id="kinem-ctrls"></div></div>
+<div>
+<canvas id="kinem-cv" aria-label="velocity-time graph with shaded displacement and a particle moving on a line"></canvas>
+<canvas id="kinem-line" aria-label="the particle moving along a straight line" style="margin-top:6px"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>v(t)</span><span><i style="background:var(--good)"></i>forward displacement</span><span><i style="background:var(--bad)"></i>backward displacement</span><span><i style="background:var(--amber)"></i>at rest</span></div>
+<div id="kinem-ro"></div>
+<div class="gdc" id="kinem-gdc"></div>
+<div id="kinem-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="kinem"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · Graph</small></h3>
+<p>Paper 2 kinematics is mostly about using |v| correctly.</p>
+<h4>Distance and displacement</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F4</kbd> ∫dx.</li>
+<li>Distance: <span class="mono">∫(Abs (10e^(−X÷2)−4), 0, 5)</span>.</li>
+<li>Displacement: the same without Abs.</li>
+</ol>
+<div class="eg">∫(Abs (10e^(−X÷2)−4), 0, 5) = 10.981<br>∫(10e^(−X÷2)−4, 0, 5)       = −1.6417</div>
+<h4>When at rest</h4>
+<ol>
+<li>Graph Y1 = v, <kbd>SHIFT</kbd> <kbd>F5</kbd> (G-SOLVE) → <kbd>F1</kbd> ROOT.</li>
+</ol>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>fnInt · CALC</small></h3>
+<p>Paper 2 kinematics is mostly about using |v| correctly.</p>
+<h4>Distance and displacement</h4>
+<ol>
+<li><kbd>MATH</kbd> → 9:fnInt(.</li>
+<li>Distance: <span class="mono">fnInt(abs(10e^(−X/2)−4), X, 0, 5)</span>.</li>
+<li>Displacement: the same without abs.</li>
+</ol>
+<div class="eg">fnInt(abs(10e^(−X/2)−4),X,0,5) = 10.98105<br>fnInt(10e^(−X/2)−4,X,0,5)      = −1.641700</div>
+<h4>When at rest</h4>
+<ol>
+<li>Graph Y1 = v, <kbd>2nd</kbd> <kbd>TRACE</kbd> (CALC) → 2:zero.</li>
+</ol>
+</aside></div>
+</section>
+<section class="sec" id="s-maclaurin" data-sec="maclaurin" hidden>
+<header class="sec-head">
+<span class="ref">AHL 5.19</span>
+<h2>Maclaurin series</h2>
+<p class="lede">Build a polynomial that matches a function's value, slope, curvature and so on at x = 0. Near 0 it is an excellent stand-in for the function.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>A polynomial a₀ + a₁x + a₂x² + … has a₀ = its value at 0, a₁ = its first derivative at 0, 2!a₂ = its second derivative at 0, and so on. To make it match f at 0 to every order, choose <b>aₖ = f⁽ᵏ⁾(0) ÷ k!</b>. That gives the <b>Maclaurin series</b> f(x) = f(0) + f′(0)x + f″(0)x²/2! + …</p>
+<p>In practice you rarely differentiate from scratch. Start from a booklet series and <b>substitute</b> (e<sup>2x</sup>: put 2x into eˣ), <b>multiply</b> two series and collect powers, or <b>differentiate or integrate</b> term by term.</p>
+<p>Some series work for every x (eˣ, sin x, cos x). Others only converge on an interval: ln(1 + x) needs −1 &lt; x ≤ 1, and 1/(1 − x) needs |x| &lt; 1. Outside it, adding terms makes things worse.</p>
+<p>Series also give limits (expand, cancel, divide) and integrals of functions with no antiderivative, like e<sup>−x²</sup>. In the model, raise n and watch the blue polynomial hug the green curve over a wider range; for ln(1 + x), watch it peel away outside the shaded interval.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">f(x) = f(0) + f′(0)x + f″(0)x²/2! + …</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">eˣ = 1 + x + x²/2! + x³/3! + …</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">sin x = x − x³/3! + x⁵/5! − …, cos x = 1 − x²/2! + x⁴/4! − …</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">ln(1 + x) = x − x²/2 + x³/3 − …, −1 &lt; x ≤ 1</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">(1 + x)ᵖ = 1 + px + p(p − 1)x²/2! + …, |x| &lt; 1</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">arctan x = x − x³/3 + x⁵/5 − …</span><span class="bk">booklet</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Divide by k!, not k.</li>
+<li>Substituting 2x: every x becomes (2x), so x² becomes 4x².</li>
+<li>Products: collect ALL pairs of powers that add to the target.</li>
+<li>Outside the interval of convergence the series is useless.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Substitute into a known series first.</b></li>
+<li><b>Products: list the pairs of powers.</b></li>
+<li><b>Limits: expand, cancel, divide, x → 0.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: polynomials hugging a function</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="maclaurin-pre"></div><div class="ctrls" id="maclaurin-ctrls"></div></div>
+<div>
+<canvas id="maclaurin-cv" aria-label="a function and its Maclaurin polynomial of chosen degree"></canvas>
+<div class="legend"><span><i style="background:var(--good)"></i>f(x)</span><span><i style="background:var(--accent)"></i>Maclaurin polynomial</span><span><i style="background:var(--good)"></i>interval of convergence (shaded)</span></div>
+<div id="maclaurin-ro"></div>
+<div class="gdc" id="maclaurin-gdc"></div>
+<div id="maclaurin-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="maclaurin"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Graph · Σ</small></h3>
+<p>Compare the function with your polynomial graphically, or sum the series directly.</p>
+<h4>Graph both</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Graph</b>: Y1 = <span class="mono">ln(1+X)</span>, Y2 = <span class="mono">X−X²÷2+X^3÷3</span>.</li>
+<li>Draw: they agree near 0 and separate further out.</li>
+</ol>
+<h4>Sum terms</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F6</kbd> → Σ(.</li>
+<li><span class="mono">Σ((−1)^(N+1)×0.1^N÷N, N, 1, 3)</span> sums three terms of ln 1.1.</li>
+</ol>
+<div class="eg">Σ((−1)^(N+1)×0.1^N÷N, N, 1, 3) = 0.09533</div>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Y= · Σ</small></h3>
+<p>Compare the function with your polynomial graphically, or sum the series directly.</p>
+<h4>Graph both</h4>
+<ol>
+<li><kbd>Y=</kbd>: Y1 = <span class="mono">ln(1+X)</span>, Y2 = <span class="mono">X−X²/2+X³/3</span>. <kbd>GRAPH</kbd>.</li>
+<li>They agree near 0 and separate further out.</li>
+</ol>
+<h4>Sum terms</h4>
+<ol>
+<li><kbd>MATH</kbd> → 0:summation Σ(.</li>
+<li>Variable N, from 1 to 3, expression <span class="mono">(−1)^(N+1)(.1)^N/N</span>.</li>
+</ol>
+<div class="eg">Σ((−1)^(N+1)(.1)^N/N, N=1 to 3) = .0953333</div>
+</aside></div>
 </section>
 <section class="sec" id="s-euler" data-sec="euler" hidden>
 <header class="sec-head">
@@ -412,13 +1475,15 @@
 <header class="sec-head">
 <span class="ref">Mixed</span>
 <h2>Mixed drill</h2>
-<p class="lede">Questions from every differential-equations topic in random order. Part of the skill is recognising which method a question wants before you start.</p>
+<p class="lede">Questions from every calculus topic in random order. Part of the skill is recognising which method a question wants before you start.</p>
 </header>
 <div class="practice" data-sec="drill"></div>
 <div class="panel prose">
 <h3>Exam habits that save marks</h3>
 <ul>
-<li>Write the separated or multiplied form as its own line. That line usually carries an M1.</li>
+<li>Write the rule or set-up line on its own (product rule, π∫y² dx, the separated form). That line usually carries an M1.</li>
+<li>Justify every maximum, minimum and inflexion. "f′ = 0" alone is never enough.</li>
+<li>Areas and distances are positive: split at crossings, or use the modulus on the GDC.</li>
 <li>Put + c in as soon as you integrate, and use the initial condition straight away.</li>
 <li>For Euler, write a table with columns n, x, y and slope. Keep full precision between rows.</li>
 <li>For y = vx, show dy/dx = v + x dv/dx explicitly, and finish in x and y.</li>
@@ -430,7 +1495,7 @@
 <header class="sec-head">
 <span class="ref"><span data-calc="casio">fx-CG50 AU</span><span data-calc="ti84">TI-84 Plus CE</span></span>
 <h2>Calculator cheat sheet</h2>
-<p class="lede">Every differential-equations keystroke in one place. Each topic page also has its own calculator panel next to the practice questions.</p>
+<p class="lede">Every calculus keystroke in one place. Each topic page also has its own calculator panel next to the practice questions.</p>
 </header>
 <div class="panel" data-calc="casio">
 <h3>Before the exam</h3>
@@ -439,6 +1504,7 @@
 <li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP): Input/Output = <b>Math/Math</b>. Angle = <b>Rad</b> for calculus with trig.</li>
 <li>Practise one Euler recursion in <b>Recursion</b> so the setup is familiar.</li>
 <li>The calculator cannot solve a differential equation exactly. It finds constants, checks answers and evaluates.</li>
+<li>SET UP → <b>Derivative: On</b> shows dy/dx whenever you trace a graph.</li>
 </ul>
 </div>
 </div>
@@ -447,6 +1513,13 @@
 <div class="tablewrap">
 <table class="cheat">
 <tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Derivative at a point</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx</td><td>f(X), x-value</td></tr>
+<tr><td>Second derivative</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F3</kbd> d²/dx²</td><td>f(X), x-value</td></tr>
+<tr><td>Max, min, intersection</td><td><b>Graph</b> → <kbd>SHIFT</kbd> <kbd>F5</kbd> G-SOLVE</td><td><kbd>F2</kbd> MAX, <kbd>F3</kbd> MIN, <kbd>F5</kbd> INTSECT</td></tr>
+<tr><td>Tangent or normal line</td><td><b>Graph</b> → <kbd>SHIFT</kbd> <kbd>F4</kbd> SKETCH</td><td>Tangent / Normal, x-value</td></tr>
+<tr><td>Area or distance</td><td><b>Run-Matrix</b> ∫dx with Abs (<kbd>OPTN</kbd> → NUM)</td><td>∫(Abs (f−g), a, b)</td></tr>
+<tr><td>Volume</td><td><b>Run-Matrix</b> ∫dx</td><td>π∫(y², a, b)</td></tr>
+<tr><td>Sum of series terms</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → Σ(</td><td>term, N, start, end</td></tr>
 <tr><td>Euler's method</td><td><b>Recursion</b> → <kbd>F3</kbd> TYPE → <kbd>F2</kbd> a<sub>n+1</sub>, <kbd>F5</kbd> SET, <kbd>F6</kbd> TABLE</td><td>aₙ + h × f(x₀ + nh, aₙ), a₀ = y₀</td></tr>
 <tr><td>Find k from data</td><td><b>Equation</b> → <kbd>F3</kbd> SOLVER</td><td>equation in K, then <kbd>F6</kbd> SOLVE</td></tr>
 <tr><td>Slope of y at a point</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx</td><td>y(X), x-value</td></tr>
@@ -461,6 +1534,10 @@
 <div class="tablewrap">
 <table class="cheat">
 <tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>Gradient at a point, check f′</td><td>d/dx in Run-Matrix</td></tr>
+<tr><td>Max, min, optimum on Paper 2</td><td>Graph → G-SOLVE → MAX / MIN</td></tr>
+<tr><td>Area between curves</td><td>INTSECT, then ∫ of Abs (Y1 − Y2)</td></tr>
+<tr><td>Total distance travelled</td><td>∫ of Abs (v)</td></tr>
 <tr><td>"Use Euler's method"</td><td>Recursion table, read the last row</td></tr>
 <tr><td>Find k, given y at some time</td><td>SOLVER on the particular solution</td></tr>
 <tr><td>"Find the time when…"</td><td>SOLVER, or Graph → G-SOLVE → X-CAL</td></tr>
@@ -485,6 +1562,13 @@
 <div class="tablewrap">
 <table class="cheat">
 <tr><th>Task</th><th>Path</th><th>Inputs</th></tr>
+<tr><td>Derivative at a point</td><td><kbd>MATH</kbd> → 8:nDeriv(</td><td>f(X), X, x-value</td></tr>
+<tr><td>Gradient on a graph</td><td><kbd>2nd</kbd> <kbd>TRACE</kbd> CALC → 6:dy/dx</td><td>x-value</td></tr>
+<tr><td>Max, min, intersection</td><td><kbd>2nd</kbd> <kbd>TRACE</kbd> CALC</td><td>3:minimum, 4:maximum, 5:intersect</td></tr>
+<tr><td>Tangent line</td><td><kbd>2nd</kbd> <kbd>PRGM</kbd> DRAW → 5:Tangent(</td><td>x-value</td></tr>
+<tr><td>Area or distance</td><td><kbd>MATH</kbd> → 9:fnInt( with abs( (<kbd>MATH</kbd> → NUM → 1)</td><td>fnInt(abs(f−g), X, a, b)</td></tr>
+<tr><td>Volume</td><td><kbd>MATH</kbd> → 9:fnInt(</td><td>π fnInt(y², X, a, b)</td></tr>
+<tr><td>Sum of series terms</td><td><kbd>MATH</kbd> → 0:summation Σ(</td><td>N, start, end, term</td></tr>
 <tr><td>Euler's method</td><td><kbd>MODE</kbd> SEQ, <kbd>Y=</kbd>, then <kbd>2nd</kbd> <kbd>GRAPH</kbd> TABLE</td><td>u(n) = u(n−1) + h × f(x₀ + (n−1)h, u(n−1)), u(nMin) = y₀</td></tr>
 <tr><td>Find k from data</td><td><kbd>MATH</kbd> → Solver…</td><td>equation in X, a guess</td></tr>
 <tr><td>Slope of y at a point</td><td><kbd>MATH</kbd> → 8:nDeriv(</td><td>y(X), X, x-value</td></tr>
@@ -499,6 +1583,10 @@
 <div class="tablewrap">
 <table class="cheat">
 <tr><th>Question wants</th><th>Use</th></tr>
+<tr><td>Gradient at a point, check f′</td><td>nDeriv(</td></tr>
+<tr><td>Max, min, optimum on Paper 2</td><td>CALC → 3:minimum / 4:maximum</td></tr>
+<tr><td>Area between curves</td><td>intersect, store in A and B, fnInt(abs(Y1 − Y2))</td></tr>
+<tr><td>Total distance travelled</td><td>fnInt(abs(v))</td></tr>
 <tr><td>"Use Euler's method"</td><td>SEQ table, read the last row</td></tr>
 <tr><td>Find k, given y at some time</td><td>Solver on the particular solution</td></tr>
 <tr><td>"Find the time when…"</td><td>Solver, or graph and CALC → 5:intersect</td></tr>

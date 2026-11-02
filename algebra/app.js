@@ -2,7 +2,7 @@
 "use strict";
 const LAB=window.LAB;
 const {$,tok,prep,MONO,sf,gcd,ri,pick,C,DRAW}=LAB;
-LAB.SECS.push('overview','direct','indsum','inddiv','indmore','contra','counter','drill','casio');
+LAB.SECS.push('overview','direct','indsum','inddiv','indmore','contra','counter','cart','polar','polyroots','demoivre','croots','drill','casio');
 LAB.CARDS.push(
 ['direct','SL 1.6','Direct proof','Let n be an integer, write it in algebra, LHS ≡ RHS'],
 ['indsum','AHL 1.15','Induction: series','Base case, assume P(k), add the next term, conclude'],
@@ -10,8 +10,13 @@ LAB.CARDS.push(
 ['indmore','AHL 1.15','Induction: inequalities & derivatives','Start at n₀, chain the inequality, differentiate the k case'],
 ['contra','AHL 1.15','Proof by contradiction','Suppose not, reach something impossible: √2, primes, logs'],
 ['counter','AHL 1.15','Counterexamples','One example kills "for all": n² + n + 41, 2ᵖ − 1'],
+["cart","AHL 1.12","Cartesian form & Argand","a + bi, i² = −1, divide by the conjugate"],
+["polar","AHL 1.13","Polar & Euler form","r cis θ = re^(iθ): moduli multiply, arguments add"],
+["polyroots","AHL 1.14","Polynomial roots","Conjugate pairs, quadratic factors, sum and product"],
+["demoivre","AHL 1.14","De Moivre's theorem","(r cis θ)ⁿ = rⁿ cis nθ, multiple-angle identities"],
+["croots","AHL 1.14","Roots of complex numbers","+ 2kπ then ÷ n: n roots on a circle"],
 ['casio',C('fx-CG50 AU','TI-84 Plus CE'),'Calculator sheet','Tables, sums and checks for testing a claim before you prove it']);
-Object.assign(LAB.SECNAME,{direct:'Direct proof',indsum:'Induction: series',inddiv:'Induction: divisibility',indmore:'Induction: inequalities & derivatives',contra:'Proof by contradiction',counter:'Counterexamples'});
+Object.assign(LAB.SECNAME,{cart:'Cartesian form & Argand',polar:'Polar & Euler form',polyroots:'Polynomial roots',demoivre:"De Moivre's theorem",croots:'Roots of complex numbers',direct:'Direct proof',indsum:'Induction: series',inddiv:'Induction: divisibility',indmore:'Induction: inequalities & derivatives',contra:'Proof by contradiction',counter:'Counterexamples'});
 
 /* ---------- formatting ---------- */
 const MIN='−';
@@ -314,8 +319,259 @@ work('counter',[`Claim: ${D.t}.`,first===null?'Every case in range holds. Exampl
 DRAW.counter=draw;
 })();
 
+/* ===================== Complex numbers ===================== */
+const {rgba}=LAB;
+const cl=x=>Math.round(x*1e10)/1e10;
+const TAU=2*Math.PI,PI12=Math.PI/12;
+/* principal argument in (−π, π] */
+const parg=t=>{t=((t%TAU)+TAU)%TAU;if(t>Math.PI+1e-12)t-=TAU;return t;};
+/* kπ/12 as a reduced fraction of π */
+const P12=k=>{if(k===0)return '0';const g=gcd(Math.abs(k),12)||1,n=k/g,d=12/g;return (n<0?MIN:'')+(Math.abs(n)===1?'':Math.abs(n))+'π'+(d===1?'':'/'+d);};
+/* an angle as a fraction of π when it is a multiple of π/12, else a decimal */
+const ang=t=>{const k=Math.round(t/PI12);return Math.abs(t-k*PI12)<1e-9?P12(k):fm(t);};
+/* a + bi as text */
+function cT(a,b){a=cl(a);b=cl(b);if(Math.abs(a)<1e-9)a=0;if(Math.abs(b)<1e-9)b=0;const B=fm(Math.abs(b)),im=(B==='1'?'':B)+'i';if(b===0)return fm(a);if(a===0)return (b<0?MIN:'')+im;return fm(a)+' '+(b<0?MIN:'+')+' '+im;}
+const cMul=(a,b,c,d)=>[a*c-b*d,a*d+b*c],cDiv=(a,b,c,d)=>{const m=c*c+d*d;return [(a*c+b*d)/m,(b*c-a*d)/m];};
+/* modulus as text: exact surd when it is √(integer) */
+function modT(m2){m2=cl(m2);const r=Math.sqrt(m2);if(Number.isInteger(m2)&&!Number.isInteger(cl(r))){let out=1,inn=m2;for(let f=2;f*f<=inn;f++)while(inn%(f*f)===0){inn/=f*f;out*=f;}return (out===1?'':out)+'√'+inn;}return fm(r);}
+const niceStep=(span,target)=>{const raw=span/target,p=Math.pow(10,Math.floor(Math.log10(raw)));for(const m of [1,2,2.5,5,10])if(m*p>=raw-1e-12)return m*p;return 10*p;};
+/* axes with optional equal scaling; returns drawing helpers in data coordinates */
+function axes(cvEl,W,o){o=o||{};const H=o.h||340,{ctx,w,h}=prep(cvEl,H);const L=o.equal?14:36,Rp=14,T=12,B=o.equal?14:24;let pw=w-L-Rp,ph=h-T-B;
+let {x0,x1,y0,y1}=W;if(o.equal){const u=Math.min(pw/(x1-x0),ph/(y1-y0)),xc=(x0+x1)/2,yc=(y0+y1)/2;x0=xc-pw/u/2;x1=xc+pw/u/2;y0=yc-ph/u/2;y1=yc+ph/u/2;}
+const X=x=>L+(x-x0)/(x1-x0)*pw,Y=y=>T+(y1-y)/(y1-y0)*ph;
+const st=o.equal?niceStep(Math.max(x1-x0,y1-y0),8):niceStep(x1-x0,7),sty=o.equal?st:niceStep(y1-y0,6);ctx.font=`10px ${MONO}`;ctx.lineWidth=1;
+for(let g=Math.ceil(x0/st)*st;g<=x1+1e-9;g+=st){ctx.strokeStyle=Math.abs(g)<1e-9?tok('muted'):tok('faint');ctx.beginPath();ctx.moveTo(X(g),T);ctx.lineTo(X(g),T+ph);ctx.stroke();if(Math.abs(g)>1e-9||!o.equal){ctx.fillStyle=tok('muted');ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText(fm(cl(g)),X(g),o.equal?Y(0)+3:T+ph+5);}}
+for(let g=Math.ceil(y0/sty)*sty;g<=y1+1e-9;g+=sty){ctx.strokeStyle=Math.abs(g)<1e-9?tok('muted'):tok('faint');ctx.beginPath();ctx.moveTo(L,Y(g));ctx.lineTo(L+pw,Y(g));ctx.stroke();if(Math.abs(g)>1e-9||!o.equal){ctx.fillStyle=tok('muted');ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(fm(cl(g))+(o.equal?'i':''),o.equal?X(0)-4:L-5,Y(g));}}
+if(o.equal){ctx.fillStyle=tok('muted');ctx.font=`600 11px ${MONO}`;ctx.textAlign='right';ctx.textBaseline='bottom';ctx.fillText('Re',L+pw-2,Y(0)-3);ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText('Im',X(0)+4,T+2);}
+const A={ctx,X,Y,u:pw/(x1-x0)};
+A.arrow=(x,y,col,lw,fx,fy)=>{fx=fx||0;fy=fy||0;const a=X(fx),b=Y(fy),c=X(x),d=Y(y),t=Math.atan2(d-b,c-a),hh=9;ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=lw||2.4;ctx.beginPath();ctx.moveTo(a,b);ctx.lineTo(c,d);ctx.stroke();
+if(Math.hypot(c-a,d-b)>6){ctx.beginPath();ctx.moveTo(c,d);ctx.lineTo(c-hh*Math.cos(t-0.4),d-hh*Math.sin(t-0.4));ctx.lineTo(c-hh*Math.cos(t+0.4),d-hh*Math.sin(t+0.4));ctx.closePath();ctx.fill();}};
+A.dot=(x,y,col,r)=>{ctx.fillStyle=col;ctx.beginPath();ctx.arc(X(x),Y(y),r||4.5,0,7);ctx.fill();};
+A.ring=(x,y,col,r)=>{ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(X(x),Y(y),r||5,0,7);ctx.stroke();};
+A.label=(x,y,t,col,dx,dy)=>{ctx.fillStyle=col;ctx.font=`600 12px ${MONO}`;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(t,X(x)+(dx===undefined?8:dx),Y(y)+(dy===undefined?-10:dy));};
+A.line=(pts,col,lw,dash)=>{ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.beginPath();let pen=false;pts.forEach(p=>{if(!p||!isFinite(p[1])){pen=false;return;}pen?ctx.lineTo(X(p[0]),Y(p[1])):ctx.moveTo(X(p[0]),Y(p[1]));pen=true;});ctx.stroke();ctx.setLineDash([]);};
+A.circle=(r,col,dash)=>{ctx.strokeStyle=col;ctx.lineWidth=1.2;ctx.setLineDash(dash||[4,4]);ctx.beginPath();ctx.arc(X(0),Y(0),r*A.u,0,7);ctx.stroke();ctx.setLineDash([]);};
+A.arc=(r,t0,t1,col)=>{ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(X(0),Y(0),r,-t0,-t1,t1>t0);ctx.stroke();};
+return A;}
+const argGdc=(sec,c,t)=>gdc(sec,c,t);
+/* signed sum of terms like [[2,'z²'],[−1,'z'],[5,'']]: zero terms dropped, coefficient 1 hidden */
+const tj=arr=>{let s='';arr.forEach(([c,v])=>{c=cl(c);if(c===0)return;const a=Math.abs(c),body=(a===1&&v?'':fm(a))+v;s+=s?` ${c<0?MIN:'+'} ${body}`:(c<0?MIN:'')+body;});return s||'0';};
+const pq=x=>x<0?`(${N(x)})`:String(x);
+const rnz=(lo,hi)=>{let x=0;do{x=ri(lo,hi);}while(x===0);return x;};
+const fr=(n,d)=>{if(d<0){n=-n;d=-d;}return LAB.frac(n,d).replace('-',MIN);};
+
+/* ===== Cartesian form and the Argand diagram ===== */
+(function(){
+let key='add';
+presets('#cart-pre',[['add','z + w'],['mul','zw'],['div','z ÷ w'],['conj','z*']],k=>{key=k;draw();},'add');
+const R=ctrls('#cart-ctrls','ca-',[{head:'z = a + bi'},{id:'a',label:'a',min:-4,max:4,step:1,val:3},{id:'b',label:'b',min:-4,max:4,step:1,val:1},{head:'w = c + di'},{id:'c',label:'c',min:-4,max:4,step:1,val:1},{id:'d',label:'d',min:-4,max:4,step:1,val:2}],()=>draw());
+readout('#cart-ro',[['caZ','z'],['caW','w'],['caR','result',1],['caM','what happened']]);
+function draw(){
+R.sync();const [a,b,c,d]=vals(R,'a','b','c','d');let res,lines,note;
+if(key==='add'){res=[a+c,b+d];lines=[`z + w = (${a} + ${c}) + (${b} + ${d})i`,`= ${cT(...res)}: add real parts, add imaginary parts`];note='vectors added nose to tail: the diagonal of the parallelogram';}
+else if(key==='mul'){res=cMul(a,b,c,d);lines=[`zw = (${cT(a,b)})(${cT(c,d)})`,`= ${a*c} + ${a*d}i + ${b*c}i + ${b*d}i²`,`i² = −1, so = ${cT(...res)}`];note='moduli multiply, arguments add (see the polar topic)';}
+else if(key==='div'){if(c===0&&d===0){res=[NaN,NaN];lines=['w = 0: division by zero is undefined'];note='undefined';}else{res=cDiv(a,b,c,d);const m=c*c+d*d;lines=[`Multiply top and bottom by w* = ${cT(c,-d)}`,`(${cT(a,b)})(${cT(c,-d)}) = ${cT(a*c+b*d,b*c-a*d)}`,`w w* = ${pq(c)}² + ${pq(d)}² = ${m}`,`z ÷ w = ${cT(a*c+b*d,b*c-a*d)} over ${m} = ${cT(...res)}`];note='moduli divide, arguments subtract';}}
+else{res=[a,-b];lines=[`z* = ${cT(a,-b)}: change the sign of the imaginary part`,`z z* = ${pq(a)}² + ${pq(b)}² = ${a*a+b*b}, always real`];note='reflection in the real axis';}
+const pts=[[a,b],[c,d],res].filter(p=>isFinite(p[0]));const M=Math.max(4.5,...pts.map(p=>Math.max(Math.abs(p[0]),Math.abs(p[1]))))*1.15;
+const A=axes($('#cart-cv'),{x0:-M,x1:M,y0:-M,y1:M},{equal:true});
+if(key==='add'){A.line([[a,b],res],tok('amber'),1.4,[5,4]);A.line([[c,d],res],tok('accent'),1.4,[5,4]);}
+if(key==='conj')A.line([[a,b],[a,-b]],tok('muted'),1.2,[3,4]);
+A.arrow(a,b,tok('accent'));A.label(a,b,'z',tok('accent'));
+if(key!=='conj'){A.arrow(c,d,tok('amber'));A.label(c,d,'w',tok('amber'));}
+if(isFinite(res[0])){A.arrow(res[0],res[1],tok('good'),3);A.label(res[0],res[1],key==='add'?'z + w':key==='mul'?'zw':key==='div'?'z/w':'z*',tok('good'));}
+put('caZ',cT(a,b));put('caW',key==='conj'?'(not used)':cT(c,d));put('caR',isFinite(res[0])?cT(...res):'undefined');put('caM',note);
+const ic=x=>cT(...x).replace(/−/g,'-');
+argGdc('cart',`Run-Matrix (Complex Mode a+bi): (${ic([a,b])})${key==='add'?'+':key==='mul'?'×':key==='div'?'÷':''}${key==='conj'?' → OPTN → COMPLEX → Conjg':'('+ic([c,d])+')'}; i is SHIFT 0`,`MODE a+bi: (${ic([a,b])})${key==='add'?'+':key==='mul'?'*':key==='div'?'/':''}${key==='conj'?' → MATH → CMPLX → 1:conj(':'('+ic([c,d])+')'}; i is 2nd .`);
+work('cart',lines);
+}
+DRAW.cart=draw;
+})();
+
+/* ===== Modulus-argument (polar) and Euler form ===== */
+(function(){
+let key='mul';
+presets('#polar-pre',[['mul','zw'],['div','z ÷ w']],k=>{key=k;draw();},'mul');
+const R=ctrls('#polar-ctrls','po-',[{head:'z = r₁ cis θ₁'},{id:'r1',label:'r₁',min:0.5,max:3,step:0.25,val:2},{id:'t1',label:'θ₁',min:-11,max:12,step:1,val:2,fmt:P12},{head:'w = r₂ cis θ₂'},{id:'r2',label:'r₂',min:0.5,max:3,step:0.25,val:1.5},{id:'t2',label:'θ₂',min:-11,max:12,step:1,val:3,fmt:P12}],()=>draw());
+readout('#polar-ro',[['poZ','z'],['poW','w'],['poR','result, modulus-argument',1],['poP','principal argument',1],['poC','result, Cartesian']]);
+function draw(){
+R.sync();const [r1,k1,r2,k2]=vals(R,'r1','t1','r2','t2');const t1=k1*PI12,t2=k2*PI12;
+const r=key==='mul'?r1*r2:r1/r2,kk=key==='mul'?k1+k2:k1-k2,t=kk*PI12,pa=parg(t),kp=Math.round(pa/PI12);
+const M=Math.max(3.2,r1,r2,r)*1.12;const A=axes($('#polar-cv'),{x0:-M,x1:M,y0:-M,y1:M},{equal:true});
+A.circle(1,tok('muted'));
+const pz=[r1*Math.cos(t1),r1*Math.sin(t1)],pw_=[r2*Math.cos(t2),r2*Math.sin(t2)],pr=[r*Math.cos(t),r*Math.sin(t)];
+A.arc(22,0,t1,tok('accent'));A.arc(30,0,t2,tok('amber'));A.arc(38,0,pa,tok('good'));
+A.arrow(...pz,tok('accent'));A.label(...pz,'z',tok('accent'));A.arrow(...pw_,tok('amber'));A.label(...pw_,'w',tok('amber'));A.arrow(...pr,tok('good'),3);A.label(...pr,key==='mul'?'zw':'z/w',tok('good'));
+put('poZ',`${fm(r1)} cis ${P12(k1)}  =  ${cT(...pz)}`);put('poW',`${fm(r2)} cis ${P12(k2)}  =  ${cT(...pw_)}`);
+put('poR',`${fm(r)} cis(${P12(k1)} ${key==='mul'?'+':MIN} ${k2<0?'('+P12(k2)+')':P12(k2)}) = ${fm(r)} cis ${P12(kk)}`);
+put('poP',kk===kp?`${P12(kp)} (already in (−π, π])`:`${P12(kk)} ${kk>kp?MIN:'+'} 2π = ${P12(kp)}`);put('poC',cT(...pr));
+argGdc('polar',`Run-Matrix, SET UP Complex Mode r∠θ, Angle Rad: (${fm(r1)}∠${P12(k1).replace('−','-')})${key==='mul'?'×':'÷'}(${fm(r2)}∠${P12(k2).replace('−','-')}); ∠ is SHIFT ×`,`MODE re^(θi), RADIAN: (${fm(r1)}e^(${P12(k1).replace('−','-')}i))${key==='mul'?'*':'/'}(${fm(r2)}e^(${P12(k2).replace('−','-')}i))`);
+work('polar',[`${key==='mul'?'Multiply':'Divide'} the moduli: ${fm(r1)} ${key==='mul'?'×':'÷'} ${fm(r2)} = ${fm(r)}`,`${key==='mul'?'Add':'Subtract'} the arguments: ${P12(k1)} ${key==='mul'?'+':MIN} ${k2<0?'('+P12(k2)+')':P12(k2)} = ${P12(kk)}`,`In Euler form: ${fm(r1)}e^(i${P12(k1)}) ${key==='mul'?'×':'÷'} ${fm(r2)}e^(i${P12(k2)}) = ${fm(r)}e^(i${P12(kp)})`]);
+}
+DRAW.polar=draw;
+})();
+
+/* ===== Polynomial roots: conjugate pairs ===== */
+(function(){
+const R=ctrls('#polyroots-ctrls','pr-',[{head:'Complex root p + qi'},{id:'p',label:'p',min:-3,max:3,step:0.5,val:1},{id:'q',label:'q',min:0,max:3,step:0.5,val:2},{head:'Real root'},{id:'r',label:'r',min:-3,max:3,step:0.5,val:2}],()=>draw());
+document.getElementById('polyroots-pre').innerHTML='<p class="small">A cubic with real coefficients: its non-real roots come as a conjugate pair.</p>';
+readout('#polyroots-ro',[['prQ','quadratic factor (z − α)(z − α*)'],['prP','the cubic',1],['prS','sum of roots = −(coefficient of z²)'],['prX','product of roots = −(constant)'],['prN','graph of y = f(x)']]);
+function draw(){
+R.sync();const [p,q,r]=vals(R,'p','q','r');const s2=p*p+q*q,A_=-(r+2*p),B_=2*p*r+s2,C_=-r*s2;
+const M=Math.max(3.5,Math.abs(p)+1,q+1,Math.abs(r)+1);const A=axes($('#polyroots-cv'),{x0:-M,x1:M,y0:-M,y1:M},{equal:true});
+if(q>0)A.line([[p,q],[p,-q]],tok('muted'),1.2,[4,4]);A.dot(p,q,tok('accent'),6);A.dot(p,-q,tok('accent'),6);A.dot(r,0,tok('amber'),6);
+A.label(p,q,'p + qi',tok('accent'));if(q>0)A.label(p,-q,'p − qi',tok('accent'),8,12);A.label(r,0,'r',tok('amber'),6,14);
+const f=x=>(x-r)*(x*x-2*p*x+s2);const pts=[];for(let i=0;i<=300;i++){const x=-5+10*i/300;pts.push([x,f(x)]);}
+let lo=Infinity,hi=-Infinity;pts.forEach(([,y])=>{if(Math.abs(y)<60){lo=Math.min(lo,y);hi=Math.max(hi,y);}});lo=Math.min(lo,-2);hi=Math.max(hi,2);
+const G=axes($('#polyroots-graph'),{x0:-5,x1:5,y0:lo-1,y1:hi+1},{h:220});G.line(pts,tok('accent'),2.4);G.dot(r,0,tok('amber'),5.5);if(q===0){G.dot(p,0,tok('accent'),5.5);}
+const zt=(c,v)=>{c=cl(c);if(c===0)return '';const a=Math.abs(c);return ` ${c<0?MIN:'+'} ${a===1&&v?'':fm(a)}${v}`;};
+put('prQ',q===0?`(z ${p<0?'+':MIN} ${fm(Math.abs(p))})²: q = 0 makes a repeated real root`:`z²${zt(-2*p,'z')}${zt(s2,'')}`);
+put('prP',`z³${zt(A_,'z²')}${zt(B_,'z')}${zt(C_,'')}`);put('prS',`${fm(r)} + 2(${fm(p)}) = ${fm(-A_)}`);put('prX',`${fm(r)} × ${fm(s2)} = ${fm(-C_)}`);
+put('prN',q===0?'touches or crosses at every real root':'crosses the x-axis once, at x = r; the complex pair is invisible on a real graph');
+argGdc('polyroots',`MENU → Equation → F2 POLYNOMIAL → degree 3, coefficients 1, ${fm(A_)}, ${fm(B_)}, ${fm(C_)}, SOLVE (Complex Mode a+bi)`,`TI-84 Plus CE: APPS → PlySmlt2 → POLYNOMIAL ROOT FINDER, order 3, a+bi, coefficients 1, ${fm(A_)}, ${fm(B_)}, ${fm(C_)}`);
+work('polyroots',[`Real coefficients ⇒ if p + qi is a root, so is p − qi.`,`(z − (p + qi))(z − (p − qi)) = (z − p)² + q² = z² − 2pz + (p² + q²)`,`Here: z² ${-2*p<0?MIN:'+'} ${fm(Math.abs(2*p))}z + ${fm(s2)}, times (z ${r<0?'+':MIN} ${fm(Math.abs(r))})`]);
+}
+DRAW.polyroots=draw;
+})();
+
+/* ===== De Moivre's theorem: powers spiral ===== */
+(function(){
+const R=ctrls('#demoivre-ctrls','dm-',[{head:'z = r cis θ'},{id:'r',label:'r',min:0.8,max:1.25,step:0.05,val:1.1},{id:'t',label:'θ',min:1,max:12,step:1,val:2,fmt:P12},{head:'Power'},{id:'n',label:'n',min:1,max:12,step:1,val:6}],()=>draw());
+document.getElementById('demoivre-pre').innerHTML='<p class="small">Each multiplication by z turns by θ and stretches by r. The dots are z⁰, z¹, z², …</p>';
+readout('#demoivre-ro',[['dmZ','z'],['dmN','zⁿ = rⁿ cis nθ',1],['dmP','principal argument',1],['dmC','zⁿ, Cartesian'],['dmR','real or imaginary?']]);
+function draw(){
+R.sync();const [r,k,n]=vals(R,'r','t','n');const t=k*PI12;
+const pts=[];for(let j=0;j<=n;j++)pts.push([r**j*Math.cos(j*t),r**j*Math.sin(j*t)]);
+const M=Math.max(1.3,...pts.map(p=>Math.hypot(p[0],p[1])))*1.15;const A=axes($('#demoivre-cv'),{x0:-M,x1:M,y0:-M,y1:M},{equal:true});
+A.circle(1,tok('muted'));A.line(pts,rgba('accent',0.5),1.6);pts.forEach((p,j)=>{A.dot(p[0],p[1],j===n?tok('good'):tok('accent'),j===n?6:3.5);});
+A.arrow(pts[1][0],pts[1][1],tok('accent'),2);A.label(pts[1][0],pts[1][1],'z',tok('accent'));A.arrow(pts[n][0],pts[n][1],tok('good'),3);A.label(pts[n][0],pts[n][1],'z'+(n>1?(['','','²','³','⁴','⁵','⁶','⁷','⁸','⁹','¹⁰','¹¹','¹²'][n]):''),tok('good'));
+const kk=n*k,pa=parg(kk*PI12),kp=Math.round(pa/PI12),rn_=r**n,re=rn_*Math.cos(kk*PI12),im=rn_*Math.sin(kk*PI12);
+put('dmZ',`${fm(r)} cis ${P12(k)}`);put('dmN',`${fm(r)}${['','','²','³','⁴','⁵','⁶','⁷','⁸','⁹','¹⁰','¹¹','¹²'][n]||'^'+n} cis(${n} × ${P12(k)}) = ${fm(rn_)} cis ${P12(kk)}`);
+put('dmP',P12(kp));put('dmC',cT(re,im));
+put('dmR',kp%12===0?'real: nθ is a multiple of π':kp%6===0?'purely imaginary: nθ is an odd multiple of π/2':'neither');
+argGdc('demoivre',`Run-Matrix, Complex Mode r∠θ, Rad: (${fm(r)}∠${P12(k)})^${n}`,`MODE re^(θi), RADIAN: (${fm(r)}e^(${P12(k)}i))^${n}`);
+work('demoivre',[`De Moivre: (r cis θ)ⁿ = rⁿ cis nθ`,`(${fm(r)} cis ${P12(k)})^${n} = ${fm(rn_)} cis ${P12(kk)}`,kk===kp?'':`Reduce the argument: ${P12(kk)} → ${P12(kp)} (subtract multiples of 2π)`,`= ${cT(re,im)}`].filter(Boolean));
+}
+DRAW.demoivre=draw;
+})();
+
+/* ===== nth roots ===== */
+(function(){
+const MODS=[1,2,8,16,27,32,64,81];
+const R=ctrls('#croots-ctrls','cr-',[{head:'Solve zⁿ = w'},{id:'n',label:'n',min:2,max:8,step:1,val:3},{id:'m',label:'|w|',min:0,max:7,step:1,val:2,fmt:i=>String(MODS[i])},{id:'t',label:'arg w',min:0,max:23,step:1,val:6,fmt:P12}],()=>draw());
+document.getElementById('croots-pre').innerHTML='<p class="small">The n roots sit on one circle, equally spaced 2π/n apart: the corners of a regular polygon.</p>';
+readout('#croots-ro',[['crW','w'],['crM','modulus of every root'],['crF','first root (k = 0)',1],['crA','arguments',1],['crS','sum of the roots']]);
+function draw(){
+R.sync();const n=+R.n.value,W=MODS[+R.m.value],k=+R.t.value;const th=k*PI12,rr=Math.pow(W,1/n);
+const roots=[];for(let j=0;j<n;j++){const a=(th+TAU*j)/n;roots.push([rr*Math.cos(a),rr*Math.sin(a),a]);}
+const M=Math.max(rr,Math.min(W,rr*2.2),1.3)*1.18;const A=axes($('#croots-cv'),{x0:-M,x1:M,y0:-M,y1:M},{equal:true});
+A.circle(rr,tok('accent'));const wx=W*Math.cos(th),wy=W*Math.sin(th);
+if(W<=M*1.05){A.arrow(wx,wy,tok('amber'),2.4);A.label(wx,wy,'w',tok('amber'));}
+else{const s=M*0.92/W;A.arrow(wx*s,wy*s,tok('amber'),2.4);A.label(wx*s,wy*s,'w, scaled down',tok('amber'),10,14);}
+A.line(roots.concat([roots[0]]).map(p=>[p[0],p[1]]),rgba('accent',0.6),1.6);roots.forEach((p,j)=>A.dot(p[0],p[1],j===0?tok('good'):tok('accent'),j===0?6.5:5));
+const argList=roots.map(p=>ang(parg(p[2])));
+put('crW',`${W} cis ${P12(k)}  =  ${cT(wx,wy)}`);put('crM',`${W}^(1/${n}) = ${fm(rr)}`);put('crF',`${fm(rr)} cis ${ang(th/n)} = ${cT(roots[0][0],roots[0][1])}`);
+put('crA',argList.join(', ')+`  (spacing ${24%n===0?P12(24/n):'2π/'+n})`);put('crS','0, for every n ≥ 2');
+argGdc('croots',`Check a root: Run-Matrix, (${fm(rr)}∠${ang(th/n)})^${n} should give ${W}∠${P12(k)}`,`Check a root: (${fm(rr)}e^(${ang(th/n)}i))^${n} should give ${W}e^(${P12(k)}i)`);
+work('croots',[`w = ${W} cis(${P12(k)} + 2kπ): adding 2kπ doesn't change w`,`z = ${W}^(1/${n}) cis((${P12(k)} + 2kπ) ÷ ${n}), k = 0, 1, …, ${n-1}`,`= ${fm(rr)} cis(${ang(th/n)} + ${24%n===0?P12(24/n):'2π/'+n} × k)`]);
+}
+DRAW.croots=draw;
+})();
+
 /* ===== Practice generators ===== */
 const GEN={
+cart:[
+()=>{const a=rnz(-5,5),b=rnz(-5,5),c=rnz(-5,5),d=rnz(-5,5),re=Math.random()<0.5;const [x,y]=cMul(a,b,c,d);const ans=re?x:y;
+return {q:`Find the ${re?'real':'imaginary'} part of (${cT(a,b)})(${cT(c,d)}).`,ans,exact:true,
+work:[`Expand: ${tj([[a*c,''],[a*d,'i'],[b*c,'i'],[b*d,'i²']])}.`,`i² = −1: (${a*c} ${b*d<0?'+':MIN} ${Math.abs(b*d)}) + (${a*d} ${b*c<0?MIN:'+'} ${Math.abs(b*c)})i = ${cT(x,y)}.`,`${re?'Real':'Imaginary'} part = <b>${fm(ans)}</b>.`],tip:`FOIL, then replace i² by −1. Real part: ac − bd. Imaginary part: ad + bc.`};},
+()=>{const a=rnz(-6,6),b=rnz(-6,6),c=rnz(-4,4),d=rnz(-4,4),re=Math.random()<0.5;const m=c*c+d*d,[x,y]=cDiv(a,b,c,d);const ans=re?x:y;
+return {q:`Write (${cT(a,b)}) ÷ (${cT(c,d)}) in the form x + yi and give the value of ${re?'x':'y'}.`,ans,
+work:[`Multiply top and bottom by the conjugate ${cT(c,-d)}.`,`Top: (${cT(a,b)})(${cT(c,-d)}) = ${cT(a*c+b*d,b*c-a*d)}. Bottom: ${pq(c)}² + ${pq(d)}² = ${m}.`,`${re?'x':'y'} = ${fr(re?a*c+b*d:b*c-a*d,m)} = <b>${sf(ans)}</b>.`],tip:`Divide by realising the denominator: multiply by w*. w w* = c² + d² is always real.`};},
+()=>{const k=pick([2,3,-2,-3,4]),x=rnz(-4,4),y=rnz(-4,4),re=Math.random()<0.5;const p=(1+k)*x,q=(1-k)*y;
+return {q:`Find the complex number z that satisfies z ${k<0?MIN:'+'} ${Math.abs(k)}z* = ${cT(p,q)}, and give ${re?'Re(z)':'Im(z)'}.`,ans:re?x:y,exact:true,
+work:[`Let z = x + yi, so z* = x − yi.`,`(x + yi) ${k<0?MIN:'+'} ${Math.abs(k)}(x − yi) = ${tj([[1+k,'x'],[1-k,'yi']])}.`,`Real parts: ${tj([[1+k,'x']])} = ${p} ⇒ x = ${x}. Imaginary parts: ${tj([[1-k,'y']])} = ${q} ⇒ y = ${y}.`,`z = ${cT(x,y)}, so ${re?'Re':'Im'}(z) = <b>${re?x:y}</b>.`],tip:`Two unknowns, two equations: equate real parts and imaginary parts separately.`};},
+()=>{const n=ri(5,60),m=ri(5,60);const v=[1,0,-1,0],ans=v[n%4]+v[m%4];const iv=['1','i','−1','−i'];
+return {q:`Find the real part of i<sup>${n}</sup> + i<sup>${m}</sup>.`,ans,exact:true,
+work:[`Powers of i repeat every 4: i, −1, −i, 1.`,`${n} = 4 × ${Math.floor(n/4)} + ${n%4}, so i<sup>${n}</sup> = ${iv[n%4]}. ${m} = 4 × ${Math.floor(m/4)} + ${m%4}, so i<sup>${m}</sup> = ${iv[m%4]}.`,`Real part = <b>${ans}</b>.`],tip:`Divide the power by 4 and use the remainder: 0 → 1, 1 → i, 2 → −1, 3 → −i.`};},
+()=>{let x=ri(1,5),y=rnz(-5,5);const a=x*x-y*y,b=2*x*y;
+return {q:`The square roots of ${cT(a,b)} are ±(x + yi), where x &gt; 0. Find x.`,ans:x,exact:true,
+work:[`(x + yi)² = x² − y² + 2xyi = ${cT(a,b)}.`,`x² − y² = ${a} and xy = ${b/2}.`,`Substitute y = ${b/2}/x: x⁴ ${-a<0?MIN:'+'} ${Math.abs(a)}x² − ${b*b/4} = 0 ⇒ x² = ${x*x} (x² must be positive).`,`x = <b>${x}</b>, y = ${y}: the roots are ±(${cT(x,y)}).`],tip:`Square roots of a + bi: set (x + yi)² = a + bi, equate parts, and get a quadratic in x².`};},
+()=>{const a=rnz(-4,4),b=rnz(-4,4),c=rnz(-3,3),d=rnz(-3,3);const [p,q]=cMul(a,b,c,d);
+return {q:`Find the real numbers a and b such that (a + bi)(${cT(c,d)}) = ${cT(p,q)}. Give a.`,ans:a,exact:true,
+work:[`a + bi = (${cT(p,q)}) ÷ (${cT(c,d)}).`,`Multiply top and bottom by ${cT(c,-d)}: (${cT(p*c+q*d,q*c-p*d)}) ÷ ${c*c+d*d}.`,`= ${cT(a,b)}, so a = <b>${a}</b>.`],tip:`An unknown complex factor: divide. Or expand and equate real and imaginary parts.`};}
+],
+polar:[
+()=>{const a=rnz(-6,6),b=rnz(-6,6);const ans=Math.hypot(a,b);
+return {q:`Find |${cT(a,b)}|.`,ans,work:[`|a + bi| = √(a² + b²).`,`√(${a*a} + ${b*b}) = ${modT(a*a+b*b)}.`,`= <b>${sf(ans)}</b>.`],tip:`Modulus = distance from O: Pythagoras on the Argand diagram.`};},
+()=>{const a=rnz(-5,5),b=rnz(-5,5);const ans=Math.atan2(b,a);const quad=a>0?'first or fourth':b>0?'second':'third';
+return {q:`Find arg(${cT(a,b)}), in radians, with −π &lt; arg ≤ π.`,ans,
+work:[`The point (${a}, ${b}) is in the ${a>0&&b>0?'first':a<0&&b>0?'second':a<0&&b<0?'third':'fourth'} quadrant.`,`Reference angle: arctan(${Math.abs(b)}/${Math.abs(a)}) = ${sf(Math.atan(Math.abs(b/a)),4)}.`,a>0?`First or fourth quadrant: arg = ${b<0?'−':''}${sf(Math.atan(Math.abs(b/a)),4)} = <b>${sf(ans)}</b>.`:`${b>0?'Second quadrant: π −':'Third quadrant: −(π −'} ${sf(Math.atan(Math.abs(b/a)),4)}${b>0?'':')'} = <b>${sf(ans)}</b>.`],tip:`Sketch it first. arctan(b/a) alone is only right in the first and fourth quadrants.`};},
+()=>{const r1=pick([2,3,0.5]),r2=pick([2,3,4,0.5]),n=ri(2,4),m=ri(1,3);const ans=r1**n*r2**m;if(ans>2000)return GEN.polar[2]();
+const wm=m===1?'':`<sup>${m}</sup>`;return {q:`|z| = ${r1} and |w| = ${r2}. Find |z<sup>${n}</sup>w${wm}|.`,ans,
+work:[`Moduli multiply: |z<sup>${n}</sup>w${wm}| = |z|<sup>${n}</sup>|w|${wm}.`,`= ${r1}<sup>${n}</sup> × ${r2}${wm}.`,`= <b>${sf(ans)}</b>.`],tip:`|zw| = |z||w| and |zⁿ| = |z|ⁿ. No need to find z or w.`};},
+()=>{const k1=rnz(-11,12),k2=rnz(-11,12),mul=Math.random()<0.5;const kk=mul?k1+k2:k1-k2,pa=parg(kk*PI12),kp=Math.round(pa/PI12);const ans=kp/12;
+return {q:`arg z = ${P12(k1)} and arg w = ${P12(k2)}. Find arg(${mul?'zw':'z/w'}) in the form kπ with −1 &lt; k ≤ 1, and give k.`,ans,
+work:[`Arguments ${mul?'add':'subtract'}: ${P12(k1)} ${mul?'+':MIN} ${k2<0?'('+P12(k2)+')':P12(k2)} = ${P12(kk)}.`,kk===kp?`Already between −π and π.`:`Bring into (−π, π]: ${P12(kk)} ${kk>kp?MIN:'+'} 2π = ${P12(kp)}.`,`k = <b>${fr(kp,12)}</b>.`],tip:`Multiply ⇒ add arguments. Divide ⇒ subtract. Then add or subtract 2π to get the principal value.`};},
+()=>{const r=pick([2,3,4,6,10]),k=pick([2,3,4,6,8,9,10,-2,-3,-4,-8]),re=Math.random()<0.5;const ans=re?r*Math.cos(k*PI12):r*Math.sin(k*PI12);
+return {q:`z = ${r} cis(${P12(k)}). Find ${re?'Re(z)':'Im(z)'}.`,ans,
+work:[`r cis θ = r cos θ + i r sin θ.`,`${re?'Re':'Im'}(z) = ${r} ${re?'cos':'sin'}(${P12(k)}).`,`= <b>${sf(ans)}</b>.`],tip:`cis θ = cos θ + i sin θ: cos gives the real part, sin the imaginary part.`};},
+()=>{const a=rnz(-4,4),b=rnz(-4,4);const ans=a*a+b*b;
+return {q:`z = ${cT(a,b)}. Find z z*.`,ans,exact:true,work:[`z* = ${cT(a,-b)}.`,`z z* = a² + b² = ${a*a} + ${b*b}.`,`= <b>${ans}</b> = |z|².`],tip:`z z* = |z|², always a non-negative real number.`};}
+],
+polyroots:[
+()=>{const p=rnz(-4,4),q=ri(1,5),askc=Math.random()<0.5;const b=-2*p,c=p*p+q*q;
+return {q:`The quadratic z² + bz + c = 0, with b and c real, has a root ${cT(p,q)}. Find ${askc?'c':'b'}.`,ans:askc?c:b,exact:true,
+work:[`Real coefficients ⇒ ${cT(p,-q)} is also a root.`,`Sum of roots = ${2*p} = −b ⇒ b = ${b}.`,`Product = (${cT(p,q)})(${cT(p,-q)}) = ${p*p} + ${q*q} = ${c} = c.`,`${askc?'c':'b'} = <b>${askc?c:b}</b>.`],tip:`Conjugate pair p ± qi gives the factor z² − 2pz + (p² + q²).`};},
+()=>{const p=rnz(-3,3),q=ri(1,3),r=rnz(-4,4),w=pick(['A','B','C']);const s2=p*p+q*q,A=-(r+2*p),B=2*p*r+s2,Cc=-r*s2;const ans={A,B,C:Cc}[w];
+return {q:`The cubic z³ + Az² + Bz + C = 0 has real coefficients, a real root ${r} and a root ${cT(p,q)}. Find ${w}.`,ans,exact:true,
+work:[`The roots are ${r}, ${cT(p,q)} and ${cT(p,-q)}.`,`Quadratic factor: z² ${-2*p<0?MIN:'+'} ${Math.abs(2*p)}z + ${s2}. Multiply by (z ${r<0?'+':MIN} ${Math.abs(r)}).`,`${tj([[1,'z³'],[A,'z²'],[B,'z'],[Cc,'']])}, so ${w} = <b>${ans}</b>.`],tip:`Build the quadratic from the conjugate pair, then multiply by the linear factor.`};},
+()=>{const p=rnz(-3,3),q=ri(1,3),r=rnz(-4,4);const s2=p*p+q*q,A=-(r+2*p),B=2*p*r+s2,Cc=-r*s2;
+return {q:`Given that ${cT(p,q)} is a root of ${tj([[1,'z³'],[A,'z²'],[B,'z'],[Cc,'']])} = 0, find the real root.`,ans:r,exact:true,
+work:[`${cT(p,-q)} is also a root (real coefficients).`,`Product of roots = −(constant) = ${-Cc}. The pair multiplies to ${s2}.`,`Real root = ${-Cc} ÷ ${s2} = <b>${r}</b>.`],tip:`Fastest route: product of all roots = (−1)ⁿ × constant ÷ leading coefficient.`};},
+()=>{const c=[rnz(1,3),ri(-9,9),ri(-9,9),ri(-9,9),rnz(-9,9)],sum=Math.random()<0.5;const ans=sum?-c[1]/c[0]:c[4]/c[0];
+const t=(k,v)=>{if(k===0)return '';return ` ${k<0?MIN:'+'} ${Math.abs(k)===1&&v?'':Math.abs(k)}${v}`;};
+return {q:`Find the ${sum?'sum':'product'} of the roots of ${c[0]===1?'':c[0]}z⁴${t(c[1],'z³')}${t(c[2],'z²')}${t(c[3],'z')}${t(c[4],'')} = 0.`,ans,
+work:[sum?`Sum of roots = −(coefficient of z³) ÷ (leading coefficient).`:`Product of roots = (−1)⁴ × constant ÷ leading coefficient.`,sum?`= −(${c[1]}) ÷ ${c[0]}.`:`= ${c[4]} ÷ ${c[0]}.`,`= <b>${fr(sum?-c[1]:c[4],c[0])}</b>.`],tip:`Degree n: sum = −aₙ₋₁/aₙ, product = (−1)ⁿa₀/aₙ. Complex roots are included.`};},
+()=>{const A=ri(-6,6),B=ri(-8,8),Cc=rnz(-9,9);const ans=A*A-2*B;
+return {q:`α, β and γ are the roots of ${tj([[1,'z³'],[A,'z²'],[B,'z'],[Cc,'']])} = 0. Find α² + β² + γ².`,ans,exact:true,
+work:[`α + β + γ = ${-A}, αβ + βγ + γα = ${B}.`,`α² + β² + γ² = (α + β + γ)² − 2(αβ + βγ + γα).`,`= ${A*A} − ${2*B<0?'('+2*B+')':2*B} = <b>${ans}</b>.`],tip:`Sum of squares = (sum)² − 2(sum of pairs). No need to find the roots.`};}
+],
+demoivre:[
+()=>{const n=ri(3,12);const ans=Math.round(2**(n/2)*Math.cos(n*Math.PI/4)*1e9)/1e9;
+return {q:`Find the real part of (1 + i)<sup>${n}</sup>.`,ans,exact:true,
+work:[`1 + i = √2 cis(π/4).`,`(1 + i)<sup>${n}</sup> = (√2)<sup>${n}</sup> cis(${P12(3*n)}) = ${n%2?'√2 × '+2**((n-1)/2):2**(n/2)} cis(${P12(Math.round(parg(3*n*PI12)/PI12))}).`,`Real part = ${n%2?'√2 × '+2**((n-1)/2):2**(n/2)} × cos(${P12(Math.round(parg(3*n*PI12)/PI12))}) = <b>${sf(ans)}</b>.`],tip:`Convert to polar, apply De Moivre, convert back. Never expand a binomial to a high power.`};},
+()=>{const n=ri(2,8),mod=Math.random()<0.5;if(mod){const ans=2**n;return {q:`Find |(√3 + i)<sup>${n}</sup>|.`,ans,exact:true,work:[`|√3 + i| = √(3 + 1) = 2.`,`|z<sup>${n}</sup>| = |z|<sup>${n}</sup> = 2<sup>${n}</sup>.`,`= <b>${ans}</b>.`],tip:`|zⁿ| = |z|ⁿ: find the modulus first, then raise it.`};}
+const kk=2*n,kp=Math.round(parg(kk*PI12)/PI12);return {q:`arg((√3 + i)<sup>${n}</sup>) = kπ with −1 &lt; k ≤ 1. Find k.`,ans:kp/12,work:[`arg(√3 + i) = π/6.`,`arg(z<sup>${n}</sup>) = ${n} × π/6 = ${P12(kk)}${kk===kp?'':`, which reduces to ${P12(kp)}`}.`,`k = <b>${fr(kp,12)}</b>.`],tip:`arg(zⁿ) = n arg z, then reduce into (−π, π].`};},
+()=>{let p=ri(1,11),q=pick([3,4,5,6,8,12]);if(p%q===0)p++;const g=gcd(p,q);const ans=q/g;
+return {q:`z = cis(${p===1?'':p}π/${q}). Find the smallest positive integer n for which zⁿ is real.`,ans,exact:true,
+work:[`zⁿ = cis(${p===1?'':p}nπ/${q}). It is real when the argument is a multiple of π.`,`${p}n/${q} must be an integer.`,`Smallest n = ${q} ÷ gcd(${p}, ${q}) = <b>${ans}</b>.`],tip:`zⁿ real ⇔ nθ = kπ. zⁿ purely imaginary ⇔ nθ = π/2 + kπ.`};},
+()=>{const c=pick([0.2,0.4,0.5,0.6,0.8,-0.3,-0.5,1/3]);const ans=4*c**3-3*c;
+return {q:`Given that cos θ = ${c===1/3?'1/3':String(c).replace('-',MIN)}, use cos 3θ = 4cos³θ − 3cos θ to find cos 3θ.`,ans,
+work:[`De Moivre: cos 3θ = Re((cos θ + i sin θ)³) = cos³θ − 3cos θ sin²θ = 4cos³θ − 3cos θ.`,`= 4(${sf(c,4)})³ − 3(${sf(c,4)}).`,`= <b>${sf(ans)}</b>.`],tip:`Real part of the cube gives cos 3θ; imaginary part gives sin 3θ = 3sin θ − 4sin³θ.`};},
+()=>{const r=pick([1,2,0.5]),k=pick([1,2,3,4,5,-1,-2]),n=ri(2,6),re=Math.random()<0.5;const ans=r**n*(re?Math.cos(n*k*PI12):Math.sin(n*k*PI12));
+return {q:`z = ${r===1?'':r+' '}cis(${P12(k)}). Find ${re?'Re':'Im'}(z<sup>${n}</sup>).`,ans,
+work:[`z<sup>${n}</sup> = ${r===1?'':r+'<sup>'+n+'</sup> '}cis(${n} × ${P12(k)}) = ${fm(r**n)} cis(${P12(n*k)}).`,`${re?'Re':'Im'} = ${fm(r**n)} ${re?'cos':'sin'}(${P12(n*k)}).`,`= <b>${sf(ans)}</b>.`],tip:`Power the modulus, multiply the argument.`};},
+()=>{const s=pick([0.2,0.3,0.5,0.6,-0.4]);const ans=3*s-4*s**3;
+return {q:`Given that sin θ = ${String(s).replace('-',MIN)}, find sin 3θ.`,ans,
+work:[`Im((cos θ + i sin θ)³) = 3cos²θ sin θ − sin³θ = 3(1 − sin²θ)sin θ − sin³θ = 3sin θ − 4sin³θ.`,`= 3(${s}) − 4(${s})³.`,`= <b>${sf(ans)}</b>.`],tip:`Expand (c + is)³, take the imaginary part, replace cos² by 1 − sin².`};}
+],
+croots:[
+()=>{const n=pick([2,3,4,5,6]),R=pick([16,32,64,81,8,27,243,729]);const ans=Math.pow(R,1/n);
+return {q:`Find the modulus of each root of z<sup>${n}</sup> = ${R}i.`,ans,
+work:[`|${R}i| = ${R}.`,`Every root has modulus ${R}<sup>1/${n}</sup>.`,`= <b>${sf(ans)}</b>.`],tip:`All n roots lie on one circle, radius |w|^(1/n).`};},
+()=>{const n=pick([2,3,4,5,6]),k=ri(1,23);const ans=k/(12*n);
+return {q:`The roots of z<sup>${n}</sup> = 8 cis(${P12(k)}) are written r cis θ. The root with the smallest positive argument has θ = kπ. Find k.`,ans,
+work:[`z = 8<sup>1/${n}</sup> cis((${P12(k)} + 2mπ) ÷ ${n}).`,`m = 0 gives the smallest positive argument: ${P12(k)} ÷ ${n}.`,`k = <b>${fr(k,12*n)}</b>.`],tip:`Divide the argument by n for the first root, then add 2π/n for each of the others.`};},
+()=>{const n=pick([3,4,6,2]),R=pick([8,16,27,64,1]),k=pick([3,6,9,12,4,8]);const rr=Math.pow(R,1/n),ans=rr*Math.cos(k*PI12/n);
+return {q:`Find the real part of the root of z<sup>${n}</sup> = ${R===1?'':R+' '}cis(${P12(k)}) with the smallest positive argument.`,ans,
+work:[`Modulus: ${R}<sup>1/${n}</sup> = ${fm(rr)}. Argument of the first root: ${P12(k)} ÷ ${n} = ${ang(k*PI12/n)}.`,`Real part = ${fm(rr)} cos(${ang(k*PI12/n)}).`,`= <b>${sf(ans)}</b>.`],tip:`First root: nth root of the modulus, argument ÷ n.`};},
+()=>{const n=pick([3,4,5,6,8]),R=pick([1,8,16,32,64]);const rr=Math.pow(R,1/n),ans=n/2*rr*rr*Math.sin(TAU/n);
+return {q:`The roots of z<sup>${n}</sup> = ${R} form a regular polygon on the Argand diagram. Find its area.`,ans,
+work:[`The roots lie on a circle of radius ${R}<sup>1/${n}</sup> = ${fm(rr)}, spaced 2π/${n} apart.`,`The polygon is ${n} triangles, each with area ½r² sin(2π/${n}).`,`Area = ${n} × ½ × ${fm(rr*rr)} × sin(2π/${n}) = <b>${sf(ans)}</b>.`],tip:`n triangles from the centre, each ½r² sin(2π/n).`};},
+()=>{const a=rnz(-4,5);const ans=a*a-a+1;
+return {q:`ω is a complex cube root of 1. Find (${N(a)} + ω)(${N(a)} + ω²).`,ans,exact:true,
+work:[`ω³ = 1 and 1 + ω + ω² = 0, so ω + ω² = −1.`,`Expand: ${a*a} + (${N(a)})(ω + ω²) + ω³.`,`= ${a*a} ${a<0?'+':MIN} ${Math.abs(a)} + 1 = <b>${ans}</b>.`],tip:`Cube roots of unity: ω³ = 1 and 1 + ω + ω² = 0. Use both to simplify.`};}
+],
+
 direct:[
 /* identity coefficient */
 ()=>{const a=ri(1,7),b=ri(1,5);const k=4*a*b;
@@ -423,5 +679,8 @@ return {q:`Find the largest integer that is a counterexample to the claim "if x�
 work:[`A counterexample needs x² > ${a*a} but x ≤ ${a}.`,`x² > ${a*a} means x > ${a} or x < −${a}. The second case gives counterexamples.`,`The largest integer below −${a} is <b>${N(ans)}</b>.`],tip:`Squaring hides the sign. Negatives break any "x² > a² ⇒ x > a" claim.`};}
 ]
 };
+/* negative numbers in generated complex-number text get a proper minus sign */
+const fixMinus=t=>String(t).replace(/(^|[\s(=,:×÷+\[>\/])-(?=[\d.a-zπ(√])/g,'$1'+MIN);
+["cart","polar","polyroots","demoivre","croots"].forEach(s=>{GEN[s]=GEN[s].map(g=>()=>{const o=g();o.q=fixMinus(o.q);o.work=o.work.map(fixMinus);return o;});});
 Object.assign(LAB.GEN,GEN);
 })();

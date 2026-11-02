@@ -2,7 +2,7 @@
 
 Interactive study site for IB Mathematics: Analysis & Approaches HL. Live at **https://ib-aahl-lab.vercel.app**.
 
-The home page is a **course hub**. Units so far: **Number & algebra**, which so far covers proof (SL 1.6, AHL 1.15: direct proof, induction, contradiction, counterexamples), **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14), **Vectors** (AHL 3.12–3.16, with rotatable 3D models) and **Calculus**, which so far covers differential equations (AHL 5.18, with live slope-field models). Every topic page follows the same pattern, so new units can be added in the same style.
+The home page is a **course hub**. Units so far: **Number & algebra**, which covers proof (SL 1.6, AHL 1.15: direct proof, induction, contradiction, counterexamples) and complex numbers (AHL 1.12–1.14: Cartesian, polar and Euler form, conjugate roots, De Moivre, nth roots), **Probability** (SL 4.5–4.9, 4.11–4.12, AHL 1.10, 4.13–4.14), **Vectors** (AHL 3.12–3.16, with rotatable 3D models) and **Calculus**, the whole of Topic 5 (SL 5.1–5.11, AHL 5.12–5.19: limits and first principles, l'Hôpital, differentiation rules, tangents, stationary points, optimisation, implicit differentiation and related rates, integration and its techniques, areas, volumes of revolution, kinematics, Maclaurin series and differential equations). Every topic page follows the same pattern, so new units can be added in the same style.
 
 ---
 
@@ -42,8 +42,8 @@ probability/          one folder per unit
   app.js              the live models and the practice generators (GEN)
   learn.js            How to answer guides and Worked examples (the object L)
 vectors/              same three files as probability/ (app.js also has the 3D engine)
-calculus/             same three files; app.js has the 2D plot and slope-field helpers. Differential equations so far
-algebra/              same three files; app.js has the proof models (cell grids, dominoes, remainder bars). Proof so far
+calculus/             same three files; app.js has the 2D plot, slope-field, equal-scale window (fitWin) and Simpson/zero-finding helpers. All of Topic 5
+algebra/              same three files; app.js has the proof models (cell grids, dominoes, remainder bars) and the Argand-diagram helper (axes) for complex numbers. Proof and complex numbers so far
 tools/check-marks.js  checks every unit's worked examples add up
 ```
 
@@ -99,11 +99,11 @@ The AA HL syllabus, for planning:
 
 | Unit | Contents |
 |---|---|
-| 1. Number & algebra | Sequences and series, exponents and logs, binomial theorem, counting*, **proof (done)**, complex numbers, systems of equations |
+| 1. Number & algebra | Sequences and series, exponents and logs, binomial theorem, counting*, **proof (done)**, **complex numbers (done)**, systems of equations |
 | 2. Functions | Graphs, composites and inverses, transformations, quadratics, rational functions, polynomials, inequalities, modulus |
 | 3. Geometry & trigonometry | 3D shapes, trig ratios and identities, radians, unit circle, trig equations and graphs, **vectors, lines and planes (done)** |
 | 4. Statistics & probability | Sampling, statistical measures, regression, **probability (done)** |
-| 5. Calculus | Limits, differentiation, integration, kinematics, related rates, **differential equations (done)**, Maclaurin series |
+| 5. Calculus | **All done**: limits, differentiation, integration, kinematics, related rates, differential equations, Maclaurin series |
 
 \*Counting is already on the Probability page.
 

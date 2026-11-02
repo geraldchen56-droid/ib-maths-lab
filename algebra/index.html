@@ -4,7 +4,7 @@
 <script>if(location.hostname==="ib-aahl-probability-lab.vercel.app")location.replace("https://ib-aahl-lab.vercel.app"+location.pathname+location.search+location.hash);</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Interactive guide to IB Maths AA HL number and algebra, starting with proof: direct proof, mathematical induction (series, divisibility, inequalities, derivatives), proof by contradiction and counterexamples, with live models, worked exam questions with mark schemes, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
+<meta name="description" content="Interactive guide to IB Maths AA HL number and algebra: proof (direct, induction, contradiction, counterexamples) and complex numbers (Cartesian, polar and Euler form, conjugate roots of polynomials, De Moivre's theorem, nth roots), with live models, worked exam questions with mark schemes, Casio fx-CG50 and TI-84 Plus CE keystrokes, and unlimited practice.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Number &amp; Algebra · IB AA HL Lab</title>
 <script>try{document.documentElement.dataset.calc=localStorage.getItem('ibprob-calc')==='ti84'?'ti84':'casio';}catch(e){document.documentElement.dataset.calc='casio';}</script>
@@ -21,7 +21,7 @@
 <div>
 <div class="eyebrow"><a class="crumb" href="../">IB AA HL Lab</a> · Topic 1 · Number &amp; algebra</div>
 <h1>Number &amp; Algebra <em>Lab</em></h1>
-<p class="sub">Starting with proof (SL 1.6, AHL 1.15): direct proof, mathematical induction, proof by contradiction and counterexamples. Each topic has the core reasoning, the standard layouts, a live model you can break, worked exam questions with mark schemes, and unlimited practice with full working.</p>
+<p class="sub">Proof (SL 1.6, AHL 1.15) and complex numbers (AHL 1.12–1.14): direct proof, induction, contradiction and counterexamples; Cartesian, polar and Euler form, conjugate roots, De Moivre's theorem and nth roots. Each topic has the core reasoning, the standard layouts, a live model you can break, worked exam questions with mark schemes, and unlimited practice with full working.</p>
 </div>
 <div class="top-side">
 <div class="calcpick" role="group" aria-label="Calculator for keystroke instructions">
@@ -49,6 +49,12 @@
 <button class="navb" data-go="indmore"><span class="r">HL 1.15</span><span class="n">Induction: inequalities &amp; derivatives</span><span class="s" data-s="indmore"></span></button>
 <button class="navb" data-go="contra"><span class="r">HL 1.15</span><span class="n">Proof by contradiction</span><span class="s" data-s="contra"></span></button>
 <button class="navb" data-go="counter"><span class="r">HL 1.15</span><span class="n">Counterexamples</span><span class="s" data-s="counter"></span></button>
+<div class="grp">Complex numbers</div>
+<button class="navb" data-go="cart"><span class="r">HL 1.12</span><span class="n">Cartesian form &amp; Argand</span><span class="s" data-s="cart"></span></button>
+<button class="navb" data-go="polar"><span class="r">HL 1.13</span><span class="n">Polar &amp; Euler form</span><span class="s" data-s="polar"></span></button>
+<button class="navb" data-go="polyroots"><span class="r">HL 1.14</span><span class="n">Polynomial roots</span><span class="s" data-s="polyroots"></span></button>
+<button class="navb" data-go="demoivre"><span class="r">HL 1.14</span><span class="n">De Moivre's theorem</span><span class="s" data-s="demoivre"></span></button>
+<button class="navb" data-go="croots"><span class="r">HL 1.14</span><span class="n">Roots of complex numbers</span><span class="s" data-s="croots"></span></button>
 <div class="grp">Test yourself</div>
 <button class="navb" data-go="drill"><span class="r">mix</span><span class="n">Mixed drill</span><span class="s" data-s="drill"></span></button>
 <button class="navb" data-go="casio"><span class="r"><span data-calc="casio">CG50</span><span data-calc="ti84">TI-84</span></span><span class="n">Calculator sheet</span><span class="s"></span></button>
@@ -57,7 +63,7 @@
 <section class="sec" id="s-overview" data-sec="overview">
 <header class="sec-head">
 <span class="ref">Map</span>
-<h2>How proof fits together</h2>
+<h2>How the unit fits together</h2>
 <p class="lede">A proof is an argument that covers <em>every</em> case at once, which is exactly what examples can't do. There are four tools. A direct proof writes the general case in algebra. Induction builds a chain from n = 1 upwards. Contradiction assumes the opposite and breaks it. A counterexample does the reverse job: one case that kills a false "for all". Most of the skill is picking the right tool from the wording.</p>
 </header>
 <div class="cards" id="cards"></div>
@@ -84,6 +90,17 @@
 <li><b>Do five practice questions.</b> They test the numerical side of each topic: the constant in a step, the base case, the first counterexample. Read the shorthand line at the bottom.</li>
 </ol>
 <p class="small">Formulas marked <span class="bk">booklet</span> are in the IB formula booklet. More number and algebra topics (sequences, logs, binomial theorem, complex numbers, systems of equations) will be added to this unit.</p>
+</div>
+</div>
+<div class="panel">
+<h3>Complex numbers: which topic does the question want?</h3>
+<p class="small" style="margin-bottom:12px">Complex numbers extend the number line to a plane. Every question is either arithmetic (Cartesian), geometry (polar), or about roots of equations.</p>
+<div class="decide">
+<div><span>"Express in the form a + bi", z and z* in one equation, square roots</span><b>Cartesian → 1.12</b></div>
+<div><span>Modulus, argument, re<sup>iθ</sup>, "rotate about O"</span><b>Polar &amp; Euler → 1.13</b></div>
+<div><span>"Given that 2 + i is a root of…", sum or product of roots</span><b>Polynomial roots → 1.14</b></div>
+<div><span>(1 + i)⁸, "show that cos 3θ = …", "smallest n such that zⁿ is real"</span><b>De Moivre → 1.14</b></div>
+<div><span>"Solve z⁵ = …", roots of unity, ω</span><b>Roots → 1.14</b></div>
 </div>
 </div>
 </section>
@@ -576,11 +593,398 @@
 </aside></div>
 </section>
 
+<section class="sec" id="s-cart" data-sec="cart" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.12</span>
+<h2>Cartesian form and the Argand diagram</h2>
+<p class="lede">A complex number a + bi is a point (a, b). Adding is moving, multiplying needs i² = −1, and dividing means making the bottom real.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>There is no real number whose square is −1, so we invent one: <b>i, with i² = −1</b>. A complex number is z = a + bi: its <b>real part</b> Re(z) = a and its <b>imaginary part</b> Im(z) = b (a real number, without the i).</p>
+<p>Plot z as the point (a, b) on the <b>Argand diagram</b>: real axis across, imaginary axis up. Then adding complex numbers is adding vectors, nose to tail. The <b>conjugate</b> z* = a − bi is the reflection in the real axis.</p>
+<p>Multiply by expanding brackets and replacing i² by −1. To divide, multiply top and bottom by the conjugate of the bottom: (c + di)(c − di) = c² + d², a real number. This is the same trick as rationalising a surd.</p>
+<p>Two complex numbers are equal only if their real parts are equal <b>and</b> their imaginary parts are equal. So one complex equation gives two real equations, which is how you solve for an unknown z = x + yi.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">i² = −1, i³ = −i, i⁴ = 1</span></div>
+<div class="fx"><span class="f">z = a + bi: Re(z) = a, Im(z) = b</span></div>
+<div class="fx"><span class="f">z* = a − bi</span></div>
+<div class="fx"><span class="f">z z* = a² + b²</span></div>
+<div class="fx"><span class="f">(a + bi) ÷ (c + di) = (a + bi)(c − di) ÷ (c² + d²)</span></div>
+<div class="fx"><span class="f">a + bi = c + di ⇔ a = c and b = d</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Im(3 − 4i) is −4, not −4i.</li>
+<li>i² = −1: the sign flips when two i's meet.</li>
+<li>Divide by multiplying by the conjugate of the BOTTOM.</li>
+<li>(x + yi)² = a + bi: reject x² &lt; 0, since x is real.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>i² = −1, then tidy.</b></li>
+<li><b>Divide: times the conjugate, top and bottom.</b></li>
+<li><b>One complex equation = two real ones.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: complex numbers as arrows</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="cart-pre"></div><div class="ctrls" id="cart-ctrls"></div></div>
+<div>
+<canvas id="cart-cv" aria-label="Argand diagram showing z, w and the result of the chosen operation"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>z</span><span><i style="background:var(--amber)"></i>w</span><span><i style="background:var(--good)"></i>result</span></div>
+<div id="cart-ro"></div>
+<div class="gdc" id="cart-gdc"></div>
+<div id="cart-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="cart"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · Complex</small></h3>
+<p>The calculator does complex arithmetic directly once Complex Mode is on.</p>
+<h4>Set up</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP) → Complex Mode: <b>a+bi</b>.</li>
+<li>i is <kbd>SHIFT</kbd> <kbd>0</kbd>.</li>
+</ol>
+<h4>Calculate</h4>
+<ol>
+<li><kbd>MENU</kbd> → <b>Run-Matrix</b>. Type <span class="mono">(3−2i)÷(1+4i)</span>, <kbd>EXE</kbd>.</li>
+<li>Re, Im and Conjg are under <kbd>OPTN</kbd> → COMPLEX (<kbd>F3</kbd>): ReP, ImP, Conjg.</li>
+</ol>
+<div class="eg">(3−2i)÷(1+4i)<br>= −5/17 − 14/17 i</div>
+<p class="small">The calculator shows fractions in Math mode; <kbd>S⇔D</kbd> switches to decimals.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MODE a+bi</small></h3>
+<p>The calculator does complex arithmetic directly in a+bi mode.</p>
+<h4>Set up</h4>
+<ol>
+<li><kbd>MODE</kbd> → choose <b>a+bi</b> on the REAL / a+bi / re^θi line.</li>
+<li>i is <kbd>2nd</kbd> <kbd>.</kbd>.</li>
+</ol>
+<h4>Calculate</h4>
+<ol>
+<li>Home screen: <span class="mono">(3−2i)/(1+4i)</span>, ENTER.</li>
+<li><kbd>MATH</kbd> → CMPLX: 1:conj(, 2:real(, 3:imag(.</li>
+</ol>
+<div class="eg">(3−2i)/(1+4i)<br>= −.2941176471−.8235294118i</div>
+<p class="small"><kbd>MATH</kbd> → 1:►Frac turns the answer into −5/17 − 14/17i.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-polar" data-sec="polar" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.13</span>
+<h2>Modulus-argument and Euler form</h2>
+<p class="lede">Describe a complex number by its distance from O and its angle. Then multiplying is just scaling and rotating.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>The <b>modulus</b> |z| = r is the distance from O to z: r = √(a² + b²). The <b>argument</b> arg z = θ is the angle from the positive real axis, anticlockwise, in radians. The principal argument lies in −π &lt; θ ≤ π.</p>
+<p>Since a = r cos θ and b = r sin θ, z = r(cos θ + i sin θ), written <b>r cis θ</b>. Euler's formula, e<sup>iθ</sup> = cos θ + i sin θ, gives the same number as <b>re<sup>iθ</sup></b>. All three forms describe the same point.</p>
+<p>Multiplying two numbers in polar form: (r₁ cis θ₁)(r₂ cis θ₂) = r₁r₂ cis(θ₁ + θ₂). <b>Moduli multiply, arguments add.</b> It follows from the compound-angle formulas, and is obvious in Euler form: e<sup>iθ₁</sup>e<sup>iθ₂</sup> = e<sup>i(θ₁ + θ₂)</sup>. Dividing: moduli divide, arguments subtract.</p>
+<p>So multiplying by cis θ rotates a point by θ about O, and multiplying by i rotates by π/2. In the model, change θ₂ and watch zw swing round while its distance from O stays r₁r₂.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">z = r(cos θ + i sin θ) = r cis θ = re<sup>iθ</sup></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">r = √(a² + b²), tan θ = b/a</span></div>
+<div class="fx"><span class="f">|zw| = |z||w|, arg(zw) = arg z + arg w</span></div>
+<div class="fx"><span class="f">|z/w| = |z|/|w|, arg(z/w) = arg z − arg w</span></div>
+<div class="fx"><span class="f">e<sup>iπ</sup> = −1</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>arctan(b/a) is wrong in the second and third quadrants: sketch first.</li>
+<li>Give the principal argument in (−π, π] unless told otherwise.</li>
+<li>Radians, not degrees.</li>
+<li>|z + w| is not |z| + |w|.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Sketch, then argue: the quadrant fixes θ.</b></li>
+<li><b>Times: moduli times, angles plus.</b></li>
+<li><b>Times i = turn π/2 anticlockwise.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: multiplying and dividing in polar form</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="polar-pre"></div><div class="ctrls" id="polar-ctrls"></div></div>
+<div>
+<canvas id="polar-cv" aria-label="Argand diagram with z, w and their product or quotient, with argument arcs"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>z and arg z</span><span><i style="background:var(--amber)"></i>w and arg w</span><span><i style="background:var(--good)"></i>result and its argument</span></div>
+<div id="polar-ro"></div>
+<div class="gdc" id="polar-gdc"></div>
+<div id="polar-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="polar"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Complex Mode r∠θ</small></h3>
+<p>The calculator converts between forms and finds Abs and Arg.</p>
+<h4>Set up</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP) → Complex Mode: <b>r∠θ</b> for polar answers (or a+bi). Angle: <b>Rad</b>.</li>
+<li>∠ is <kbd>SHIFT</kbd> <kbd>×</kbd>.</li>
+</ol>
+<h4>Modulus and argument</h4>
+<ol>
+<li><kbd>OPTN</kbd> → COMPLEX → Abs and Arg: <span class="mono">Abs (−1+i)</span>, <span class="mono">Arg (−1+i)</span>.</li>
+<li>Convert: type a number, then COMPLEX → ►r∠θ or ►a+bi.</li>
+</ol>
+<div class="eg">Arg (−1+i) = 2.356… = 3π/4<br>(2∠π/3)×(√2∠3π/4) = 2.828∠−2.880</div>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MODE re^θi</small></h3>
+<p>The calculator converts between forms and finds abs and angle.</p>
+<h4>Set up</h4>
+<ol>
+<li><kbd>MODE</kbd>: <b>RADIAN</b>, and <b>re^θi</b> for polar answers (or a+bi).</li>
+</ol>
+<h4>Modulus and argument</h4>
+<ol>
+<li><kbd>MATH</kbd> → CMPLX: 5:abs( and 4:angle(.</li>
+<li>Convert: 6:►Rect or 7:►Polar after a number.</li>
+<li>Enter polar numbers as <span class="mono">2e^((π/3)i)</span>.</li>
+</ol>
+<div class="eg">angle(−1+i) = 2.35619449 = 3π/4<br>2e^((π/3)i)*√(2)e^((3π/4)i) = 2.828e^(−2.880i)</div>
+</aside></div>
+</section>
+<section class="sec" id="s-polyroots" data-sec="polyroots" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.14 · 2.12</span>
+<h2>Polynomial roots and conjugate pairs</h2>
+<p class="lede">A polynomial with real coefficients has its non-real roots in conjugate pairs. Each pair multiplies out to a real quadratic factor.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Take a polynomial with <b>real coefficients</b> and a root α = p + qi. Conjugating the equation f(α) = 0 changes nothing on the right and, because the coefficients are real, turns the left into f(α*). So <b>α* = p − qi is also a root</b>.</p>
+<p>The pair gives a real quadratic factor: (z − α)(z − α*) = z² − (α + α*)z + αα* = <b>z² − 2pz + (p² + q²)</b>. Divide the polynomial by it, or compare coefficients, to find the rest.</p>
+<p>For a polynomial aₙzⁿ + … + a₀, the <b>sum of the roots</b> is −aₙ₋₁/aₙ and the <b>product</b> is (−1)ⁿa₀/aₙ. These count complex roots too, and often find a missing root or coefficient without any division.</p>
+<p>In the model, the complex pair is always mirrored in the real axis. The real graph y = f(x) only shows real roots: it crosses the x-axis at r, and the complex pair is invisible there.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">real coefficients: p + qi a root ⇒ p − qi a root</span></div>
+<div class="fx"><span class="f">(z − α)(z − α*) = z² − 2pz + p² + q²</span></div>
+<div class="fx"><span class="f">sum of roots = −aₙ₋₁ ÷ aₙ</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">product of roots = (−1)ⁿa₀ ÷ aₙ</span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">α² + β² + γ² = (Σα)² − 2Σαβ</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Conjugate pairs need REAL coefficients. Say so when you use it.</li>
+<li>(z − p)² − (qi)² = (z − p)² + q².</li>
+<li>Product sign: (−1)ⁿ, so it changes with the degree.</li>
+<li>Rearrange to "= 0" before reading off coefficients.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Root p + qi ⇒ factor z² − 2pz + (p² + q²).</b></li>
+<li><b>Missing root? Product or sum of roots.</b></li>
+<li><b>Compare coefficients instead of long division.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: a conjugate pair and the real graph</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="polyroots-pre"></div><div class="ctrls" id="polyroots-ctrls"></div></div>
+<div>
+<canvas id="polyroots-cv" aria-label="Argand diagram of a cubic's roots and a graph of the cubic for real x"></canvas>
+<canvas id="polyroots-graph" aria-label="graph of the cubic for real x" style="margin-top:8px"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>complex pair</span><span><i style="background:var(--amber)"></i>real root</span></div>
+<div id="polyroots-ro"></div>
+<div class="gdc" id="polyroots-gdc"></div>
+<div id="polyroots-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="polyroots"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Equation · POLYNOMIAL</small></h3>
+<p>The polynomial solver finds every root, real and complex.</p>
+<h4>Solve a polynomial</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP) → Complex Mode: <b>a+bi</b> (otherwise complex roots are hidden).</li>
+<li><kbd>MENU</kbd> → <b>Equation</b> → <kbd>F2</kbd> POLYNOMIAL → degree (<kbd>F2</kbd> for 3, <kbd>F3</kbd> for 4, …).</li>
+<li>Enter the coefficients, <kbd>F1</kbd> SOLVE.</li>
+</ol>
+<div class="eg">z³ − 4z² + 9z − 10<br>coefficients 1, −4, 9, −10<br>X1 = 2,  X2 = 1 + 2i,  X3 = 1 − 2i</div>
+<p class="warn">On Paper 1 there is no calculator: use the conjugate pair and compare coefficients.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>PlySmlt2</small></h3>
+<p>The Polynomial Root Finder app finds every root, real and complex.</p>
+<h4>Solve a polynomial</h4>
+<ol>
+<li><kbd>APPS</kbd> → <b>PlySmlt2</b> → 1:POLYNOMIAL ROOT FINDER.</li>
+<li>Set ORDER, choose <b>a+bi</b>, NEXT.</li>
+<li>Enter the coefficients, SOLVE (GRAPH key).</li>
+</ol>
+<div class="eg">ORDER 3: 1, −4, 9, −10<br>x1 = 2,  x2 = 1+2i,  x3 = 1−2i</div>
+<p class="warn">On Paper 1 there is no calculator: use the conjugate pair and compare coefficients.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-demoivre" data-sec="demoivre" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.14</span>
+<h2>De Moivre's theorem</h2>
+<p class="lede">Raising r cis θ to the power n raises r to the power n and multiplies the angle by n. Powers become spirals.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Multiplying by z = r cis θ scales by r and turns by θ. Do it n times and you have scaled by rⁿ and turned by nθ: <b>(r cis θ)ⁿ = rⁿ cis nθ</b>. That is De Moivre's theorem. It holds for every integer n (it can be proved by induction for positive n).</p>
+<p>For high powers, never expand brackets. Convert to polar, apply the theorem, reduce the argument by multiples of 2π, and convert back. (1 + i)⁸ = (√2)⁸ cis(8π/4) = 16 cis 2π = 16.</p>
+<p>Expanding (cos θ + i sin θ)ⁿ with the binomial theorem and comparing it with cos nθ + i sin nθ gives <b>multiple-angle identities</b>: the real parts give cos nθ, the imaginary parts sin nθ. Going the other way, z + 1/z = 2cos θ lets you write cosⁿθ in terms of cos kθ, which is how you integrate cos⁴θ.</p>
+<p>In the model, the dots are z⁰, z¹, z², …: with r &gt; 1 they spiral out, with r &lt; 1 they spiral in, and with r = 1 they walk round the unit circle.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">(r cis θ)ⁿ = rⁿ cis nθ = rⁿe<sup>inθ</sup></span><span class="bk">booklet</span></div>
+<div class="fx"><span class="f">zⁿ real ⇔ nθ = kπ</span></div>
+<div class="fx"><span class="f">z = cis θ: zⁿ + z⁻ⁿ = 2cos nθ, zⁿ − z⁻ⁿ = 2i sin nθ</span></div>
+<div class="fx"><span class="f">cos 3θ = 4cos³θ − 3cos θ</span></div>
+<div class="fx"><span class="f">sin 3θ = 3sin θ − 4sin³θ</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Raise the modulus to the power too: (2 cis θ)³ = 8 cis 3θ, not 2 cis 3θ.</li>
+<li>Reduce nθ into (−π, π] at the end.</li>
+<li>"Real" includes negative numbers.</li>
+<li>(z − z⁻¹)ⁿ involves 2i sin, so watch the powers of i.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>Polar, power, reduce, convert back.</b></li>
+<li><b>Modulus to the n, angle times n.</b></li>
+<li><b>Identities: expand, compare real and imaginary parts.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: powers spiral</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="demoivre-pre"></div><div class="ctrls" id="demoivre-ctrls"></div></div>
+<div>
+<canvas id="demoivre-cv" aria-label="Argand diagram showing successive powers of z spiralling about the origin"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>z, z², … </span><span><i style="background:var(--good)"></i>zⁿ</span><span><i style="background:var(--muted)"></i>unit circle</span></div>
+<div id="demoivre-ro"></div>
+<div class="gdc" id="demoivre-gdc"></div>
+<div id="demoivre-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="demoivre"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix · r∠θ</small></h3>
+<p>Check a power directly; the method marks still need the polar working.</p>
+<h4>Raise to a power</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP) → Complex Mode: <b>r∠θ</b> (or a+bi for a Cartesian answer). Angle: Rad.</li>
+<li><span class="mono">(1−√3i)^6</span> or <span class="mono">(2∠−π/3)^6</span>.</li>
+</ol>
+<div class="eg">(1−√3i)^6 = 64<br>(1+i)^8 = 16</div>
+<p class="small">Arguments from the calculator are always principal values in (−π, π].</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>MODE re^θi</small></h3>
+<p>Check a power directly; the method marks still need the polar working.</p>
+<h4>Raise to a power</h4>
+<ol>
+<li><kbd>MODE</kbd>: RADIAN, and re^θi or a+bi.</li>
+<li><span class="mono">(1−√(3)i)^6</span> or <span class="mono">(2e^((−π/3)i))^6</span>.</li>
+</ol>
+<div class="eg">(1−√(3)i)^6 = 64<br>(1+i)^8 = 16</div>
+<p class="small">Tiny rounding terms like 1E−12i can appear; they are zero.</p>
+</aside></div>
+</section>
+<section class="sec" id="s-croots" data-sec="croots" hidden>
+<header class="sec-head">
+<span class="ref">AHL 1.14</span>
+<h2>Roots of complex numbers</h2>
+<p class="lede">zⁿ = w has exactly n solutions. They share one modulus and sit evenly round a circle, at the corners of a regular polygon.</p>
+</header>
+<div class="theory">
+<div class="panel prose">
+<h3>The idea</h3>
+<p>Write w = R cis θ. Because adding 2π to an angle doesn't change the point, w is also R cis(θ + 2kπ) for every integer k. Taking the nth root by De Moivre: <b>z = R<sup>1/n</sup> cis((θ + 2kπ)/n)</b>.</p>
+<p>k = 0, 1, …, n − 1 give n different roots; k = n brings you back to the first. All have modulus R<sup>1/n</sup>, and their arguments are <b>2π/n apart</b>. On the Argand diagram they are the vertices of a regular n-gon centred at O.</p>
+<p>The <b>nth roots of unity</b> solve zⁿ = 1: 1, ω, ω², …, ωⁿ⁻¹ with ω = cis(2π/n). Their sum is 0 (a geometric series, or the polygon's symmetry). For cube roots, 1 + ω + ω² = 0 and ω³ = 1 simplify almost anything.</p>
+<p>In the model, change n and watch the polygon gain corners; change arg w and watch the whole polygon turn by one nth of that angle.</p>
+</div>
+<div class="panel">
+<h3>Formulas</h3>
+<div class="fx-list">
+<div class="fx"><span class="f">zⁿ = R cis θ ⇒ z = R<sup>1/n</sup> cis((θ + 2kπ)/n), k = 0, …, n − 1</span></div>
+<div class="fx"><span class="f">roots of unity: ωᵏ, ω = cis(2π/n)</span></div>
+<div class="fx"><span class="f">1 + ω + ω² + … + ωⁿ⁻¹ = 0</span></div>
+<div class="fx"><span class="f">cube roots: ω³ = 1, 1 + ω + ω² = 0</span></div>
+<div class="fx"><span class="f">polygon area = n × ½r² sin(2π/n)</span></div>
+</div>
+<div class="notes">
+<div class="note trap"><span class="label">Traps</span><ul>
+<li>Add 2kπ BEFORE dividing by n.</li>
+<li>There are exactly n roots: stop at k = n − 1.</li>
+<li>The modulus is R<sup>1/n</sup>, not R.</li>
+<li>Rearrange zⁿ + 16 = 0 to zⁿ = −16 first.</li>
+</ul></div>
+<div class="note tip"><span class="label">Shorthand</span><ul>
+<li><b>+ 2kπ, then ÷ n.</b></li>
+<li><b>n roots, one circle, 2π/n apart.</b></li>
+<li><b>ω: cube to 1, add to 0.</b></li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="panel">
+<h3>Live model: roots on a circle</h3>
+<div class="lab-grid">
+<div class="lcol"><div id="croots-pre"></div><div class="ctrls" id="croots-ctrls"></div></div>
+<div>
+<canvas id="croots-cv" aria-label="Argand diagram with w and the n roots of z to the n equals w forming a regular polygon"></canvas>
+<div class="legend"><span><i style="background:var(--amber)"></i>w</span><span><i style="background:var(--accent)"></i>roots of zⁿ = w</span><span><i style="background:var(--good)"></i>first root (k = 0)</span></div>
+<div id="croots-ro"></div>
+<div class="gdc" id="croots-gdc"></div>
+<div id="croots-work" class="wk"></div>
+</div>
+</div>
+</div>
+<div class="duo"><div class="practice" data-sec="croots"></div>
+<aside class="calc" data-calc="casio"><h3>On your fx-CG50 AU <small>Run-Matrix</small></h3>
+<p>The calculator only gives one root of a power directly. Find them all by hand, then check each.</p>
+<h4>Check a root</h4>
+<ol>
+<li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP) → Complex Mode: <b>a+bi</b>. Angle: Rad.</li>
+<li>Raise your root to the power n: <span class="mono">(√3+i)^3</span> should give w.</li>
+</ol>
+<div class="eg">(√3+i)^3 = 8i  ✓<br>(−2i)^3   = 8i  ✓</div>
+<p class="small">For polynomial forms such as z⁴ + 16 = 0, Equation → POLYNOMIAL lists all roots.</p>
+</aside>
+<aside class="calc" data-calc="ti84"><h3>On your TI-84 Plus CE <small>Home screen</small></h3>
+<p>The calculator only gives one root of a power directly. Find them all by hand, then check each.</p>
+<h4>Check a root</h4>
+<ol>
+<li><kbd>MODE</kbd>: a+bi, RADIAN.</li>
+<li>Raise your root to the power n: <span class="mono">(√(3)+i)^3</span> should give w.</li>
+</ol>
+<div class="eg">(√(3)+i)^3 = 8i  ✓<br>(−2i)^3     = 8i  ✓</div>
+<p class="small">For polynomial forms such as z⁴ + 16 = 0, PlySmlt2 lists all roots.</p>
+</aside></div>
+</section>
 <section class="sec" id="s-drill" data-sec="drill" hidden>
 <header class="sec-head">
 <span class="ref">Mixed</span>
 <h2>Mixed drill</h2>
-<p class="lede">Questions from every proof topic in random order. Part of the skill is recognising which method a question wants before you start.</p>
+<p class="lede">Questions from every proof and complex-number topic in random order. Part of the skill is recognising which method a question wants before you start.</p>
 </header>
 <div class="practice" data-sec="drill"></div>
 <div class="panel prose">
@@ -592,6 +996,8 @@
 <li>In contradiction, write the assumption in full, including "no common factor" or "this is the complete list".</li>
 <li>For a counterexample, show the arithmetic and say "so the statement is false".</li>
 <li>Prove identities from one side to the other. Never simplify both sides at once.</li>
+<li>Complex numbers: sketch every point before giving an argument, and give arguments in radians in (−π, π].</li>
+<li>When you use a conjugate root, write "since the coefficients are real". It carries the R1.</li>
 </ul>
 </div>
 </section>
@@ -609,6 +1015,7 @@
 <li><kbd>SHIFT</kbd> <kbd>MENU</kbd> (SET UP): Input/Output = <b>Math/Math</b>, so fractions and powers display exactly.</li>
 <li>Practise one Table with two functions (Y1 and Y2) so the setup is quick.</li>
 <li>Proof questions are mostly on Paper 1. On Paper 2, expect a "check" or "hence" part that needs a table or a sum.</li>
+<li>For complex numbers: SET UP → Complex Mode <b>a+bi</b> (or r∠θ), Angle <b>Rad</b>. In Real mode, complex answers show as Non-Real ERROR.</li>
 </ul>
 </div>
 </div>
@@ -622,6 +1029,10 @@
 <tr><td>Factorial</td><td><kbd>OPTN</kbd> → <kbd>F6</kbd> (▷) → <kbd>F3</kbd> PROB → <kbd>F1</kbd> x!</td><td>after the number</td></tr>
 <tr><td>Divisibility test</td><td><b>Table</b>, Y1 = f(X)÷d</td><td>look for decimals</td></tr>
 <tr><td>Derivative at a point</td><td><b>Run-Matrix</b> → <kbd>OPTN</kbd> → <kbd>F4</kbd> CALC → <kbd>F2</kbd> d/dx or <kbd>F3</kbd> d²/dx²</td><td>f(X), x-value</td></tr>
+<tr><td>Complex arithmetic</td><td><b>Run-Matrix</b>, Complex Mode a+bi; i is <kbd>SHIFT</kbd> <kbd>0</kbd></td><td>(3−2i)÷(1+4i)</td></tr>
+<tr><td>Modulus, argument, conjugate</td><td><kbd>OPTN</kbd> → COMPLEX</td><td>Abs, Arg, Conjg, ReP, ImP</td></tr>
+<tr><td>Polar ↔ Cartesian</td><td><kbd>OPTN</kbd> → COMPLEX → ►r∠θ, ►a+bi</td><td>after the number; ∠ is <kbd>SHIFT</kbd> <kbd>×</kbd></td></tr>
+<tr><td>All roots of a polynomial</td><td><b>Equation</b> → <kbd>F2</kbd> POLYNOMIAL</td><td>degree, coefficients; Complex Mode a+bi</td></tr>
 <tr><td>Fraction ↔ decimal</td><td><kbd>S⇔D</kbd></td><td>Run-Matrix output</td></tr>
 </table>
 </div>
@@ -647,6 +1058,7 @@
 <li><kbd>MODE</kbd>: <b>FUNCTION</b>, <b>MATHPRINT</b>, so fractions and powers display exactly.</li>
 <li>Practise one TABLE with two functions (Y1 and Y2) so the setup is quick.</li>
 <li>Proof questions are mostly on Paper 1. On Paper 2, expect a "check" or "hence" part that needs a table or a sum.</li>
+<li>For complex numbers: <kbd>MODE</kbd> <b>a+bi</b> (or re^θi) and <b>RADIAN</b>. In REAL mode, complex answers give ERR: NONREAL ANS.</li>
 </ul>
 </div>
 </div>
@@ -660,6 +1072,10 @@
 <tr><td>Factorial</td><td><kbd>MATH</kbd> → PROB → 4:!</td><td>after the number</td></tr>
 <tr><td>HCF</td><td><kbd>MATH</kbd> → NUM → gcd(</td><td>two numbers</td></tr>
 <tr><td>Derivative at a point</td><td><kbd>MATH</kbd> → 8:nDeriv(</td><td>f(X), X, x-value</td></tr>
+<tr><td>Complex arithmetic</td><td><kbd>MODE</kbd> a+bi; i is <kbd>2nd</kbd> <kbd>.</kbd></td><td>(3−2i)/(1+4i)</td></tr>
+<tr><td>Modulus, argument, conjugate</td><td><kbd>MATH</kbd> → CMPLX</td><td>5:abs(, 4:angle(, 1:conj(, 2:real(, 3:imag(</td></tr>
+<tr><td>Polar ↔ Cartesian</td><td><kbd>MATH</kbd> → CMPLX → 6:►Rect, 7:►Polar</td><td>after the number; polar as re^(θi)</td></tr>
+<tr><td>All roots of a polynomial</td><td><kbd>APPS</kbd> → PlySmlt2 → 1:POLYNOMIAL ROOT FINDER</td><td>order, a+bi, coefficients</td></tr>
 <tr><td>Decimal → fraction</td><td><kbd>MATH</kbd> → 1:►Frac</td><td>Home screen answer</td></tr>
 </table>
 </div>

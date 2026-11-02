@@ -9,6 +9,169 @@ const {K,G,M}=window.LAB;
 const AG='<span class="small">AG</span>';
 
 const L={
+cart:{
+method:[
+['Write everything as a + bi','Collect real parts and imaginary parts. i² = −1, i³ = −i, i⁴ = 1.'],
+['Multiply by expanding','FOIL, then replace i² by −1.'],
+['Divide by the conjugate','Multiply top and bottom by the conjugate of the denominator: (c + di)(c − di) = c² + d².'],
+['Unknown z: let z = x + yi','Substitute, including z* = x − yi, then equate real parts and imaginary parts.'],
+['Check on the Argand diagram','Real part across, imaginary part up. Adding is vector addition; z* is a reflection.']
+],
+types:[
+['"Express in the form a + bi"','Expand, or multiply by the conjugate'],
+['An equation containing z and z*','z = x + yi, equate real and imaginary parts'],
+['"Find the square roots of a + bi"','(x + yi)² = a + bi, quadratic in x²'],
+['"Find real a and b such that…"','Equate real and imaginary parts'],
+['Powers of i','Remainder of the power ÷ 4']
+],
+marks:['M1 for multiplying by the conjugate, or for substituting z = x + yi.','A1 for each correct part (real and imaginary).','M1 for equating real and imaginary parts, A1 for each value.'],
+ex:[
+{tag:'Paper 1 · no calculator',title:'The four operations',stem:'Let z = 3 − 2i and w = 1 + 4i.',parts:[
+{q:'Find z + w*.',m:2,s:['w* = 1 − 4i '+M('A1'),'z + w* = <b>4 − 6i</b> '+M('A1')]},
+{q:'Find zw.',m:2,s:['(3 − 2i)(1 + 4i) = 3 + 12i − 2i − 8i² '+M('M1'),'= 3 + 10i + 8 = <b>11 + 10i</b> '+M('A1')]},
+{q:'Find z ÷ w in the form a + bi.',m:3,s:['Multiply top and bottom by w* = 1 − 4i '+M('M1'),'Top: (3 − 2i)(1 − 4i) = 3 − 12i − 2i + 8i² = −5 − 14i. Bottom: 1 + 16 = 17 '+M('A1'),'<b>−5/17 − (14/17)i</b> '+M('A1')]}
+],tip:'The bottom becomes c² + d², always positive. If you get a negative denominator, a sign was lost in (c + di)(c − di).'},
+{tag:'Paper 1 · no calculator',title:'Square roots of a complex number',stem:'Find the square roots of −5 + 12i.',parts:[
+{q:'Find both square roots, in the form x + yi.',m:5,s:['Let (x + yi)² = −5 + 12i: x² − y² + 2xyi = −5 + 12i '+M('M1'),'x² − y² = −5 and xy = 6 '+M('A1'),'y = 6/x gives x² − 36/x² = −5, so x⁴ + 5x² − 36 = 0 '+M('M1'),'(x² + 9)(x² − 4) = 0, and x is real, so x² = 4 '+M('A1'),'x = 2, y = 3 or x = −2, y = −3: <b>±(2 + 3i)</b> '+M('A1')]}
+],tip:'x² = −9 is rejected because x is real. Keep that root and you get "x = 3i", which is not allowed.'},
+{tag:'Paper 1 · no calculator',title:'An equation with z and z*',stem:'Find the complex number z such that 2z + iz* = 7 + 8i.',parts:[
+{q:'Find z in the form x + yi.',m:5,s:['Let z = x + yi, z* = x − yi '+M('M1'),'2x + 2yi + i(x − yi) = 2x + y + (x + 2y)i '+M('A1'),'Equate parts: 2x + y = 7 and x + 2y = 8 '+M('M1')+' '+M('A1'),'x = 2, y = 3: <b>z = 2 + 3i</b> '+M('A1')]},
+{q:'Find |z − 1|.',m:2,s:['z − 1 = 1 + 3i '+M('M1'),'|1 + 3i| = <b>√10</b> '+M('A1')]}
+],tip:'i × (−yi) = −yi² = +y. That sign is what makes the real equation 2x + y, not 2x − y.'}
+]},
+
+polar:{
+method:[
+['Sketch the point','Its quadrant fixes the argument. Never trust arctan(b/a) alone.'],
+['Modulus','r = |z| = √(a² + b²).'],
+['Argument','Reference angle arctan(|b/a|), then adjust for the quadrant. Principal value: −π &lt; θ ≤ π.'],
+['Multiply or divide in polar','Moduli multiply (divide); arguments add (subtract).'],
+['Convert back if asked','a = r cos θ, b = r sin θ. Euler: re<sup>iθ</sup> = r cis θ.']
+],
+types:[
+['"Find the modulus and argument"','Pythagoras, then the quadrant'],
+['"Express in the form re^(iθ)"','Same as polar, written with Euler'],
+['zw or z/w in polar form','Multiply moduli, add arguments'],
+['"Write in the form a + bi"','r cos θ + i r sin θ'],
+['Rotation by θ about O','Multiply by cis θ (by i for π/2)']
+],
+marks:['A1 for the modulus, A1 for the argument (in the right quadrant).','M1 for multiplying moduli and adding arguments.','A1 for the principal argument. Degrees, or an angle outside (−π, π], usually loses it.'],
+ex:[
+{tag:'Paper 1 · no calculator',title:'Multiply and divide in polar form',stem:'Let z = 1 + √3 i and w = −1 + i.',parts:[
+{q:'Find the modulus and argument of z and of w.',m:4,s:['|z| = √(1 + 3) = 2 '+M('A1'),'arg z = π/3 (first quadrant) '+M('A1'),'|w| = √2 '+M('A1'),'arg w = 3π/4 (second quadrant) '+M('A1')]},
+{q:'Find zw in the form r cis θ, −π &lt; θ ≤ π.',m:2,s:['|zw| = 2√2, arg = π/3 + 3π/4 = 13π/12 '+M('M1'),'Principal: 13π/12 − 2π = −11π/12, so <b>zw = 2√2 cis(−11π/12)</b> '+M('A1')]},
+{q:'Find z ÷ w in the form r cis θ.',m:2,s:['|z/w| = 2/√2 = √2, arg = π/3 − 3π/4 '+M('M1'),'<b>√2 cis(−5π/12)</b> '+M('A1')]}
+],tip:'arctan(1/−1) = −π/4 on the calculator, but w is in the second quadrant: π − π/4 = 3π/4.'},
+{tag:'Paper 1 · no calculator',title:'Euler form both ways',stem:'This question uses the form re<sup>iθ</sup>.',parts:[
+{q:'Express z = −2 − 2i in the form re<sup>iθ</sup>, −π &lt; θ ≤ π.',m:3,s:['r = √(4 + 4) = 2√2 '+M('A1'),'Third quadrant: θ = −(π − π/4) '+M('M1'),'<b>z = 2√2 e<sup>−3πi/4</sup></b> '+M('A1')]},
+{q:'Express w = 3e<sup>iπ/6</sup> in the form a + bi.',m:2,s:['3(cos π/6 + i sin π/6) '+M('M1'),'<b>3√3/2 + (3/2)i</b> '+M('A1')]},
+{q:'Show that e<sup>iθ</sup> + e<sup>−iθ</sup> = 2cos θ.',m:2,s:['(cos θ + i sin θ) + (cos(−θ) + i sin(−θ)) = (cos θ + i sin θ) + (cos θ − i sin θ) '+M('M1'),'= 2cos θ '+M('A1')]}
+],tip:'cos is even and sin is odd: cos(−θ) = cos θ and sin(−θ) = −sin θ. That is the whole of part (c).'},
+{tag:'Paper 2 · calculator',title:'Moduli, arguments, rotation',stem:'Let z = 3 + 4i and w = 2 − i.',parts:[
+{q:'Find |zw|.',m:2,s:['|zw| = |z||w| = 5 × √5 '+M('M1'),'= <b>11.2</b> (3 s.f.) '+M('A1')]},
+{q:'Find arg(z ÷ w).',m:2,s:['arg z − arg w = 0.92730 − (−0.46365) '+M('M1'),G('Run-Matrix: Arg((3+4i)÷(2−i)) = 1.3909','MATH → CMPLX → angle((3+4i)/(2−i)) = 1.390943'),'= <b>1.39</b> (3 s.f.) '+M('A1')]},
+{q:'The point representing z is rotated π/2 anticlockwise about O. Find the complex number of its image.',m:2,s:['Rotation by π/2 is multiplication by i '+M('M1'),'i(3 + 4i) = <b>−4 + 3i</b> '+M('A1')]}
+],tip:'Set the calculator to radians. In degrees, Arg returns 79.7 and the A1 is lost.'}
+]},
+
+polyroots:{
+method:[
+['Use the conjugate pair','Real coefficients: if p + qi is a root, so is p − qi.'],
+['Build the quadratic factor','(z − α)(z − α*) = z² − 2pz + (p² + q²).'],
+['Find the remaining factor','Divide, or compare coefficients.'],
+['Or use sums and products','Sum = −aₙ₋₁/aₙ, product = (−1)ⁿa₀/aₙ.'],
+['List all roots','State every root, including the real ones.']
+],
+types:[
+['"Given that 1 + 2i is a root…"','Conjugate is a root; quadratic factor'],
+['"Find the other roots"','Divide by the quadratic factor'],
+['Unknown coefficients a, b','Sum and product of roots, or substitute the root'],
+['"Sum of the roots", "product of the roots"','Vieta from the coefficients'],
+['α² + β² + γ²','(sum)² − 2(sum of pairs)']
+],
+marks:['A1 for stating the conjugate root, with the reason (real coefficients).','M1 for forming the quadratic factor, A1 for it.','M1 for the remaining factor or real root, A1 for each final root.'],
+ex:[
+{tag:'Paper 1 · no calculator',title:'Factorise a cubic',stem:'f(z) = z³ − 4z² + 9z − 10. Given that 1 + 2i is a root of f(z) = 0:',parts:[
+{q:'Write down another complex root.',m:1,s:['f has real coefficients, so <b>1 − 2i</b> is a root '+M('A1')]},
+{q:'Find a real quadratic factor of f(z).',m:2,s:['(z − 1 − 2i)(z − 1 + 2i) = (z − 1)² − (2i)² '+M('M1'),'= <b>z² − 2z + 5</b> '+M('A1')]},
+{q:'Find the real root.',m:2,s:['f(z) = (z² − 2z + 5)(z − 2), comparing constant terms: 5 × (−2) = −10 '+M('M1'),'<b>z = 2</b> '+M('A1')]}
+],tip:'(z − 1)² − (2i)² = (z − 1)² + 4. The minus becomes a plus because i² = −1.'},
+{tag:'Paper 1 · no calculator',title:'A quartic with an imaginary root',stem:'g(z) = z⁴ − 2z³ + 6z² − 2z + 5. One root of g(z) = 0 is i.',parts:[
+{q:'Explain why −i is also a root.',m:1,s:['g has real coefficients, so non-real roots come in conjugate pairs '+M('R1')]},
+{q:'Find all the roots.',m:4,s:['(z − i)(z + i) = z² + 1 is a factor '+M('M1')+' '+M('A1'),'g(z) = (z² + 1)(z² − 2z + 5) '+M('A1'),'Roots: <b>±i and 1 ± 2i</b> '+M('A1')]},
+{q:'Verify the sum and the product of the roots from the coefficients.',m:2,s:['Sum = −(−2)/1 = 2 = i − i + 2 '+M('A1'),'Product = 5/1 = 5 = (1)(5) '+M('A1')]}
+],tip:'Comparing coefficients is faster than long division: the z³ coefficient −2 and constant 5 fix the second factor at once.'},
+{tag:'Paper 1 · no calculator',title:'Unknown coefficients',stem:'z³ + az² + bz + 20 = 0, where a and b are real, has a root 2 + i.',parts:[
+{q:'Find the real root.',m:3,s:['Product of roots = −20 '+M('M1'),'(2 + i)(2 − i) = 5 '+M('A1'),'5r = −20, so <b>r = −4</b> '+M('A1')]},
+{q:'Find a and b.',m:3,s:['Sum of roots = (2 + i) + (2 − i) − 4 = 0 = −a '+M('M1'),'<b>a = 0</b> '+M('A1'),'b = sum of pairs = 5 + (−4)(2 + i) + (−4)(2 − i) = 5 − 16, <b>b = −11</b> '+M('A1')]}
+],tip:'Vieta avoids expanding (2 + i)³. If you substitute instead, (2 + i)³ = 2 + 11i, which is easy to get wrong.'}
+]},
+
+demoivre:{
+method:[
+['Convert to polar first','r cis θ, with θ in radians.'],
+['Apply De Moivre','(r cis θ)ⁿ = rⁿ cis nθ. Valid for any integer n, including negative.'],
+['Reduce the argument','Add or subtract multiples of 2π.'],
+['Convert back if needed','rⁿ cos nθ + i rⁿ sin nθ.'],
+['Identities: expand and compare','Expand (cos θ + i sin θ)ⁿ with the binomial theorem; real part = cos nθ, imaginary part = sin nθ.']
+],
+types:[
+['(1 + i)⁸, (√3 − i)⁶','Polar, De Moivre, back to Cartesian'],
+['"Smallest n such that zⁿ is real"','nθ = kπ'],
+['"Show that cos 3θ = …"','Expand (c + is)³, real part'],
+['zⁿ + z⁻ⁿ = 2cos nθ','Express cosⁿθ in multiple angles'],
+['Hence integrate cos⁴θ','Use the multiple-angle form']
+],
+marks:['M1 for converting to polar, A1 for r and θ.','M1 for applying De Moivre, A1 for the result.','For identities: M1 binomial expansion, A1 for equating real (or imaginary) parts, A1 for the identity.'],
+ex:[
+{tag:'Paper 1 · no calculator',title:'A sixth power',stem:'Let z = 1 − √3 i.',parts:[
+{q:'Write z in the form r cis θ, −π &lt; θ ≤ π.',m:2,s:['r = 2 '+M('A1'),'θ = −π/3 (fourth quadrant): <b>z = 2 cis(−π/3)</b> '+M('A1')]},
+{q:'Find z⁶.',m:2,s:['z⁶ = 2⁶ cis(−2π) '+M('M1'),'= <b>64</b> '+M('A1')]},
+{q:'Find the smallest positive integer n for which zⁿ is real.',m:2,s:['zⁿ = 2ⁿ cis(−nπ/3) is real when nπ/3 is a multiple of π '+M('M1'),'<b>n = 3</b> (z³ = −8) '+M('A1')]}
+],tip:'"Real" includes negative real numbers. z³ = −8 counts, so the answer is 3, not 6.'},
+{tag:'Paper 1 · no calculator',title:'Multiple-angle identity',stem:'This question proves and uses a triple-angle identity.',parts:[
+{q:'Use De Moivre\'s theorem to show that cos 3θ = 4cos³θ − 3cos θ.',m:5,s:['(cos θ + i sin θ)³ = cos 3θ + i sin 3θ '+M('M1'),'Expand with c = cos θ, s = sin θ: c³ + 3c²(is) + 3c(is)² + (is)³ '+M('A1'),'Real part: cos 3θ = c³ − 3cs² '+M('A1'),'s² = 1 − c² '+M('M1'),'cos 3θ = c³ − 3c + 3c³ = 4c³ − 3c '+M('A1')]},
+{q:'Hence solve 8x³ − 6x − 1 = 0.',m:3,s:['Let x = cos θ: 2(4cos³θ − 3cos θ) = 1, so cos 3θ = ½ '+M('M1'),'3θ = π/3, 5π/3, 7π/3 '+M('A1'),'<b>x = cos(π/9), cos(5π/9), cos(7π/9)</b> '+M('A1')]}
+],tip:'A cubic has three roots, so take three values of 3θ before the cosines start repeating.'},
+{tag:'Paper 1 · no calculator',title:'Powers of cos from z + 1/z',stem:'Let z = cis θ.',parts:[
+{q:'Show that zⁿ + z⁻ⁿ = 2cos nθ.',m:2,s:['zⁿ = cis nθ and z⁻ⁿ = cis(−nθ) = cos nθ − i sin nθ '+M('M1'),'Adding: 2cos nθ '+M('A1')]},
+{q:'By expanding (z + z⁻¹)⁴, show that cos⁴θ = ⅛(cos 4θ + 4cos 2θ + 3).',m:4,s:['(z + z⁻¹)⁴ = z⁴ + 4z² + 6 + 4z⁻² + z⁻⁴ '+M('M1')+' '+M('A1'),'= 2cos 4θ + 8cos 2θ + 6 '+M('A1'),'(2cos θ)⁴ = 16cos⁴θ, so cos⁴θ = ⅛(cos 4θ + 4cos 2θ + 3) '+M('A1')]},
+{q:'Hence find ∫ from 0 to π/2 of cos⁴θ dθ.',m:2,s:['⅛[¼sin 4θ + 2sin 2θ + 3θ] from 0 to π/2 '+M('M1'),'= ⅛ × 3π/2 = <b>3π/16</b> '+M('A1')]}
+],tip:'Pair the terms symmetrically: z⁴ with z⁻⁴, z² with z⁻². Each pair is 2cos(something).'}
+]},
+
+croots:{
+method:[
+['Write w in polar with + 2kπ','w = R cis(θ + 2kπ). The 2kπ is what produces n different roots.'],
+['Take the nth root','z = R<sup>1/n</sup> cis((θ + 2kπ)/n).'],
+['List k = 0, 1, …, n − 1','Exactly n roots. Adjust arguments into (−π, π] if asked.'],
+['Convert if asked','Cartesian form with exact values.'],
+['Use the geometry','The roots are the vertices of a regular n-gon centred at O, spacing 2π/n. Their sum is 0.']
+],
+types:[
+['"Solve z³ = 8i"','Polar form, + 2kπ, divide by n'],
+['Roots of unity, ω','1 + ω + … + ωⁿ⁻¹ = 0, ωⁿ = 1'],
+['"Show that the roots form…"','Equal moduli, arguments 2π/n apart'],
+['Area of the polygon','n × ½r² sin(2π/n)'],
+['(z + 1)ⁿ = zⁿ type','Divide and set ((z + 1)/z)ⁿ = 1']
+],
+marks:['A1 for w in polar form, M1 for the general root with 2kπ.','A1 for all n roots (in the form asked).','For roots of unity: M1 for using the geometric series or ωⁿ = 1, A1 for the result.'],
+ex:[
+{tag:'Paper 1 · no calculator',title:'Cube roots of 8i',stem:'Solve z³ = 8i.',parts:[
+{q:'Find the roots in the form r cis θ, then in the form a + bi.',m:5,s:['8i = 8 cis(π/2) '+M('A1'),'z = 2 cis((π/2 + 2kπ)/3), k = 0, 1, 2 '+M('M1'),'2 cis(π/6), 2 cis(5π/6), 2 cis(3π/2) '+M('A1'),'= <b>√3 + i</b> and <b>−√3 + i</b> '+M('A1'),'and <b>−2i</b> '+M('A1')]}
+],tip:'Adding 2kπ before dividing by 3 is what creates three different roots. Dividing first and adding 2kπ after gives only one.'},
+{tag:'Paper 1 · no calculator',title:'Cube roots of unity',stem:'Let ω = cis(2π/3).',parts:[
+{q:'Show that 1 + ω + ω² = 0.',m:2,s:['Geometric series: 1 + ω + ω² = (ω³ − 1) ÷ (ω − 1) '+M('M1'),'ω³ = cis 2π = 1, and ω ≠ 1, so the sum is 0 '+M('A1')]},
+{q:'Simplify (1 + ω)(1 + ω²).',m:2,s:['= 1 + ω + ω² + ω³ '+M('M1'),'= 0 + 1 = <b>1</b> '+M('A1')]},
+{q:'Simplify (1 + ω²)⁵.',m:2,s:['1 + ω² = −ω, so (1 + ω²)⁵ = −ω⁵ '+M('M1'),'ω⁵ = ω³ω² = ω², so the answer is <b>−ω²</b> '+M('A1')]}
+],tip:'Two facts do all the work: ω³ = 1 and 1 + ω + ω² = 0. Reduce powers modulo 3 first.'},
+{tag:'Paper 1 · no calculator',title:'Fourth roots and a square',stem:'Consider z⁴ = −16.',parts:[
+{q:'Find the four roots in the form r cis θ.',m:3,s:['−16 = 16 cis(π + 2kπ) '+M('A1'),'z = 2 cis((π + 2kπ)/4) '+M('M1'),'<b>2 cis(π/4), 2 cis(3π/4), 2 cis(−3π/4), 2 cis(−π/4)</b> '+M('A1')]},
+{q:'The roots form a square on the Argand diagram. Find its area.',m:2,s:['Four triangles from O, each ½ × 2 × 2 × sin(π/2) = 2 '+M('M1'),'Area = <b>8</b> '+M('A1')]},
+{q:'Write down the product of the four roots.',m:1,s:['z⁴ + 16 = 0: product = (−1)⁴ × 16 ÷ 1 = <b>16</b> '+M('A1')]}
+],tip:'The equation is z⁴ + 16 = 0, so the constant is +16, not −16. Rearrange before using the product formula.'}
+]},
+
 direct:{
 method:[
 ['Name the general object','"Let n be an integer." Even numbers are 2n, odd numbers 2n + 1, consecutive integers n, n + 1, n + 2. Two independent numbers need two letters: 2m + 1 and 2n + 1.'],
@@ -196,5 +359,5 @@ ex:[
 ]}
 };
 window.LAB.L=Object.assign(window.LAB.L,L);
-Object.assign(window.LAB.TITLES,{direct:'direct proof',indsum:'induction with series',inddiv:'induction with divisibility',indmore:'induction with inequalities and derivatives',contra:'proof by contradiction',counter:'counterexamples'});
+Object.assign(window.LAB.TITLES,{cart:'complex numbers in Cartesian form',polar:'modulus-argument and Euler form',polyroots:'polynomial roots and conjugate pairs',demoivre:'De Moivre\'s theorem',croots:'roots of complex numbers',direct:'direct proof',indsum:'induction with series',inddiv:'induction with divisibility',indmore:'induction with inequalities and derivatives',contra:'proof by contradiction',counter:'counterexamples'});
 })();
